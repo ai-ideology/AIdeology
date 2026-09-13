@@ -7,10 +7,13 @@
  * Also writes src/content/derived-colors.json so the palette stays tied to art.
  */
 import { mkdir } from 'node:fs/promises';
+import { join } from 'node:path';
 import sharp from 'sharp';
 
-const SRC = '/app/设计方案/AI意识形态26个图';
-const OUT = '/app/public/assets';
+// Repo root = parent of this script's dir, so the pipeline works from any checkout.
+const ROOT = join(import.meta.dir, '..');
+const SRC = join(ROOT, '设计方案/AI意识形态26个图');
+const OUT = join(ROOT, 'public/assets');
 
 // slug -> source file base name (matches the frozen v1 ideology names)
 const MAP: Record<string, string> = {
@@ -142,5 +145,5 @@ for (const [slug, name] of Object.entries(MAP)) {
   console.log(slug, colors[slug]);
 }
 
-await Bun.write('/app/src/content/derived-colors.json', JSON.stringify(colors, null, 2) + '\n');
+await Bun.write(join(ROOT, 'src/content/derived-colors.json'), JSON.stringify(colors, null, 2) + '\n');
 console.log('done', Object.keys(colors).length);

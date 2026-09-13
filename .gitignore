@@ -4,3 +4,6 @@ dist/
 *.log
 _scratch/
 .zcode/
+
+# Original source material — kept locally, not part of the published app
+设计方案/
