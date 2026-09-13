@@ -119,3 +119,59 @@ describe('adaptive planning', () => {
     }
   });
 });
+
+function blendProfiles(s1: string, s2: string, w: number): SessionAnswers {
+  const r1 = prototypeRules.find((r) => r.id === s1)!;
+  const r2 = prototypeRules.find((r) => r.id === s2)!;
+  const a = emptyAnswers();
+  for (const item of coreItems) {
+    const k = item.axis as keyof typeof r1.axis_targets;
+    const t = (r1.axis_targets[k] ?? 0) * w + (r2.axis_targets[k] ?? 0) * (1 - w);
+    let best = 2, bd = Infinity;
+    item.options.forEach((o, i) => { const d = Math.abs(o.score / 2 - t); if (d < bd) { bd = d; best = i; } });
+    a.core[item.id] = best;
+  }
+  return a;
+}
+
+describe('discrimination sweep across all 26 prototypes', () => {
+  test('each prototype-shaped profile puts that prototype in the top 3', () => {
+    const misses: string[] = [];
+    for (const rule of prototypeRules) {
+      const r = computeResult(profileFor(rule.id));
+      const rank = r.scores.findIndex((s) => s.slug === rule.id) + 1;
+      if (rank > 3) misses.push(`${rule.id} rank ${rank}`);
+    }
+    expect(misses).toEqual([]);
+  });
+
+  test('at least 24 of 26 profiles rank their own prototype first', () => {
+    let exact = 0;
+    for (const rule of prototypeRules) {
+      if (computeResult(profileFor(rule.id)).scores[0].slug === rule.id) exact++;
+    }
+    expect(exact).toBeGreaterThanOrEqual(24);
+  });
+
+  test('all-middle is low_information; a strong shaped profile is a single primary', () => {
+    expect(computeResult(allMiddle()).type).toBe('low_information');
+    expect(computeResult(profileFor('intelligence-commons')).type).toBe('single_primary');
+  });
+
+  test('all five result types are reachable from core answers', () => {
+    expect(computeResult(allMiddle()).type).toBe('low_information');
+    // deterministic vectors found by seeded search; each maps onto one band
+    const VECTORS: [string, number[]][] = [
+      ['dual_core', [1,3,3,4,3,3,0,4,0,1,3,4,2,4,1,4,2,2,0,2,3,4,4,4,3,4,2,0,1,3,3,3,3,3,3,4,3,0,3,1,3,2,2,3,2,2,1,2]],
+      ['mixed', [3,2,3,4,3,3,1,4,3,4,3,2,4,1,3,1,1,4,4,4,0,3,3,2,1,2,4,4,2,2,4,1,1,2,2,3,4,3,4,1,2,4,4,2,3,4,3,0]],
+      ['primary_plus_resonance', [0,1,4,2,2,0,4,2,3,4,4,4,2,1,3,0,0,4,2,4,3,1,1,0,3,3,3,0,1,1,0,1,0,1,4,0,3,4,0,3,3,2,0,0,1,3,4,3]],
+      ['single_primary', [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]],
+    ];
+    for (const [expected, vec] of VECTORS) {
+      const a = emptyAnswers();
+      coreItems.forEach((item, i) => { a.core[item.id] = vec[i]; });
+      const r = computeResult(a);
+      expect(r.type).toBe(expected as typeof r.type);
+    }
+  });
+});

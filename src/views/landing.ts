@@ -38,7 +38,7 @@ export function renderLanding(): string {
           <button type="button" class="btn btn--primary btn--xl" data-act="start-test">开始测试 <span aria-hidden="true">→</span></button>
           <a class="btn btn--xl" href="#/library">探索意识形态谱系</a>
         </div>
-        <p class="mono hero__meta">48 SCENARIOS · 16 AXES · 26 IDEOLOGIES · 8 HIDDEN</p>
+        <p class="mono hero__meta">48 SCENARIOS · 16 AXES · 26 IDEOLOGIES · 8 HIDDEN STANCES</p>
       </div>
       <div class="hero__field" aria-hidden="true"><div class="cf">${conflict}</div></div>
     </div>
@@ -47,7 +47,7 @@ export function renderLanding(): string {
       <div class="stats__i od-stat"><span class="stats__n">26</span><span class="mono stats__l">IDEOLOGIES</span></div>
       <div class="stats__i od-stat"><span class="stats__n">48</span><span class="mono stats__l">CORE ITEMS</span></div>
       <div class="stats__i od-stat"><span class="stats__n">16</span><span class="mono stats__l">AXES</span></div>
-      <div class="stats__i od-stat"><span class="stats__n">08</span><span class="mono stats__l">HIDDEN</span></div>
+      <div class="stats__i od-stat"><span class="stats__n">08</span><span class="mono stats__l">HIDDEN STANCES</span></div>
     </section>
 
     <section class="how">
