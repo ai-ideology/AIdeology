@@ -1,0 +1,151 @@
+[
+  {
+    "id": "machine-emancipation",
+    "name": "机器解放主义",
+    "prerequisites": {
+      "V4": {
+        "min": 0.65
+      },
+      "prototype": "digital-life",
+      "prototype_fit_min": 65
+    },
+    "items": [
+      "H01",
+      "H02"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "false_positive_guard": "若数字生命主义hallmark未通过，不触发。",
+    "version": "v1"
+  },
+  {
+    "id": "intelligence-succession",
+    "name": "智能继承主义",
+    "prerequisites": {
+      "V3": {
+        "min": 0.65
+      },
+      "X3": {
+        "min": 0.1
+      }
+    },
+    "items": [
+      "H03",
+      "H04"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "false_positive_guard": "只是预测AI会超过人类不够；必须规范接受主体更替。",
+    "version": "v1"
+  },
+  {
+    "id": "algorithmic-paternalism",
+    "name": "算法家长主义",
+    "prerequisites": {
+      "V8": {
+        "min": 0.65
+      },
+      "prototype": "algorithmic-opt",
+      "prototype_fit_min": 65
+    },
+    "items": [
+      "H05",
+      "H06"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "false_positive_guard": "仅接受本人预先授权的自我约束不触发。",
+    "version": "v1"
+  },
+  {
+    "id": "human-authenticism",
+    "name": "人文真实性主义",
+    "prerequisites": {
+      "X1": {
+        "max": -0.65
+      }
+    },
+    "items": [
+      "H07",
+      "H08"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "score_orientation": "special_positive_means_hidden",
+    "false_positive_guard": "只是认为当前AI质量差不触发。",
+    "version": "v1"
+  },
+  {
+    "id": "synthetic-equivalence",
+    "name": "合成等价主义",
+    "prerequisites": {
+      "X1": {
+        "min": 0.65
+      }
+    },
+    "items": [
+      "H09",
+      "H10"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "false_positive_guard": "只接受AI工具效率、不接受关系/体验等价，不触发。",
+    "version": "v1"
+  },
+  {
+    "id": "ai-ecomodernism",
+    "name": "AI生态现代主义",
+    "prerequisites": {
+      "X2": {
+        "min": 0.55
+      },
+      "V1": {
+        "min": 0.05
+      }
+    },
+    "items": [
+      "H11",
+      "H12"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "false_positive_guard": "只是忽视生态成本不触发；必须相信技术扩容可解决约束。",
+    "version": "v1"
+  },
+  {
+    "id": "digital-restraint",
+    "name": "数字节制主义",
+    "prerequisites": {
+      "X2": {
+        "max": -0.4
+      },
+      "V8": {
+        "max": -0.1
+      }
+    },
+    "items": [
+      "H13",
+      "H14"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "score_orientation": "special_positive_means_hidden",
+    "false_positive_guard": "只因当前AI不好用而拒绝，不触发。",
+    "version": "v1"
+  },
+  {
+    "id": "deep-futurism",
+    "name": "深未来主义",
+    "prerequisites": {
+      "X3": {
+        "min": 0.65
+      },
+      "strong_core_count": {
+        "axis": "X3",
+        "min_raw_abs": 1,
+        "direction": "positive",
+        "count": 2
+      }
+    },
+    "items": [
+      "H15",
+      "H16"
+    ],
+    "trigger": "两道专题题均达到明显支持（>=+1），且至少一道强支持（=+2）",
+    "false_positive_guard": "喜欢科幻、相信AGI会出现都不够；必须愿为遥远未来承担当代成本。",
+    "version": "v1"
+  }
+]

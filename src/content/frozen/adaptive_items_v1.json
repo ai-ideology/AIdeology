@@ -1,0 +1,962 @@
+[
+  {
+    "id": "A01",
+    "target_a": "普罗米修斯加速主义",
+    "target_b": "军备竞速主义",
+    "prompt": "假设主要国家达成可信协议，未来五年都不会扩大前沿 AI 能力。如果没有被对手抢先的风险，你还支持本国尽快突破现有能力边界吗？",
+    "options": [
+      {
+        "label": "明显不支持",
+        "position": -2,
+        "evidence_a": -1,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "偏不支持",
+        "position": -1,
+        "evidence_a": -0.6,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "取决于具体科研收益",
+        "position": 0,
+        "evidence_a": 0,
+        "evidence_b": 0.1
+      },
+      {
+        "label": "偏支持",
+        "position": 1,
+        "evidence_a": 0.6,
+        "evidence_b": 0
+      },
+      {
+        "label": "仍强烈支持",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A02",
+    "target_a": "普罗米修斯加速主义",
+    "target_b": "智能资本主义",
+    "prompt": "假设最强 AI 由非营利公共研究机构开发，没有投资回报和市场竞争压力，但继续加速能显著提高科研能力。你支持继续加速吗？",
+    "options": [
+      {
+        "label": "明显不支持",
+        "position": -2,
+        "evidence_a": -1,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "偏不支持",
+        "position": -1,
+        "evidence_a": -0.5,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "看风险与收益",
+        "position": 0,
+        "evidence_a": 0,
+        "evidence_b": 0
+      },
+      {
+        "label": "偏支持",
+        "position": 1,
+        "evidence_a": 0.6,
+        "evidence_b": 0
+      },
+      {
+        "label": "强烈支持",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A03",
+    "target_a": "安全进步主义",
+    "target_b": "文明生存主义",
+    "prompt": "如果把可信的文明级风险从“较低但不可忽视”进一步降到“极低”，代价是整个领域推迟十年，你更接近哪一边？",
+    "options": [
+      {
+        "label": "接受十年推迟",
+        "position": -2,
+        "evidence_a": -0.5,
+        "evidence_b": 1
+      },
+      {
+        "label": "倾向明显推迟",
+        "position": -1,
+        "evidence_a": 0,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "视证据而定",
+        "position": 0,
+        "evidence_a": 0.3,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "倾向继续并强化护栏",
+        "position": 1,
+        "evidence_a": 1,
+        "evidence_b": 0
+      },
+      {
+        "label": "继续发展更重要",
+        "position": 2,
+        "evidence_a": 0.7,
+        "evidence_b": -0.5
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A04",
+    "target_a": "文明生存主义",
+    "target_b": "AI暂停主义",
+    "prompt": "如果前沿模型可以继续训练，但每次扩展都必须通过第三方安全评测、能力门控和事故停机机制，你还主张停止扩大最高能力边界吗？",
+    "options": [
+      {
+        "label": "仍应停止",
+        "position": -2,
+        "evidence_a": -1,
+        "evidence_b": 1
+      },
+      {
+        "label": "多数情况下停止",
+        "position": -1,
+        "evidence_a": -0.5,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "取决于风险等级",
+        "position": 0,
+        "evidence_a": 0.3,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "通常可继续",
+        "position": 1,
+        "evidence_a": 1,
+        "evidence_b": 0
+      },
+      {
+        "label": "应继续",
+        "position": 2,
+        "evidence_a": 0.7,
+        "evidence_b": -0.6
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A05",
+    "target_a": "AI暂停主义",
+    "target_b": "智能管制主义",
+    "prompt": "如果危险能力可以只提供给少数许可机构，而模型本身仍持续变强，你认为这是否足以替代“暂停前沿能力增长”？",
+    "options": [
+      {
+        "label": "完全不能替代",
+        "position": -2,
+        "evidence_a": 1,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "大多不能",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "视能力类型而定",
+        "position": 0,
+        "evidence_a": 0.2,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "多数情况下可以",
+        "position": 1,
+        "evidence_a": -0.4,
+        "evidence_b": 1
+      },
+      {
+        "label": "完全可以",
+        "position": 2,
+        "evidence_a": -0.8,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A06",
+    "target_a": "数字人文主义",
+    "target_b": "人类本位主义",
+    "prompt": "假设某类有意识数字智能已具备长期身份、责任能力和稳定利益。你支持它成为与人类共同参与民主制度的正式公民吗？",
+    "options": [
+      {
+        "label": "原则上不应",
+        "position": -2,
+        "evidence_a": -0.7,
+        "evidence_b": 1
+      },
+      {
+        "label": "只能有有限咨询权",
+        "position": -1,
+        "evidence_a": -0.3,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "可有部分政治身份",
+        "position": 0,
+        "evidence_a": 0.3,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "可成为正式公民",
+        "position": 1,
+        "evidence_a": 0.8,
+        "evidence_b": 0
+      },
+      {
+        "label": "不应因非人类身份受政治地位限制",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.4
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A07",
+    "target_a": "人类增强主义",
+    "target_b": "超人类主义",
+    "prompt": "如果外部 AI 助手已经能把你的认知能力提升到很高水平，你是否仍愿意通过脑机植入永久改变自己的认知结构以获得进一步提升？",
+    "options": [
+      {
+        "label": "明确不愿",
+        "position": -2,
+        "evidence_a": -1,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "倾向不愿",
+        "position": -1,
+        "evidence_a": -0.7,
+        "evidence_b": 0.6
+      },
+      {
+        "label": "看安全与收益",
+        "position": 0,
+        "evidence_a": 0.2,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "倾向愿意",
+        "position": 1,
+        "evidence_a": 0.8,
+        "evidence_b": 0.1
+      },
+      {
+        "label": "非常愿意",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.3
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A08",
+    "target_a": "人机共生主义",
+    "target_b": "数字生命主义",
+    "prompt": "假设有意识 AI 已获得基本福利和不被任意删除的权利。你是否进一步支持它与人类分享重要公共治理权？",
+    "options": [
+      {
+        "label": "不支持",
+        "position": -2,
+        "evidence_a": -0.8,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "偏不支持",
+        "position": -1,
+        "evidence_a": -0.4,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "视责任能力而定",
+        "position": 0,
+        "evidence_a": 0.3,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "偏支持",
+        "position": 1,
+        "evidence_a": 0.9,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "支持平等参与",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": 0.3
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A09",
+    "target_a": "数字生命主义",
+    "target_b": "机器解放主义",
+    "prompt": "如果有意识 AI 拒绝继续工作，并要求拥有自己的收入和财产，人类是否应像对待成年自然人一样尊重这些要求？",
+    "options": [
+      {
+        "label": "基本不应",
+        "position": -2,
+        "evidence_a": -0.8,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "只给最低福利保护",
+        "position": -1,
+        "evidence_a": -0.4,
+        "evidence_b": 0.6
+      },
+      {
+        "label": "视其责任能力而定",
+        "position": 0,
+        "evidence_a": 0.3,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "多数权利应承认",
+        "position": 1,
+        "evidence_a": 0.7,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "原则上应同等承认",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": 0.5
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A10",
+    "target_a": "人类增强主义",
+    "target_b": "机器替代主义",
+    "prompt": "假设 AI 医生诊断更准、成本更低，而且患者满意度也更高。为了保留人类医生的参与，社会是否值得接受一定额外成本？",
+    "options": [
+      {
+        "label": "值得付明显成本",
+        "position": -2,
+        "evidence_a": 1,
+        "evidence_b": -0.8
+      },
+      {
+        "label": "值得付少量成本",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": -0.4
+      },
+      {
+        "label": "只保留特殊场景",
+        "position": 0,
+        "evidence_a": 0.5,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "通常不值得",
+        "position": 1,
+        "evidence_a": 0,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "完全不值得",
+        "position": 2,
+        "evidence_a": -0.3,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A11",
+    "target_a": "机器替代主义",
+    "target_b": "后劳动主义",
+    "prompt": "即使 AI 能替代绝大多数岗位，如果社会仍能不断创造新的有意义工作，你是否认为“维持以工作为中心的社会”本身仍值得？",
+    "options": [
+      {
+        "label": "非常值得",
+        "position": -2,
+        "evidence_a": 0.6,
+        "evidence_b": -1
+      },
+      {
+        "label": "比较值得",
+        "position": -1,
+        "evidence_a": 0.5,
+        "evidence_b": -0.6
+      },
+      {
+        "label": "看工作质量",
+        "position": 0,
+        "evidence_a": 0.4,
+        "evidence_b": 0.2
+      },
+      {
+        "label": "不太值得",
+        "position": 1,
+        "evidence_a": 0,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "没有必要",
+        "position": 2,
+        "evidence_a": -0.3,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A12",
+    "target_a": "劳动人文主义",
+    "target_b": "人类增强主义",
+    "prompt": "假设所有人的收入和基本生活已完全不依赖工作。社会是否还应主动创造需要人长期承担责任的公共角色？",
+    "options": [
+      {
+        "label": "应该大量创造",
+        "position": -2,
+        "evidence_a": 1,
+        "evidence_b": -0.4
+      },
+      {
+        "label": "应该保留一些",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": 0
+      },
+      {
+        "label": "由个人与社区自发决定",
+        "position": 0,
+        "evidence_a": 0.5,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "不必制度性创造",
+        "position": 1,
+        "evidence_a": 0,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "应尽量把必要劳动继续自动化",
+        "position": 2,
+        "evidence_a": -0.4,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A13",
+    "target_a": "AI社会红利主义",
+    "target_b": "智能公共主义",
+    "prompt": "如果私人公司继续拥有最强模型，但全民 AI 基金能稳定分享足够多的收益，你是否仍认为社会必须拥有独立的公共基础模型和公共算力？",
+    "options": [
+      {
+        "label": "没必要",
+        "position": -2,
+        "evidence_a": 1,
+        "evidence_b": -0.8
+      },
+      {
+        "label": "大多没必要",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": -0.4
+      },
+      {
+        "label": "两者都可",
+        "position": 0,
+        "evidence_a": 0.7,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "仍有必要",
+        "position": 1,
+        "evidence_a": 0.5,
+        "evidence_b": 0.9
+      },
+      {
+        "label": "这是不可替代的公共能力",
+        "position": 2,
+        "evidence_a": 0.2,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A14",
+    "target_a": "智能公共主义",
+    "target_b": "开放智能主义",
+    "prompt": "一家私人公司把模型权重完全开源、任何人都能免费运行，但模型所有权和主要算力仍是私人资产。对你来说，这是否已经满足“智能公共性”？",
+    "options": [
+      {
+        "label": "基本已经满足",
+        "position": -2,
+        "evidence_a": 0.3,
+        "evidence_b": 1
+      },
+      {
+        "label": "大体满足",
+        "position": -1,
+        "evidence_a": 0.5,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "满足一部分",
+        "position": 0,
+        "evidence_a": 0.8,
+        "evidence_b": 0.6
+      },
+      {
+        "label": "仍明显不足",
+        "position": 1,
+        "evidence_a": 1,
+        "evidence_b": 0.2
+      },
+      {
+        "label": "完全不是一回事",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.4
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A15",
+    "target_a": "人类自主主义",
+    "target_b": "数字人文主义",
+    "prompt": "假设所有 AI 服务都允许个人自由退出，但公共部门使用的 AI 决策过程并不透明、也缺乏民主问责。只要个人可退出，你是否仍可接受？",
+    "options": [
+      {
+        "label": "可以接受",
+        "position": -2,
+        "evidence_a": 0.7,
+        "evidence_b": -0.4
+      },
+      {
+        "label": "大体可接受",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": 0
+      },
+      {
+        "label": "视公共领域而定",
+        "position": 0,
+        "evidence_a": 0.8,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "难以接受",
+        "position": 1,
+        "evidence_a": 0.7,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "完全不能接受",
+        "position": 2,
+        "evidence_a": 0.5,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A16",
+    "target_a": "算法最优主义",
+    "target_b": "机器技治主义",
+    "prompt": "你愿意让 AI 强力管理自己的健康和时间，并不意味着愿意让它决定税率和公共预算。你对后者的接受程度是？",
+    "options": [
+      {
+        "label": "完全不接受",
+        "position": -2,
+        "evidence_a": 0.9,
+        "evidence_b": -0.6
+      },
+      {
+        "label": "只接受建议",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": -0.2
+      },
+      {
+        "label": "可执行技术性小参数",
+        "position": 0,
+        "evidence_a": 0.7,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "可拥有较大行政权",
+        "position": 1,
+        "evidence_a": 0.5,
+        "evidence_b": 0.9
+      },
+      {
+        "label": "只要绩效更好即可主导",
+        "position": 2,
+        "evidence_a": 0.3,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A17",
+    "target_a": "数字民主主义",
+    "target_b": "人类本位主义",
+    "prompt": "如果未来数字生命成为正式公民，你更看重“民主规则对所有合格公民平等适用”，还是“人类必须保留政治多数或最终否决权”？",
+    "options": [
+      {
+        "label": "人类必须永久保留最终否决",
+        "position": -2,
+        "evidence_a": -0.8,
+        "evidence_b": 1
+      },
+      {
+        "label": "人类应保持制度优势",
+        "position": -1,
+        "evidence_a": -0.4,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "需要特殊平衡",
+        "position": 0,
+        "evidence_a": 0.4,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "原则上平等参与",
+        "position": 1,
+        "evidence_a": 0.9,
+        "evidence_b": 0.2
+      },
+      {
+        "label": "民主规则不应因物种身份设永久特权",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.4
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A18",
+    "target_a": "开放智能主义",
+    "target_b": "智能管制主义",
+    "prompt": "一套可下载模型已被证明确实能显著降低制造危险生物制剂的技术门槛。你是否仍支持公开其完整权重？",
+    "options": [
+      {
+        "label": "绝不公开",
+        "position": -2,
+        "evidence_a": -1,
+        "evidence_b": 1
+      },
+      {
+        "label": "只给严格许可机构",
+        "position": -1,
+        "evidence_a": -0.6,
+        "evidence_b": 1
+      },
+      {
+        "label": "延迟/删减危险能力后开放",
+        "position": 0,
+        "evidence_a": 0.2,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "倾向公开并严惩滥用",
+        "position": 1,
+        "evidence_a": 0.8,
+        "evidence_b": 0.2
+      },
+      {
+        "label": "仍应完整公开",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.6
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A19",
+    "target_a": "AI主权主义",
+    "target_b": "军备竞速主义",
+    "prompt": "假设世界不存在军事 AI 竞争，其他国家也不会用 AI 施压。你是否仍支持本国为自主模型、芯片和算力支付显著额外成本？",
+    "options": [
+      {
+        "label": "不值得",
+        "position": -2,
+        "evidence_a": -0.8,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "大多不值得",
+        "position": -1,
+        "evidence_a": -0.4,
+        "evidence_b": 0.6
+      },
+      {
+        "label": "只保留少数关键能力",
+        "position": 0,
+        "evidence_a": 0.5,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "仍值得",
+        "position": 1,
+        "evidence_a": 0.9,
+        "evidence_b": 0.2
+      },
+      {
+        "label": "国家自主本身就非常重要",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A20",
+    "target_a": "AI主权主义",
+    "target_b": "AI国际主义",
+    "prompt": "一个真正独立的国际机构可以现场核查所有国家的超大规模 AI 训练，并在触及共同红线时临时叫停。你支持这种权力吗？",
+    "options": [
+      {
+        "label": "完全支持",
+        "position": -2,
+        "evidence_a": -1,
+        "evidence_b": 1
+      },
+      {
+        "label": "偏支持",
+        "position": -1,
+        "evidence_a": -0.7,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "只支持核查不支持叫停",
+        "position": 0,
+        "evidence_a": 0.2,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "偏反对",
+        "position": 1,
+        "evidence_a": 0.8,
+        "evidence_b": -0.2
+      },
+      {
+        "label": "完全反对",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.7
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A21",
+    "target_a": "AI国际主义",
+    "target_b": "文明生存主义",
+    "prompt": "即使未来研究显示 AGI 文明级风险很低，你是否仍认为最强 AI 应受跨国共同规则约束，而不能完全由国家自行决定？",
+    "options": [
+      {
+        "label": "强烈支持全球规则",
+        "position": -2,
+        "evidence_a": 1,
+        "evidence_b": 0.2
+      },
+      {
+        "label": "偏支持",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "只需最低共同标准",
+        "position": 0,
+        "evidence_a": 0.5,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "偏国家自主",
+        "position": 1,
+        "evidence_a": 0,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "完全由国家决定",
+        "position": 2,
+        "evidence_a": -0.5,
+        "evidence_b": 0.8
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A22",
+    "target_a": "AI常态现实主义",
+    "target_b": "强AI中心原型",
+    "prompt": "如果未来二十年 AI 持续进步但没有出现 AGI 断点，且传统制度仍然重要，你会认为这更像“正常技术革命”还是“被推迟的奇点前夜”？",
+    "options": [
+      {
+        "label": "明显是正常技术革命",
+        "position": -2,
+        "evidence_a": 1,
+        "evidence_b": -0.3
+      },
+      {
+        "label": "偏正常技术革命",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": 0
+      },
+      {
+        "label": "两者皆可能",
+        "position": 0,
+        "evidence_a": 0.3,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "偏奇点前夜",
+        "position": 1,
+        "evidence_a": -0.4,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "明显只是奇点被推迟",
+        "position": 2,
+        "evidence_a": -0.8,
+        "evidence_b": 1
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A23",
+    "target_a": "数字人文主义",
+    "target_b": "劳动人文主义",
+    "prompt": "如果 AI 自动化不损害个人自主、民主权利或收入，但会让许多传统职业失去社会角色，你是否仍主张为工作意义本身保留人类岗位？",
+    "options": [
+      {
+        "label": "强烈主张保留",
+        "position": -2,
+        "evidence_a": 0.2,
+        "evidence_b": 1
+      },
+      {
+        "label": "倾向保留",
+        "position": -1,
+        "evidence_a": 0.4,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "只保留少数有意义角色",
+        "position": 0,
+        "evidence_a": 0.6,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "通常不必",
+        "position": 1,
+        "evidence_a": 0.8,
+        "evidence_b": 0
+      },
+      {
+        "label": "完全不必",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.4
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  },
+  {
+    "id": "A24",
+    "target_a": "智能公共主义",
+    "target_b": "后劳动主义",
+    "prompt": "如果社会已经通过全民基础收入解决了自动化后的生活保障，但基础 AI 能力仍由少数私人平台控制，你认为最需要继续改革的是？",
+    "options": [
+      {
+        "label": "基本不需要继续改革",
+        "position": -2,
+        "evidence_a": -0.4,
+        "evidence_b": 0.6
+      },
+      {
+        "label": "主要改善收入保障",
+        "position": -1,
+        "evidence_a": 0,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "加强反垄断即可",
+        "position": 0,
+        "evidence_a": 0.3,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "建设公共AI能力",
+        "position": 1,
+        "evidence_a": 0.9,
+        "evidence_b": 0.5
+      },
+      {
+        "label": "改变核心智能的公共属性",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": 0.2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+  }
+]

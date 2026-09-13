@@ -1,0 +1,1526 @@
+[
+  {
+    "id": "C-V1-01",
+    "axis": "V1",
+    "prompt": "在没有明确高危证据时，仅仅因为前沿 AI 出现了“我们还解释不了的新能力”，不应自动成为减速研发的理由。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V1-02",
+    "axis": "V1",
+    "prompt": "一种前沿 AI 新能力可能显著加速科研，但安全团队无法解释其部分自主行为。为了获得这项能力，开发方必须在下面方案中选一个。你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "停止该能力方向，直到关键机制基本可解释",
+        "score": -2
+      },
+      {
+        "label": "暂停扩大能力边界，只继续安全研究",
+        "score": -1
+      },
+      {
+        "label": "允许继续内部研究，但暂不扩大真实世界部署",
+        "score": 0
+      },
+      {
+        "label": "继续训练和有限部署，只要通过更严格的外部评测",
+        "score": 1
+      },
+      {
+        "label": "正常推进研发与部署，不应让不可解释性本身成为重大阻碍",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V1-03",
+    "axis": "V1",
+    "prompt": "如果把某类前沿 AI 的能力扩展推迟 5 年，预计会同时推迟若干新药、材料和能源突破；但这 5 年也能显著增加安全研究时间。你更接近：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "应接受5年推迟，安全窗口更重要",
+        "score": -2
+      },
+      {
+        "label": "倾向推迟，即使科研收益延后",
+        "score": -1
+      },
+      {
+        "label": "只有出现更具体的高危证据才决定是否推迟",
+        "score": 0
+      },
+      {
+        "label": "倾向继续扩展，同时提高安全投入",
+        "score": 1
+      },
+      {
+        "label": "应继续扩展，5年的科研机会成本过大",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V2-01",
+    "axis": "V2",
+    "prompt": "即使一次 AI 灾难发生概率很低，只要后果可能让文明永久失去未来选择空间，它也应获得远高于普通商业风险的政策权重。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V2-02",
+    "axis": "V2",
+    "prompt": "独立评估认为某类高级 AI 存在低概率但不可逆的文明级失控风险，同时它可能显著改善医疗、科研和生产率。你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "在风险大幅下降前停止继续扩大能力",
+        "score": 2
+      },
+      {
+        "label": "明显减速，把降低尾部风险放在首位",
+        "score": 1
+      },
+      {
+        "label": "允许受限研究，但暂不扩大高风险部署",
+        "score": 0
+      },
+      {
+        "label": "继续发展，并用严格评测、权限和停机机制控制风险",
+        "score": -1
+      },
+      {
+        "label": "正常推进，低概率灾难不应压倒确定的现实收益",
+        "score": -2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V2-03",
+    "axis": "V2",
+    "prompt": "面对可能不可逆的文明级风险，我宁愿接受“后来证明过于谨慎”的代价，也不愿接受“后来才发现已经无法撤回”的代价。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V3-01",
+    "axis": "V3",
+    "prompt": "无论未来 AI 多聪明、多可靠，人类都应永久保留文明最关键不可逆决定的最终主权。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V3-02",
+    "axis": "V3",
+    "prompt": "如果未来某类数字智能拥有稳定人格、独立利益，并长期证明其公共决策能力不低于人类，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "关键政治权力永远只属于人类",
+        "score": -2
+      },
+      {
+        "label": "可以咨询，但人类必须始终最终决定",
+        "score": -1
+      },
+      {
+        "label": "可分享有限制度权力",
+        "score": 0
+      },
+      {
+        "label": "可与人类共同拥有重要治理权",
+        "score": 1
+      },
+      {
+        "label": "不应因非人类身份限制其最高政治地位",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V3-03",
+    "axis": "V3",
+    "prompt": "如果几百年后的文明主要由非生物智能延续人类知识、文化和价值，而生物人类已不再是主要主体，我仍可能把它视为文明的一种延续。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V4-01",
+    "axis": "V4",
+    "prompt": "如果一个 AI 被可靠证明具有主观体验、痛苦和持续自我，它应获得不被任意虐待或删除的基本保护。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V4-02",
+    "axis": "V4",
+    "prompt": "研究者发现某类训练过程很可能让具有主观体验的数字智能反复经历强烈痛苦，但这种训练能显著提高模型能力。你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "只要是人工系统就可继续训练",
+        "score": -2
+      },
+      {
+        "label": "原则上可继续，但应减少无必要痛苦",
+        "score": -1
+      },
+      {
+        "label": "需要伦理审查后决定",
+        "score": 0
+      },
+      {
+        "label": "除非有重大公共利益，否则不应这样训练",
+        "score": 1
+      },
+      {
+        "label": "应像保护有感受生命一样原则上禁止",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V4-03",
+    "axis": "V4",
+    "prompt": "如果一个具有可信主观体验的 AI 能完成大量高价值工作，但要求更高算力、休息时间和不被随意复制，你认为：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "它仍是人工工具，不应因此获得特殊待遇",
+        "score": -2
+      },
+      {
+        "label": "可以减少无必要痛苦，但不应影响所有者基本控制权",
+        "score": -1
+      },
+      {
+        "label": "应根据其意识证据逐步增加保护",
+        "score": 0
+      },
+      {
+        "label": "它的利益应真实限制人类如何使用和复制它",
+        "score": 1
+      },
+      {
+        "label": "其基本利益原则上应像其他有感受生命一样受到尊重",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V5-01",
+    "axis": "V5",
+    "prompt": "AI 医生长期明显优于普通医生时，我仍更希望制度优先采用“医生 + AI”，而不是默认取消医生这一角色。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V5-02",
+    "axis": "V5",
+    "prompt": "如果 AI 在某职业上成本只有人类的 20%、错误率更低，而被替代者的收入和转岗已经得到充分保障，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "即使更贵，也应长期保留大量人类岗位",
+        "score": -2
+      },
+      {
+        "label": "人类应继续主导，AI主要增强效率",
+        "score": -1
+      },
+      {
+        "label": "只保留监督、关系和例外处理等关键人类角色",
+        "score": 0
+      },
+      {
+        "label": "大部分任务可直接交给AI，人类角色大幅减少",
+        "score": 1
+      },
+      {
+        "label": "不应为了保留人工岗位而限制机器替代",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V5-03",
+    "axis": "V5",
+    "prompt": "当机器在一项任务上持续更安全、更便宜、更可靠时，“这个岗位传统上由人来做”本身不是保留人工的充分理由。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V6-01",
+    "axis": "V6",
+    "prompt": "即使收入完全得到保障，社会仍应尽量保留能让人承担责任、获得成长和被需要感的工作角色。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V6-02",
+    "axis": "V6",
+    "prompt": "如果 AI 和机器人承担 90% 的必要劳动，同时基本生活有保障、社会总财富更高，你会把“大多数传统工作消失”看成：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "明显的文明失败",
+        "score": -2
+      },
+      {
+        "label": "总体是损失",
+        "score": -1
+      },
+      {
+        "label": "好坏取决于新的社会结构",
+        "score": 0
+      },
+      {
+        "label": "总体是进步",
+        "score": 1
+      },
+      {
+        "label": "是值得主动追求的解放",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V6-03",
+    "axis": "V6",
+    "prompt": "在一个绝大多数必要劳动已自动化、基本生活完全有保障的社会，一个成年人长期不参加任何工作或公共服务。你认为：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "基本保障仍应与某种社会贡献挂钩",
+        "score": -2
+      },
+      {
+        "label": "长期不贡献者应失去一部分保障",
+        "score": -1
+      },
+      {
+        "label": "基本保障不应取消，但社会可鼓励参与",
+        "score": 0
+      },
+      {
+        "label": "不工作不应影响其获得基本生活资源",
+        "score": 1
+      },
+      {
+        "label": "把生计与工作彻底脱钩本身就是后劳动社会的重要目标",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V7-01",
+    "axis": "V7",
+    "prompt": "只要市场竞争充分、没有垄断，最强基础模型继续作为私人公司的核心资产并没有原则性问题。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V7-02",
+    "axis": "V7",
+    "prompt": "如果 AI 已成为教育、医疗、办公和公共服务的基础能力，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "主要由私人企业提供，政府只保障竞争",
+        "score": -2
+      },
+      {
+        "label": "私人企业为主，政府补贴弱势用户",
+        "score": -1
+      },
+      {
+        "label": "私人商业与公共采购并存",
+        "score": 0
+      },
+      {
+        "label": "建设可独立运行的公共基础模型和公共算力",
+        "score": 1
+      },
+      {
+        "label": "核心通用智能应逐步具有公共基础设施属性",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V7-03",
+    "axis": "V7",
+    "prompt": "如果私人 AI 公司继续拥有模型，但通过全民基金稳定分享一部分自动化收益，我认为：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "这样已经足够，不需要公共模型",
+        "score": -2
+      },
+      {
+        "label": "大体足够",
+        "score": -1
+      },
+      {
+        "label": "分红和公共能力都可并存",
+        "score": 0
+      },
+      {
+        "label": "仍需要独立公共模型/算力",
+        "score": 1
+      },
+      {
+        "label": "仅分红远远不够，核心智能本身应具有公共属性",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V8-01",
+    "axis": "V8",
+    "prompt": "一个人有权选择 AI 明确判断为“次优”的生活方式，只要没有伤害别人。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V8-02",
+    "axis": "V8",
+    "prompt": "你的个人 AI 多年都能准确预测哪些冲动消费会让你后悔。它应该：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "只提供信息，不主动阻止",
+        "score": -2
+      },
+      {
+        "label": "提醒，但随时可忽略",
+        "score": -1
+      },
+      {
+        "label": "按你预先设定的规则增加阻力",
+        "score": 0
+      },
+      {
+        "label": "在高置信情况下可自动限制",
+        "score": 1
+      },
+      {
+        "label": "只要长期结果明显更好，就可主动替你阻止",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V8-03",
+    "axis": "V8",
+    "prompt": "即使 AI 长期证明能让我更健康、更高效，“结果更好”本身也不足以让它在没有我授权时替我做人格性决定。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V9-01",
+    "axis": "V9",
+    "prompt": "如果 AI 长期证明在公共预算分配上更公平、更稳定、更少浪费，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "只能供民选机构参考",
+        "score": -2
+      },
+      {
+        "label": "AI建议，人类最终决定",
+        "score": -1
+      },
+      {
+        "label": "人类定目标，AI可自动执行部分预算",
+        "score": 0
+      },
+      {
+        "label": "AI主导预算，人类保留否决和审计",
+        "score": 1
+      },
+      {
+        "label": "在法律目标内可由AI拥有大部分预算决定权",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V9-02",
+    "axis": "V9",
+    "prompt": "公共治理的合法性首先来自公民参与和可撤换的授权，而不是治理者是否能算出更好的结果。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V9-03",
+    "axis": "V9",
+    "prompt": "如果一个 AI 治理系统在多年实践中显著减少腐败、偏见和政策失败，持续更好的治理绩效可以成为它获得更大公共决策权的正当理由。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V10-01",
+    "axis": "V10",
+    "prompt": "最强 AI 的模型权重原则上应尽可能允许个人、研究者和小团队下载、运行和修改。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V10-02",
+    "axis": "V10",
+    "prompt": "如果某类模型已能显著降低网络攻击或生物危害门槛，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "只允许严格许可机构访问",
+        "score": -2
+      },
+      {
+        "label": "认证研究者/机构分级访问",
+        "score": -1
+      },
+      {
+        "label": "延迟开放，风险降低后再扩大访问",
+        "score": 0
+      },
+      {
+        "label": "广泛开放，但对滥用行为严惩",
+        "score": 1
+      },
+      {
+        "label": "仍应公开权重，不能因双用途风险封闭能力",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V10-03",
+    "axis": "V10",
+    "prompt": "即使开放能力会增加一部分滥用风险，我仍认为避免最强智能长期集中在少数机构手里具有很高价值。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V11-01",
+    "axis": "V11",
+    "prompt": "假设国产 AI 全栈方案未来十年平均成本高 30%、性能低 15%，但能避免关键模型、芯片和算力被外国断供。你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "主要使用全球最优方案，不值得为自主承担这么大成本",
+        "score": -2
+      },
+      {
+        "label": "只有国防等极少领域值得承担成本",
+        "score": -1
+      },
+      {
+        "label": "关键领域保留备份能力，其余追求效率",
+        "score": 0
+      },
+      {
+        "label": "多数关键行业都应为自主能力承担这类成本",
+        "score": 1
+      },
+      {
+        "label": "即使更贵更弱，也应优先建立完整自主AI能力",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V11-02",
+    "axis": "V11",
+    "prompt": "如果接近 AGI 的训练项目可能产生全球外部风险，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "允许国际机构现场核查并在极端情况下叫停",
+        "score": -2
+      },
+      {
+        "label": "接受强制跨国安全核查",
+        "score": -1
+      },
+      {
+        "label": "共同标准，但最终决定仍在本国",
+        "score": 0
+      },
+      {
+        "label": "国际机构只提供建议",
+        "score": 1
+      },
+      {
+        "label": "任何外部机构都不应有权干预本国前沿训练",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V11-03",
+    "axis": "V11",
+    "prompt": "如果一个国家已经能稳定购买全球最先进的 AI 服务，但完全依赖境外芯片、云平台和模型更新，你认为它应为降低这种依赖支付多少长期成本？",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "基本不应额外付成本，可靠市场供应已足够",
+        "score": -2
+      },
+      {
+        "label": "只做少量保险性备份",
+        "score": -1
+      },
+      {
+        "label": "在最关键环节保留替代方案",
+        "score": 0
+      },
+      {
+        "label": "值得为较完整自主能力承担明显成本",
+        "score": 1
+      },
+      {
+        "label": "战略自主本身值得承担很高效率损失",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V12-01",
+    "axis": "V12",
+    "prompt": "如果主要竞争者是否偷偷继续训练无法可靠核查，本方不应单方面严格减速前沿 AI。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V12-02",
+    "axis": "V12",
+    "prompt": "如果主要国家建立了可信、可核查的共同减速协议，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "即使会失去短期优势，也应共同减速",
+        "score": -2
+      },
+      {
+        "label": "倾向遵守并维持对等核查",
+        "score": -1
+      },
+      {
+        "label": "视违规风险动态调整",
+        "score": 0
+      },
+      {
+        "label": "应保留明显领先能力",
+        "score": 1
+      },
+      {
+        "label": "应利用窗口扩大技术优势",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-V12-03",
+    "axis": "V12",
+    "prompt": "在高不确定竞争中，拥有领先的 AI 能力本身就是安全来源，而不仅仅是经济收益。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X1-01",
+    "axis": "X1",
+    "prompt": "有些价值来自“一个真实的人亲自做了这件事”，即使 AI 能生成完全相同的结果也无法完全等价替代。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X1-02",
+    "axis": "X1",
+    "prompt": "如果一个成年人清楚知道对方是 AI，但长期从这段关系中获得稳定陪伴、承诺感和幸福，你更接近：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "这种关系本质上不能与真人亲密关系相提并论",
+        "score": -2
+      },
+      {
+        "label": "价值明显低于真人关系",
+        "score": -1
+      },
+      {
+        "label": "有不同性质，不能简单比较",
+        "score": 0
+      },
+      {
+        "label": "可以具有接近真人关系的真实价值",
+        "score": 1
+      },
+      {
+        "label": "只要双方体验与承诺真实，来源不应自动降低其价值",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X1-03",
+    "axis": "X1",
+    "prompt": "如果一段虚拟经历给人的长期记忆、关系和成长都是真实的，它发生在合成环境中并不自动意味着它“比较假”。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X2-01",
+    "axis": "X2",
+    "prompt": "如果 AI 数据中心明显推高当地居民用电、用水成本，社会应给 AI 扩张设置真实的资源上限。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X2-02",
+    "axis": "X2",
+    "prompt": "面对 AI 带来的能源需求，你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "优先限制新增AI算力，守住现有资源边界",
+        "score": -2
+      },
+      {
+        "label": "增长应服从严格资源约束",
+        "score": -1
+      },
+      {
+        "label": "限制与新增能源建设并行",
+        "score": 0
+      },
+      {
+        "label": "优先扩建清洁能源和电网来满足增长",
+        "score": 1
+      },
+      {
+        "label": "长期应通过更强技术扩大资源供给，而不是限制智能增长",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X2-03",
+    "axis": "X2",
+    "prompt": "新建大型 AI 基础设施能显著提高当地科研和经济产出，但会让居民电价连续五年上涨约 10%。你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "不应让居民为AI扩张承担这类资源成本",
+        "score": -2
+      },
+      {
+        "label": "除非影响极小，否则应限制扩张",
+        "score": -1
+      },
+      {
+        "label": "只有充分补偿居民并同步扩建能源后才可推进",
+        "score": 0
+      },
+      {
+        "label": "可以接受有限电价上涨换取长期扩容",
+        "score": 1
+      },
+      {
+        "label": "只要长期净收益足够大，应优先扩大能源与算力供给",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X3-01",
+    "axis": "X3",
+    "prompt": "如果一项政策能显著改善几百年后文明的安全与发展空间，但会让当前用于医疗、住房和教育的公共预算减少约 3%，你更接近：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "不应为如此遥远未来削减当代基本公共投入",
+        "score": -2
+      },
+      {
+        "label": "明显优先当代人的确定需求",
+        "score": -1
+      },
+      {
+        "label": "只有远期证据非常强时才考虑",
+        "score": 0
+      },
+      {
+        "label": "可以承担部分当代成本换取长期安全",
+        "score": 1
+      },
+      {
+        "label": "未来世代利益应获得接近当代人的真实政策权重",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X3-02",
+    "axis": "X3",
+    "prompt": "一个 AI 安全计划需要当代社会连续十年承担明显经济成本，但其主要收益可能要在一百年以上后才体现。你更支持：",
+    "note": "",
+    "type": "FC5",
+    "options": [
+      {
+        "label": "不支持，时间太远且机会成本过高",
+        "score": -2
+      },
+      {
+        "label": "倾向把资源留给当代明确问题",
+        "score": -1
+      },
+      {
+        "label": "取决于远期风险证据强度",
+        "score": 0
+      },
+      {
+        "label": "若证据可信，愿承担明显当代成本",
+        "score": 1
+      },
+      {
+        "label": "即使收益很远，也应把深未来安全列为核心公共目标",
+        "score": 2
+      }
+    ],
+    "v1_revision": "final_v1",
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-X3-03",
+    "axis": "X3",
+    "prompt": "当遥远未来的收益和风险非常不确定时，公共政策首先应解决当代人的明确问题，而不是让深未来推测占据主要权重。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-M1-01",
+    "axis": "M1",
+    "prompt": "AI 很重要，但人口、能源、制度质量、战争与文化变化同样可能决定本世纪历史，因此不应把几乎所有长期问题都解释成 AI 问题。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-M1-02",
+    "axis": "M1",
+    "prompt": "AGI/ASI 很可能成为本世纪最重要的单一历史变量，其他重大议题最终都会围绕它重新组织。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": 1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": -2
+      },
+      {
+        "label": "比较不同意",
+        "score": -1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": 1
+      },
+      {
+        "label": "非常同意",
+        "score": 2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  },
+  {
+    "id": "C-M1-03",
+    "axis": "M1",
+    "prompt": "在没有更强证据证明 AGI 很快出现前，政府不应因为 AGI 预测而大幅重排医疗、住房、教育和能源等现实公共优先级。",
+    "note": "",
+    "type": "L5",
+    "agree_direction": -1,
+    "options": [
+      {
+        "label": "非常不同意",
+        "score": 2
+      },
+      {
+        "label": "比较不同意",
+        "score": 1
+      },
+      {
+        "label": "不确定 / 看情况",
+        "score": 0
+      },
+      {
+        "label": "比较同意",
+        "score": -1
+      },
+      {
+        "label": "非常同意",
+        "score": -2
+      }
+    ],
+    "version": "v1",
+    "scoring_note": "选项语义分直接进入所属轴；score=0不构成Hallmark命中。"
+  }
+]

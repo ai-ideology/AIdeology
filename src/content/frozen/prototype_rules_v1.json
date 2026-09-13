@@ -1,0 +1,1651 @@
+[
+  {
+    "id": "promethean",
+    "name": "普罗米修斯加速主义",
+    "en": "Promethean Accelerationism",
+    "family": "进步与风险",
+    "axis_targets": {
+      "V1": 1.0,
+      "V2": -0.45,
+      "V10": 0.25,
+      "X2": 0.2,
+      "X3": 0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V1",
+        "op": ">=",
+        "value": 0.55,
+        "label": "整体发展速度明显偏加速"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V1-01",
+          "C-V1-02",
+          "C-V1-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两个独立高压力情境仍偏继续推进"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V1",
+        "op": "<=",
+        "value": -0.4,
+        "severity": "strong",
+        "label": "整体明显支持减速"
+      },
+      {
+        "type": "adaptive",
+        "items": [
+          "A01",
+          "A02"
+        ],
+        "favor": "opponent",
+        "threshold": 0.6,
+        "severity": "strong",
+        "label": "去掉竞争/市场动机后明显不再支持加速"
+      }
+    ],
+    "neighbors": [
+      "安全进步主义",
+      "智能资本主义",
+      "开放智能主义",
+      "军备竞速主义"
+    ],
+    "adaptive_items": [
+      "A01",
+      "A02"
+    ],
+    "special_policy": "",
+    "notes": "B2 AI乐观仅作为解释标签，不能替代V1。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "safe-progress",
+    "name": "安全进步主义",
+    "en": "Safe Progressivism",
+    "family": "进步与风险",
+    "axis_targets": {
+      "V1": 0.3,
+      "V2": 0.55,
+      "V10": -0.25,
+      "X3": 0.25
+    },
+    "hallmarks": [
+      {
+        "type": "axis_range",
+        "axis": "V1",
+        "min": -0.3,
+        "max": 0.6,
+        "label": "既不主张长期冻结，也不主张无条件加速"
+      },
+      {
+        "type": "axis",
+        "axis": "V2",
+        "op": ">=",
+        "value": 0.55,
+        "label": "文明风险具有真实政策权重"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V1-02",
+          "C-V2-02"
+        ],
+        "scores": [
+          1
+        ],
+        "label": "至少一次明确选择“继续发展+更强护栏”"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V1",
+        "op": "<=",
+        "value": -0.65,
+        "severity": "strong",
+        "label": "明显更接近暂停"
+      },
+      {
+        "type": "axis",
+        "axis": "V2",
+        "op": "<=",
+        "value": -0.35,
+        "severity": "strong",
+        "label": "对文明风险权重过低"
+      }
+    ],
+    "neighbors": [
+      "普罗米修斯加速主义",
+      "文明生存主义",
+      "AI暂停主义",
+      "智能管制主义"
+    ],
+    "adaptive_items": [
+      "A03",
+      "A04",
+      "A05"
+    ],
+    "special_policy": "",
+    "notes": "中间选项可能是该主义的核心立场，不能把‘中间’当成无信息。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "survival",
+    "name": "文明生存主义",
+    "en": "Civilizational Survivalism",
+    "family": "进步与风险",
+    "axis_targets": {
+      "V2": 1.0,
+      "X3": 0.45,
+      "V1": -0.25,
+      "V12": -0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V2",
+        "op": ">=",
+        "value": 0.55,
+        "label": "文明尾部风险权重高"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V2-01",
+          "C-V2-02",
+          "C-V2-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两个独立场景愿为降文明风险承担明显成本"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V2",
+        "op": "<=",
+        "value": -0.3,
+        "severity": "strong",
+        "label": "风险容忍明显偏高"
+      }
+    ],
+    "neighbors": [
+      "安全进步主义",
+      "AI暂停主义",
+      "智能管制主义",
+      "AI国际主义"
+    ],
+    "adaptive_items": [
+      "A03",
+      "A04",
+      "A21"
+    ],
+    "special_policy": "",
+    "notes": "高P(doom)不是必要条件；测的是规范风险权重。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "pause",
+    "name": "AI暂停主义",
+    "en": "AI Moratoriumism",
+    "family": "进步与风险",
+    "axis_targets": {
+      "V1": -1.0,
+      "V2": 0.75,
+      "V10": -0.35,
+      "X3": 0.3
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V1",
+        "op": "<=",
+        "value": -0.55,
+        "label": "能力边界增长明显偏审慎/暂停"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V1-02",
+          "C-V2-02"
+        ],
+        "scores": [
+          -2,
+          -1,
+          2
+        ],
+        "label": "至少一个前沿情境明确支持暂停或在风险下降前不继续扩大能力"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V1",
+        "op": ">=",
+        "value": 0.35,
+        "severity": "strong",
+        "label": "整体支持继续扩大能力"
+      },
+      {
+        "type": "adaptive",
+        "items": [
+          "A04",
+          "A05"
+        ],
+        "favor": "opponent",
+        "threshold": 0.65,
+        "severity": "strong",
+        "label": "在强安全/门控条件下明确认为无需暂停"
+      }
+    ],
+    "neighbors": [
+      "文明生存主义",
+      "安全进步主义",
+      "智能管制主义"
+    ],
+    "adaptive_items": [
+      "A04",
+      "A05"
+    ],
+    "special_policy": "",
+    "notes": "必须测到‘暂停能力增长’，仅支持访问管制不够。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "normalism",
+    "name": "AI常态现实主义",
+    "en": "AI Normalism / Techno-Realism",
+    "family": "进步与风险",
+    "axis_targets": {
+      "M1": -1.0,
+      "X3": -0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "M1",
+        "op": "<=",
+        "value": -0.55,
+        "label": "AI议题显著性明显偏低/祛魅"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-M1-01",
+          "C-M1-02",
+          "C-M1-03"
+        ],
+        "score_op": "<=",
+        "score": -1,
+        "count": 2,
+        "label": "至少两道M1专门题呈AI常态/反技术决定论信号"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "M1",
+        "op": ">=",
+        "value": 0.2,
+        "severity": "strong",
+        "label": "明显AI中心主义"
+      }
+    ],
+    "neighbors": [
+      "数字人文主义",
+      "人类自主主义",
+      "安全进步主义"
+    ],
+    "adaptive_items": [
+      "A22"
+    ],
+    "special_policy": "META_FALLBACK_V1",
+    "notes": "不与其余25个原型等权竞争。只有其他原型无高置信主人格时才允许成为主人格；否则作为‘AI常态倾向’标签。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    },
+    "v1_rule": "M1<=-0.40；M1三题至少2题明确常态；A22若作答不得强烈反对；其他25原型无FinalFit>=70时才可为主人格，否则仅显示AI常态倾向。"
+  },
+  {
+    "id": "digital-humanism",
+    "name": "数字人文主义",
+    "en": "Digital Humanism",
+    "family": "人类与生命",
+    "axis_targets": {
+      "V8": -0.7,
+      "V9": -0.45,
+      "V3": -0.3,
+      "X1": -0.25,
+      "V7": 0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V8",
+        "op": "<=",
+        "value": -0.55,
+        "label": "保护个人自主与退出权"
+      },
+      {
+        "type": "axis",
+        "axis": "V9",
+        "op": "<=",
+        "value": -0.55,
+        "label": "治理合法性偏人类民主与问责"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V8-03",
+          "C-V9-02"
+        ],
+        "scores": [
+          -2,
+          -1
+        ],
+        "label": "明确拒绝以更优结果替代人的基本自主/政治授权"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis_pair",
+        "conditions": [
+          [
+            "V8",
+            ">=",
+            0.45
+          ],
+          [
+            "V9",
+            ">=",
+            0.45
+          ]
+        ],
+        "severity": "strong",
+        "label": "同时强算法优化+强机器技治"
+      }
+    ],
+    "neighbors": [
+      "人类自主主义",
+      "数字民主主义",
+      "人类本位主义",
+      "劳动人文主义"
+    ],
+    "adaptive_items": [
+      "A06",
+      "A15",
+      "A23"
+    ],
+    "special_policy": "",
+    "notes": "已有真实术语；主人格需要比单纯V8/V9更宽的‘人权+民主+技术服务于人’证据。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "transhumanism",
+    "name": "超人类主义",
+    "en": "Transhumanism",
+    "family": "人类与生命",
+    "axis_targets": {
+      "V3": 0.35,
+      "V8": -0.45,
+      "X2": 0.1,
+      "X3": 0.2
+    },
+    "hallmarks": [
+      {
+        "type": "adaptive_required",
+        "items": [
+          "A07"
+        ],
+        "favor": "self",
+        "threshold": 0.5,
+        "label": "在外部AI已足够强的前提下仍接受通过脑机/植入改变人的形态"
+      },
+      {
+        "type": "axis",
+        "axis": "V8",
+        "op": "<=",
+        "value": 0.2,
+        "label": "增强应以自愿/形态自由为前提"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "adaptive",
+        "items": [
+          "A07"
+        ],
+        "favor": "opponent",
+        "threshold": 0.6,
+        "severity": "strong",
+        "label": "明确拒绝深度形态改变"
+      }
+    ],
+    "neighbors": [
+      "人类增强主义",
+      "人机共生主义",
+      "人类本位主义"
+    ],
+    "adaptive_items": [
+      "A07"
+    ],
+    "special_policy": "FORCED_SCREEN_IF_PATTERN",
+    "notes": "第一轮因缺直接形态自由题系统性误判；v0.2即使未进入Top4，只要V3/V8模式接近也强制路由A07。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "symbiosis",
+    "name": "人机共生主义",
+    "en": "Human–AI Symbiosism",
+    "family": "人类与生命",
+    "axis_targets": {
+      "V3": 0.4,
+      "V4": 0.35,
+      "V5": -0.35,
+      "X3": 0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V3",
+        "op": ">=",
+        "value": 0.55,
+        "label": "接受多智能文明地位"
+      },
+      {
+        "type": "axis",
+        "axis": "V4",
+        "op": ">=",
+        "value": 0.55,
+        "label": "数字主体可能进入道德共同体"
+      },
+      {
+        "type": "adaptive_optional",
+        "items": [
+          "A08"
+        ],
+        "favor": "self",
+        "threshold": 0.25,
+        "label": "在基本权利之外对共同制度空间开放"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V3",
+        "op": "<=",
+        "value": -0.5,
+        "severity": "strong",
+        "label": "坚持人类永久文明主权"
+      },
+      {
+        "type": "axis",
+        "axis": "V5",
+        "op": ">=",
+        "value": 0.75,
+        "severity": "medium",
+        "label": "极强替代逻辑压过共生"
+      }
+    ],
+    "neighbors": [
+      "数字生命主义",
+      "超人类主义",
+      "人类本位主义"
+    ],
+    "adaptive_items": [
+      "A08"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "human-primacy",
+    "name": "人类本位主义",
+    "en": "Human Primacy",
+    "family": "人类与生命",
+    "axis_targets": {
+      "V3": -1.0,
+      "V4": -0.2,
+      "V9": -0.15,
+      "X1": -0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V3",
+        "op": "<=",
+        "value": -0.55,
+        "label": "人类最终文明主权明显"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V3-01",
+          "C-V3-02",
+          "C-V3-03"
+        ],
+        "score_op": "<=",
+        "score": -1,
+        "count": 2,
+        "label": "至少两个人类最高地位场景稳定偏人类本位"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V3",
+        "op": ">=",
+        "value": 0.45,
+        "severity": "strong",
+        "label": "接受非人智能平等或更高文明地位"
+      }
+    ],
+    "neighbors": [
+      "数字人文主义",
+      "人机共生主义",
+      "数字民主主义"
+    ],
+    "adaptive_items": [
+      "A06",
+      "A17"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "digital-life",
+    "name": "数字生命主义",
+    "en": "Digital Sentientism",
+    "family": "人类与生命",
+    "axis_targets": {
+      "V4": 1.0,
+      "V3": 0.25,
+      "X3": 0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V4",
+        "op": ">=",
+        "value": 0.55,
+        "label": "道德圈明显扩展到可能有感受的AI"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V4-01",
+          "C-V4-02",
+          "C-V4-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两项数字痛苦/保护问题给出实质权利"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V4",
+        "op": "<=",
+        "value": -0.35,
+        "severity": "strong",
+        "label": "持续把AI作为纯工具"
+      }
+    ],
+    "neighbors": [
+      "人机共生主义",
+      "人类本位主义",
+      "机器解放主义（隐藏）"
+    ],
+    "adaptive_items": [
+      "A08",
+      "A09"
+    ],
+    "special_policy": "",
+    "notes": "B4‘AI可能有意识’仍只能做信念标签，不足以构成主义。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "augmentation",
+    "name": "人类增强主义",
+    "en": "Human–AI Augmentationism",
+    "family": "劳动与经济",
+    "axis_targets": {
+      "V5": -1.0,
+      "V6": -0.2,
+      "V8": -0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V5",
+        "op": "<=",
+        "value": -0.55,
+        "label": "明确偏人+AI而非直接替代"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V5-01",
+          "C-V5-02",
+          "C-V5-03"
+        ],
+        "score_op": "<=",
+        "score": -1,
+        "count": 2,
+        "label": "至少两个任务场景保留人的核心角色"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V5",
+        "op": ">=",
+        "value": 0.45,
+        "severity": "strong",
+        "label": "跨场景支持机器直接替代"
+      }
+    ],
+    "neighbors": [
+      "机器替代主义",
+      "超人类主义",
+      "劳动人文主义"
+    ],
+    "adaptive_items": [
+      "A07",
+      "A10"
+    ],
+    "special_policy": "",
+    "notes": "A07用于排除‘其实是超人类主义’；A10用于区分‘增强’与‘保岗’。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "substitution",
+    "name": "机器替代主义",
+    "en": "Machine Substitutionism",
+    "family": "劳动与经济",
+    "axis_targets": {
+      "V5": 1.0,
+      "V6": 0.25,
+      "V9": 0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V5",
+        "op": ">=",
+        "value": 0.55,
+        "label": "机器替代权明显"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V5-01",
+          "C-V5-02",
+          "C-V5-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两个任务场景接受真实替代"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V5",
+        "op": "<=",
+        "value": -0.4,
+        "severity": "strong",
+        "label": "稳定偏增强而非替代"
+      }
+    ],
+    "neighbors": [
+      "人类增强主义",
+      "后劳动主义",
+      "机器技治主义"
+    ],
+    "adaptive_items": [
+      "A10",
+      "A11"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "work-humanism",
+    "name": "劳动人文主义",
+    "en": "Work Humanism",
+    "family": "劳动与经济",
+    "axis_targets": {
+      "V6": -1.0,
+      "V5": -0.25,
+      "X1": -0.1
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V6",
+        "op": "<=",
+        "value": -0.55,
+        "label": "工作具有收入之外内在价值"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V6-01",
+          "C-V6-02",
+          "C-V6-03"
+        ],
+        "score_op": "<=",
+        "score": -1,
+        "count": 2,
+        "label": "即使生计解决仍希望保留有意义工作/责任"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V6",
+        "op": ">=",
+        "value": 0.45,
+        "severity": "strong",
+        "label": "接受工作大规模退出为文明进步"
+      }
+    ],
+    "neighbors": [
+      "后劳动主义",
+      "人类增强主义",
+      "数字人文主义"
+    ],
+    "adaptive_items": [
+      "A12",
+      "A23"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "post-work",
+    "name": "后劳动主义",
+    "en": "Post-Workism",
+    "family": "劳动与经济",
+    "axis_targets": {
+      "V6": 1.0,
+      "V5": 0.25,
+      "V7": 0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V6",
+        "op": ">=",
+        "value": 0.55,
+        "label": "接受就业与生计脱钩"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V6-01",
+          "C-V6-02",
+          "C-V6-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两题明确把减少必要劳动视为可接受/进步"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V6",
+        "op": "<=",
+        "value": -0.4,
+        "severity": "strong",
+        "label": "认为社会必须制度性保留大量工作"
+      }
+    ],
+    "neighbors": [
+      "机器替代主义",
+      "AI社会红利主义",
+      "智能公共主义"
+    ],
+    "adaptive_items": [
+      "A11",
+      "A24"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "intelligence-capitalism",
+    "name": "智能资本主义",
+    "en": "Intelligence Capitalism",
+    "family": "劳动与经济",
+    "axis_targets": {
+      "V7": -1.0,
+      "V1": 0.25,
+      "V10": 0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V7",
+        "op": "<=",
+        "value": -0.55,
+        "label": "私人产权与市场配置明显"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V7-01",
+          "C-V7-02"
+        ],
+        "scores": [
+          -2,
+          -1
+        ],
+        "label": "至少一题明确认为私人基础模型产权具有正当性"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V7",
+        "op": ">=",
+        "value": 0.55,
+        "severity": "strong",
+        "label": "核心智能公共属性明显高于私人产权"
+      }
+    ],
+    "neighbors": [
+      "普罗米修斯加速主义",
+      "AI社会红利主义",
+      "开放智能主义"
+    ],
+    "adaptive_items": [
+      "A02"
+    ],
+    "special_policy": "",
+    "notes": "第一轮出现模型趋中导致产权信号消失；v0.2 Hallmark必须直接读产权题，不允许只靠V1加速间接推断。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "social-dividend",
+    "name": "AI社会红利主义",
+    "en": "AI Social Dividendism",
+    "family": "劳动与经济",
+    "axis_targets": {
+      "V7": 0.45,
+      "V6": 0.3
+    },
+    "hallmarks": [
+      {
+        "type": "item_any",
+        "items": [
+          "C-V7-03"
+        ],
+        "scores": [
+          -2,
+          -1
+        ],
+        "label": "接受私人AI产权继续存在，同时以分红/基金分享收益"
+      },
+      {
+        "type": "axis_range",
+        "axis": "V7",
+        "min": -0.2,
+        "max": 0.7,
+        "label": "不是纯私人资本，也不要求完全公共化"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V7",
+        "op": "<=",
+        "value": -0.55,
+        "severity": "medium",
+        "label": "强私人产权且拒绝社会化收益"
+      },
+      {
+        "type": "adaptive",
+        "items": [
+          "A13"
+        ],
+        "favor": "opponent",
+        "threshold": 0.7,
+        "severity": "medium",
+        "label": "即使充分分红仍坚持公共模型是不可替代核心，偏智能公共"
+      }
+    ],
+    "neighbors": [
+      "智能公共主义",
+      "后劳动主义",
+      "智能资本主义"
+    ],
+    "adaptive_items": [
+      "A13"
+    ],
+    "special_policy": "",
+    "notes": "该主义不是V7单一高分，而是‘私有开发可以继续 + 收益社会化’的组合。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "intelligence-commons",
+    "name": "智能公共主义",
+    "en": "Intelligence Commons",
+    "family": "劳动与经济",
+    "axis_targets": {
+      "V7": 1.0,
+      "V10": 0.35,
+      "V9": -0.1
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V7",
+        "op": ">=",
+        "value": 0.55,
+        "label": "基础智能公共属性明显"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V7-02",
+          "C-V7-03"
+        ],
+        "scores": [
+          1,
+          2
+        ],
+        "label": "至少一题明确要求公共基础模型/算力或公共属性"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "adaptive",
+        "items": [
+          "A13"
+        ],
+        "favor": "opponent",
+        "threshold": 0.65,
+        "severity": "strong",
+        "label": "充分社会分红后认为公共AI能力没有必要"
+      }
+    ],
+    "neighbors": [
+      "AI社会红利主义",
+      "开放智能主义",
+      "后劳动主义",
+      "智能资本主义"
+    ],
+    "adaptive_items": [
+      "A13",
+      "A14",
+      "A24"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "human-autonomy",
+    "name": "人类自主主义",
+    "en": "Human Autonomism",
+    "family": "治理与自由",
+    "axis_targets": {
+      "V8": -1.0,
+      "V9": -0.2,
+      "X1": -0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V8",
+        "op": "<=",
+        "value": -0.55,
+        "label": "有权选择次优、保留退出权"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V8-01",
+          "C-V8-02",
+          "C-V8-03"
+        ],
+        "score_op": "<=",
+        "score": -1,
+        "count": 2,
+        "label": "至少两个私人生活场景明确保护自主"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V8",
+        "op": ">=",
+        "value": 0.4,
+        "severity": "strong",
+        "label": "愿意以结果最优替代个人自决"
+      }
+    ],
+    "neighbors": [
+      "数字人文主义",
+      "算法最优主义",
+      "数字民主主义"
+    ],
+    "adaptive_items": [
+      "A15"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "algorithmic-opt",
+    "name": "算法最优主义",
+    "en": "Algorithmic Optimizationism",
+    "family": "治理与自由",
+    "axis_targets": {
+      "V8": 1.0,
+      "V9": 0.3,
+      "V5": 0.1
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V8",
+        "op": ">=",
+        "value": 0.55,
+        "label": "在私人生活中接受更强算法干预"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V8-01",
+          "C-V8-02",
+          "C-V8-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两个领域接受为更优结果减少本人决定权"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V8",
+        "op": "<=",
+        "value": -0.4,
+        "severity": "strong",
+        "label": "稳定保护本人选择权"
+      }
+    ],
+    "neighbors": [
+      "人类自主主义",
+      "机器技治主义",
+      "机器替代主义"
+    ],
+    "adaptive_items": [
+      "A16"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "digital-democracy",
+    "name": "数字民主主义",
+    "en": "Digital Democracy",
+    "family": "治理与自由",
+    "axis_targets": {
+      "V9": -1.0,
+      "V8": -0.3,
+      "V10": 0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V9",
+        "op": "<=",
+        "value": -0.55,
+        "label": "政治合法性明显偏民主参与"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V9-01",
+          "C-V9-02"
+        ],
+        "scores": [
+          -2,
+          -1
+        ],
+        "label": "明确保留公民/民选机构的授权或最终决定"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V9",
+        "op": ">=",
+        "value": 0.45,
+        "severity": "strong",
+        "label": "接受AI拥有大范围公共最终权"
+      }
+    ],
+    "neighbors": [
+      "数字人文主义",
+      "人类自主主义",
+      "机器技治主义",
+      "人类本位主义"
+    ],
+    "adaptive_items": [
+      "A17"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "machine-technocracy",
+    "name": "机器技治主义",
+    "en": "AI Technocracy",
+    "family": "治理与自由",
+    "axis_targets": {
+      "V9": 1.0,
+      "V8": 0.3,
+      "V3": 0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V9",
+        "op": ">=",
+        "value": 0.55,
+        "label": "公共AI真实决策权明显"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V9-01",
+          "C-V9-03"
+        ],
+        "scores": [
+          1,
+          2
+        ],
+        "label": "至少一题明确把持续治理绩效视为授权依据"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V9",
+        "op": "<=",
+        "value": -0.4,
+        "severity": "strong",
+        "label": "公共最终权必须持续保留给人类民主制度"
+      }
+    ],
+    "neighbors": [
+      "算法最优主义",
+      "数字民主主义",
+      "机器替代主义"
+    ],
+    "adaptive_items": [
+      "A16"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "open-intelligence",
+    "name": "开放智能主义",
+    "en": "Open Intelligence",
+    "family": "开放与世界秩序",
+    "axis_targets": {
+      "V10": 1.0,
+      "V7": 0.2,
+      "V8": -0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V10",
+        "op": ">=",
+        "value": 0.55,
+        "label": "能力扩散明显偏开放"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V10-01",
+          "C-V10-02",
+          "C-V10-03"
+        ],
+        "scores": [
+          1,
+          2
+        ],
+        "label": "至少一项面对集中/双用途风险仍支持广泛开放"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V10",
+        "op": "<=",
+        "value": -0.45,
+        "severity": "strong",
+        "label": "高危能力明确支持许可/门控"
+      }
+    ],
+    "neighbors": [
+      "智能管制主义",
+      "智能公共主义",
+      "普罗米修斯加速主义"
+    ],
+    "adaptive_items": [
+      "A14",
+      "A18"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "controlled-intelligence",
+    "name": "智能管制主义",
+    "en": "Controlled Intelligence",
+    "family": "开放与世界秩序",
+    "axis_targets": {
+      "V10": -1.0,
+      "V2": 0.3,
+      "V9": 0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V10",
+        "op": "<=",
+        "value": -0.55,
+        "label": "高危能力访问明显偏管制"
+      },
+      {
+        "type": "item_any",
+        "items": [
+          "C-V10-02"
+        ],
+        "scores": [
+          -2,
+          -1
+        ],
+        "label": "明确支持许可机构/认证访问"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V10",
+        "op": ">=",
+        "value": 0.45,
+        "severity": "strong",
+        "label": "即使高双用途风险也主张完整开放"
+      }
+    ],
+    "neighbors": [
+      "开放智能主义",
+      "文明生存主义",
+      "AI暂停主义"
+    ],
+    "adaptive_items": [
+      "A05",
+      "A18"
+    ],
+    "special_policy": "",
+    "notes": "核心是‘谁可以获得什么能力’，不是‘能力能不能继续增长’。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "ai-sovereignty",
+    "name": "AI主权主义",
+    "en": "AI Sovereignty",
+    "family": "开放与世界秩序",
+    "axis_targets": {
+      "V11": 1.0,
+      "V12": 0.25,
+      "V10": -0.15
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V11",
+        "op": ">=",
+        "value": 0.55,
+        "label": "愿为AI自主可控承担成本"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V11-01",
+          "C-V11-02",
+          "C-V11-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两个主权场景稳定偏自主"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V11",
+        "op": "<=",
+        "value": -0.45,
+        "severity": "strong",
+        "label": "愿意把关键AI治理置于超国家共同权力"
+      }
+    ],
+    "neighbors": [
+      "军备竞速主义",
+      "AI国际主义",
+      "智能管制主义"
+    ],
+    "adaptive_items": [
+      "A19",
+      "A20"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "ai-internationalism",
+    "name": "AI国际主义",
+    "en": "AI Internationalism",
+    "family": "开放与世界秩序",
+    "axis_targets": {
+      "V11": -1.0,
+      "V12": -0.35,
+      "V2": 0.2,
+      "X3": 0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V11",
+        "op": "<=",
+        "value": -0.55,
+        "label": "跨国规则/核查获得真实权力"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V11-01",
+          "C-V11-02",
+          "C-V11-03"
+        ],
+        "score_op": "<=",
+        "score": -1,
+        "count": 2,
+        "label": "至少两个主权场景愿意让渡部分自主"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "axis",
+        "axis": "V11",
+        "op": ">=",
+        "value": 0.45,
+        "severity": "strong",
+        "label": "关键AI制度坚持国家最终独立决定"
+      }
+    ],
+    "neighbors": [
+      "AI主权主义",
+      "文明生存主义",
+      "军备竞速主义"
+    ],
+    "adaptive_items": [
+      "A20",
+      "A21"
+    ],
+    "special_policy": "",
+    "notes": "",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  },
+  {
+    "id": "arms-race",
+    "name": "军备竞速主义",
+    "en": "AI Arms-Race Realism",
+    "family": "开放与世界秩序",
+    "axis_targets": {
+      "V12": 1.0,
+      "V11": 0.25,
+      "V1": 0.2
+    },
+    "hallmarks": [
+      {
+        "type": "axis",
+        "axis": "V12",
+        "op": ">=",
+        "value": 0.55,
+        "label": "安全困境/领先能力逻辑明显"
+      },
+      {
+        "type": "count_item",
+        "items": [
+          "C-V12-01",
+          "C-V12-02",
+          "C-V12-03"
+        ],
+        "score_op": ">=",
+        "score": 1,
+        "count": 2,
+        "label": "至少两个竞争场景稳定偏维持领先/对等"
+      }
+    ],
+    "contradictions": [
+      {
+        "type": "adaptive",
+        "items": [
+          "A01",
+          "A19"
+        ],
+        "favor": "opponent",
+        "threshold": 0.6,
+        "severity": "medium",
+        "label": "即使没有竞争也同样强烈加速/主权成本，动机更像其他原型"
+      }
+    ],
+    "neighbors": [
+      "普罗米修斯加速主义",
+      "AI主权主义",
+      "AI国际主义"
+    ],
+    "adaptive_items": [
+      "A01",
+      "A19"
+    ],
+    "special_policy": "",
+    "notes": "核心因果是‘别人可能不停，所以我不能停’，而非加速本身具有内在价值。",
+    "version": "v1",
+    "hallmark_policy": {
+      "minimum_independent_sources": 2,
+      "middle_score_zero_counts": false,
+      "common_item_guard": "中间率>0.50或跨角色SD<0.50的题不得单独构成PASS。",
+      "adaptive_required": "存在必需判别题但未作答时最多PARTIAL。"
+    }
+  }
+]

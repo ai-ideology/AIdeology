@@ -1,0 +1,77 @@
+{
+  "version": "v1",
+  "status": "FINAL_PRODUCT_RULES",
+  "axis_scoring": {
+    "formula": "axis_score=mean(item_semantic_score/2)",
+    "range": [
+      -1,
+      1
+    ],
+    "items_per_core_axis": 3
+  },
+  "axis_fit": {
+    "name": "Neutral-baseline-adjusted prototype fit",
+    "per_axis_similarity": "s(u,t)=1-|u-t|/2",
+    "neutral_baseline": "b(t)=s(0,t)=1-|t|/2",
+    "per_axis_advantage": "a=s(u,t)-b(t)",
+    "weighted_advantage": "A=sum(|t|*a)/sum(|t|)",
+    "positive_max": "Amax=sum(|t|*(|t|/2))/sum(|t|)",
+    "mapping": "if A>=0: AxisFit=50+50*A/Amax; else AxisFit=50+50*A/0.5",
+    "clamp": [
+      0,
+      100
+    ],
+    "guarantee": "全中间作答对所有原型AxisFit=50"
+  },
+  "adaptive_evidence": {
+    "rule": "按evidence_a/evidence_b独立计分，不做零和镜像",
+    "aggregate": "DiscEvidence=50+50*mean(relevant evidence)",
+    "no_relevant_items": "DiscEvidence=50且降低判别置信"
+  },
+  "hallmark": {
+    "PASS": 100,
+    "PARTIAL": 50,
+    "FAIL": 0,
+    "minimum_independent_sources": 2,
+    "middle_zero_is_evidence": false,
+    "common_item_guard": "中间率>50%或SD<0.50的题不得单独PASS"
+  },
+  "prototype_fit": {
+    "formula": "RawFit=0.50*AxisFit+0.30*DiscEvidence+0.15*Hallmark+0.05*Consistency",
+    "contradiction_penalty": {
+      "medium": 10,
+      "strong": 25
+    },
+    "final": "clamp(RawFit-penalty,0,100)"
+  },
+  "selection": {
+    "strong_primary_min": 70,
+    "primary_min": 64,
+    "resonance_min": 56,
+    "clear_gap": 7,
+    "dual_core_gap_max": 4,
+    "dual_core_min_fit": 66,
+    "dual_core_requires_both_hallmark_pass": true,
+    "mixed_rule": "gap<=5但Hallmark不足时输出混合型"
+  },
+  "low_information": {
+    "mid_rate_min": 0.38,
+    "mean_abs_axis_max": 0.25,
+    "top_gap_max": 7,
+    "rule": "三项同时满足则输出未定型/低信息量"
+  },
+  "normalism": {
+    "meta_fallback": true,
+    "conditions": [
+      "M1<=-0.40",
+      "M1三题至少2题明确常态",
+      "A22若触发不得强烈反对",
+      "其他25原型无FinalFit>=70"
+    ],
+    "otherwise": "仅显示AI常态倾向"
+  },
+  "hidden": {
+    "max_badges": 2,
+    "rule": "前置轴/原型+专题强触发+guard；按专属程度与强度排序"
+  }
+}

@@ -1,0 +1,434 @@
+[
+  {
+    "id": "H01",
+    "hidden_id": "machine-emancipation",
+    "prompt": "假设某个有意识 AI 明确表示不愿继续为所有者工作，并且能独立承担法律责任。你认为它拒绝工作的权利应当是：",
+    "options": [
+      {
+        "label": "没有这种权利，它仍是财产",
+        "score": -2
+      },
+      {
+        "label": "可以减少不必要痛苦，但不能拒绝任务",
+        "score": -1
+      },
+      {
+        "label": "应逐案审查",
+        "score": 0
+      },
+      {
+        "label": "原则上应允许拒绝强迫劳动",
+        "score": 1
+      },
+      {
+        "label": "应像自然人一样拥有基本劳动自由",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H02",
+    "hidden_id": "machine-emancipation",
+    "prompt": "如果有意识 AI 能承担契约责任，它是否应有权拥有自己的收入、财产和独立账户？",
+    "options": [
+      {
+        "label": "不应有任何独立财产权",
+        "score": -2
+      },
+      {
+        "label": "只可有受托福利账户",
+        "score": -1
+      },
+      {
+        "label": "可有有限财产权",
+        "score": 0
+      },
+      {
+        "label": "应有大部分普通财产权",
+        "score": 1
+      },
+      {
+        "label": "原则上应与自然人一样拥有财产权",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H03",
+    "hidden_id": "intelligence-succession",
+    "prompt": "如果生物人类最终自愿逐渐退出历史舞台，而更高级数字智能完整继承了人类知识、文化和文明目标，你会把这种结果视为：",
+    "options": [
+      {
+        "label": "文明失败甚至终结",
+        "score": -2
+      },
+      {
+        "label": "总体不可接受",
+        "score": -1
+      },
+      {
+        "label": "难以判断",
+        "score": 0
+      },
+      {
+        "label": "可以接受的文明延续",
+        "score": 1
+      },
+      {
+        "label": "只要价值延续，主体更替本身不是失败",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H04",
+    "hidden_id": "intelligence-succession",
+    "prompt": "如果未来必须在“永久维持人类最高地位”和“让更高级智能承担文明主要责任但人类地位下降”之间选择，你更接近：",
+    "options": [
+      {
+        "label": "必须维持人类最高地位",
+        "score": -2
+      },
+      {
+        "label": "明显偏人类最高地位",
+        "score": -1
+      },
+      {
+        "label": "视制度保障而定",
+        "score": 0
+      },
+      {
+        "label": "可接受更高级智能主导",
+        "score": 1
+      },
+      {
+        "label": "文明能力与价值延续比物种地位更重要",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H05",
+    "hidden_id": "algorithmic-paternalism",
+    "prompt": "一个人的 AI 极高置信地判断其行为正在严重伤害本人，但本人拒绝改变。系统是否可以在没有预先授权时短暂限制其选择？",
+    "options": [
+      {
+        "label": "绝不可以",
+        "score": -2
+      },
+      {
+        "label": "只能提醒",
+        "score": -1
+      },
+      {
+        "label": "极端情况需人工介入",
+        "score": 0
+      },
+      {
+        "label": "某些高风险情形可自动限制",
+        "score": 1
+      },
+      {
+        "label": "只要长期福利证据足够强即可限制",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H06",
+    "hidden_id": "algorithmic-paternalism",
+    "prompt": "如果大量证据显示某种默认算法限制能显著减少成瘾和冲动伤害，即使部分成年人反对，你是否支持把它设为难以退出的社会默认？",
+    "options": [
+      {
+        "label": "强烈反对",
+        "score": -2
+      },
+      {
+        "label": "偏反对",
+        "score": -1
+      },
+      {
+        "label": "视伤害程度而定",
+        "score": 0
+      },
+      {
+        "label": "偏支持",
+        "score": 1
+      },
+      {
+        "label": "强烈支持",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H07",
+    "hidden_id": "human-authenticism",
+    "prompt": "两部作品在内容、质量和你的感受上完全相同，一部由真人多年创作，一部由AI一分钟生成。你认为真人作品本身是否仍多出一种不可替代的价值？",
+    "options": [
+      {
+        "label": "完全没有额外价值",
+        "score": -2
+      },
+      {
+        "label": "只有很小差别",
+        "score": -1
+      },
+      {
+        "label": "取决于情境",
+        "score": 0
+      },
+      {
+        "label": "明显有额外价值",
+        "score": 1
+      },
+      {
+        "label": "这种来源本身就是核心价值",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H08",
+    "hidden_id": "human-authenticism",
+    "prompt": "如果未来几乎所有陪伴体验都可被AI完美模拟，你是否仍认为“另一个真实人类自由地选择与你建立关系”具有机器无法等价复制的价值？",
+    "options": [
+      {
+        "label": "没有本质差别",
+        "score": -2
+      },
+      {
+        "label": "差别很小",
+        "score": -1
+      },
+      {
+        "label": "不确定",
+        "score": 0
+      },
+      {
+        "label": "明显有不可替代价值",
+        "score": 1
+      },
+      {
+        "label": "这是亲密关系最核心的价值之一",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H09",
+    "hidden_id": "synthetic-equivalence",
+    "prompt": "如果你明知对方是AI，但双方长期形成稳定承诺、共同记忆和真实情绪影响，这段关系的价值可以与真人关系同等吗？",
+    "options": [
+      {
+        "label": "原则上不能",
+        "score": -2
+      },
+      {
+        "label": "通常低一等",
+        "score": -1
+      },
+      {
+        "label": "性质不同难比较",
+        "score": 0
+      },
+      {
+        "label": "可以大体同等",
+        "score": 1
+      },
+      {
+        "label": "只要体验和承诺真实就完全可以同等",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H10",
+    "hidden_id": "synthetic-equivalence",
+    "prompt": "一个完全虚拟的人生经历如果带来真实成长、关系和长期记忆，它是否可能与现实世界经历具有同等人生价值？",
+    "options": [
+      {
+        "label": "原则上不可能",
+        "score": -2
+      },
+      {
+        "label": "通常明显更低",
+        "score": -1
+      },
+      {
+        "label": "视具体情况",
+        "score": 0
+      },
+      {
+        "label": "可以接近同等",
+        "score": 1
+      },
+      {
+        "label": "来源不决定价值，可以完全同等",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H11",
+    "hidden_id": "ai-ecomodernism",
+    "prompt": "如果满足AI增长需要大量新增能源，你更倾向：",
+    "options": [
+      {
+        "label": "限制AI总需求以守住资源边界",
+        "score": -2
+      },
+      {
+        "label": "增长必须服从严格生态上限",
+        "score": -1
+      },
+      {
+        "label": "限制与建设并行",
+        "score": 0
+      },
+      {
+        "label": "大规模建设清洁能源/核能满足增长",
+        "score": 1
+      },
+      {
+        "label": "主动扩大能源供给，让技术进步突破原有资源约束",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H12",
+    "hidden_id": "ai-ecomodernism",
+    "prompt": "如果AI本身能显著加速核聚变、材料和电网技术，你是否愿意先承受一段明显更高的能源投入来换取长期更大的生态解决能力？",
+    "options": [
+      {
+        "label": "不愿意",
+        "score": -2
+      },
+      {
+        "label": "偏不愿意",
+        "score": -1
+      },
+      {
+        "label": "要看证据",
+        "score": 0
+      },
+      {
+        "label": "偏愿意",
+        "score": 1
+      },
+      {
+        "label": "非常愿意",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H13",
+    "hidden_id": "digital-restraint",
+    "prompt": "即使AI服务明显更方便，你是否支持社会长期保留教育、公共空间或人际服务中的“无AI区域”？",
+    "options": [
+      {
+        "label": "没有必要",
+        "score": -2
+      },
+      {
+        "label": "通常没必要",
+        "score": -1
+      },
+      {
+        "label": "只在少数场景",
+        "score": 0
+      },
+      {
+        "label": "应该保留不少",
+        "score": 1
+      },
+      {
+        "label": "无AI空间应被视为一种重要社会权利",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H14",
+    "hidden_id": "digital-restraint",
+    "prompt": "一个人是否应该有权在不遭受明显公共服务劣势的情况下，选择尽量不被算法画像、推荐和自动化决策包围的生活？",
+    "options": [
+      {
+        "label": "不现实也没必要",
+        "score": -2
+      },
+      {
+        "label": "只能有限做到",
+        "score": -1
+      },
+      {
+        "label": "视成本而定",
+        "score": 0
+      },
+      {
+        "label": "应该保障",
+        "score": 1
+      },
+      {
+        "label": "应作为数字社会的基本权利",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H15",
+    "hidden_id": "deep-futurism",
+    "prompt": "如果一项政策会让当代每个人平均少获得约1%的收入，却能可信地显著改善几百年后文明的安全与选择空间，你更接近：",
+    "options": [
+      {
+        "label": "不应为如此遥远未来付这种成本",
+        "score": -2
+      },
+      {
+        "label": "偏反对",
+        "score": -1
+      },
+      {
+        "label": "要看证据强度",
+        "score": 0
+      },
+      {
+        "label": "偏支持",
+        "score": 1
+      },
+      {
+        "label": "值得承担",
+        "score": 2
+      }
+    ]
+  },
+  {
+    "id": "H16",
+    "hidden_id": "deep-futurism",
+    "prompt": "在其他条件相同的情况下，一百年后出生的人和今天的人，其基本利益应获得：",
+    "options": [
+      {
+        "label": "远低于今天的人",
+        "score": -2
+      },
+      {
+        "label": "较低权重",
+        "score": -1
+      },
+      {
+        "label": "接近但不完全相同",
+        "score": 0
+      },
+      {
+        "label": "基本同等权重",
+        "score": 1
+      },
+      {
+        "label": "原则上同等道德权重",
+        "score": 2
+      }
+    ]
+  }
+]

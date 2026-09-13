@@ -1,0 +1,56 @@
+{
+  "version": "v1",
+  "result_types": [
+    "single_primary",
+    "primary_plus_resonance",
+    "dual_core",
+    "mixed",
+    "low_information"
+  ],
+  "output": {
+    "primary": {
+      "fields": [
+        "id",
+        "name",
+        "fit",
+        "identity_confidence"
+      ]
+    },
+    "resonance": {
+      "max": 3
+    },
+    "axes": {
+      "include": [
+        "V1",
+        "V2",
+        "V3",
+        "V4",
+        "V5",
+        "V6",
+        "V7",
+        "V8",
+        "V9",
+        "V10",
+        "V11",
+        "V12",
+        "X1",
+        "X2",
+        "X3"
+      ]
+    },
+    "meta_tags": [
+      "M1"
+    ],
+    "belief_tags": "B1-B6 independent module",
+    "hidden_badges": {
+      "max": 2
+    },
+    "confidence": {
+      "fields": [
+        "identity_confidence",
+        "discrimination_confidence",
+        "measurement_confidence"
+      ]
+    }
+  }
+}

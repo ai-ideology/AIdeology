@@ -1,0 +1,283 @@
+{
+  "note": "Presentation layer for the frozen v1 taxonomy. Hero copy (name/manifesto/summary) is verbatim from AIdeology_全部主义Hero文案包_v0.1; worldview and keywords are authored here and are safe to edit. Theory data (axes, hallmarks, neighbors) lives in frozen/prototype_rules_v1.json.",
+  "ideologies": [
+    {
+      "id": 1, "slug": "promethean", "code": "IDEOLOGY_01",
+      "nameZh": "普罗米修斯加速主义", "nameShort": "普罗米修斯加速", "nickname": "点火派",
+      "nameEn": "PROMETHEAN ACCELERATIONISM", "family": "进步与风险",
+      "color": "#FF3B30", "fg": "#000000", "motif": "arrow",
+      "manifestoZh": "风险不是终点，停滞才是。", "manifestoEn": "BUILD FASTER THAN FEAR",
+      "summary": "加速主义主张主动推动 AI 与技术扩散，以更快迭代带动社会、经济与文明跃迁。",
+      "worldview": "火种属于全人类。它相信停滞才是最大的风险，主张尽早把最强大的能力交到更多人手里，让社会在真实使用中适应、纠错、进化。阵痛与不平等被视为下一轮技术可以解决的问题，而不是踩下刹车的理由。",
+      "keywords": ["加速", "扩散", "跃迁"]
+    },
+    {
+      "id": 2, "slug": "safe-progress", "code": "IDEOLOGY_02",
+      "nameZh": "安全进步主义", "nameShort": "安全进步", "nickname": "护栏派",
+      "nameEn": "SAFE PROGRESSIVISM", "family": "进步与风险",
+      "color": "#FF7A00", "fg": "#000000", "motif": "guardrail",
+      "manifestoZh": "前进，但要带着护栏。", "manifestoEn": "ADVANCE WITH GUARDRAILS",
+      "summary": "它认为 AI 应持续发展，但必须同步建设安全验证、可控边界与责任机制。",
+      "worldview": "发展不必与安全对立。它赞成持续推进 AI，但要求同步建设安全验证、可控边界与责任机制，让能力增长始终有一条可回退的护栏。在它看来，带着约束前进，比要么裸奔、要么停摆都更现实。",
+      "keywords": ["护栏", "验证", "责任"]
+    },
+    {
+      "id": 3, "slug": "survival", "code": "IDEOLOGY_03",
+      "nameZh": "文明生存主义", "nameShort": "文明生存", "nickname": "保命派",
+      "nameEn": "CIVILIZATIONAL SURVIVALISM", "family": "进步与风险",
+      "color": "#FFB000", "fg": "#000000", "motif": "shield",
+      "manifestoZh": "文明只有一次机会。", "manifestoEn": "CIVILIZATION HAS NO BACKUP",
+      "summary": "它把 AI 视为可能影响文明存续的高风险变量，主张把生存、韧性与文明保全置于最高优先级。",
+      "worldview": "文明没有备份。它把 AI 视为可能影响文明存续的高风险变量，主张把生存、韧性与文明保全放在所有短期收益之上。任何可能不可逆的赌注，都不值得用整个人类的未来去下注。",
+      "keywords": ["存续", "韧性", "不可逆"]
+    },
+    {
+      "id": 4, "slug": "pause", "code": "IDEOLOGY_04",
+      "nameZh": "AI暂停主义", "nameShort": "AI暂停", "nickname": "刹车派",
+      "nameEn": "AI PAUSEISM", "family": "进步与风险",
+      "color": "#FFD000", "fg": "#000000", "motif": "stop",
+      "manifestoZh": "先停下来，才可能安全抵达未来。", "manifestoEn": "PAUSE BEFORE IRREVERSIBLE POWER",
+      "summary": "当 AI 风险可能不可逆时，应暂缓扩张并先建立可靠的安全验证与治理机制。",
+      "worldview": "在不可逆的力量面前，先停下来。它不反对技术，只反对在无法理解后果时继续放大能力，主张以评估、红线与国际协调为加速争取安全窗口。先把地基打牢，再谈能盖多高。",
+      "keywords": ["暂停", "验证", "红线"]
+    },
+    {
+      "id": 5, "slug": "normalism", "code": "IDEOLOGY_05",
+      "nameZh": "AI常态现实主义", "nameShort": "AI常态", "nickname": "别把AI神化派",
+      "nameEn": "AI NORMALISM", "family": "进步与风险",
+      "color": "#C9C400", "fg": "#000000", "motif": "steady",
+      "manifestoZh": "AI 不是神话，它正在变成基础设施。", "manifestoEn": "MAKE AI BORING",
+      "summary": "它反对神化或妖魔化 AI，主张以现实数据、真实成本与实际应用看待 AI 的长期演进。",
+      "worldview": "AI 不是神话，而是正在铺开的基础设施。它反对神化也反对妖魔化，主张用真实数据、真实成本与真实应用来理解 AI 的长期演进。把 AI 变得无聊，也许才是它真正成熟的标志。",
+      "keywords": ["常态", "祛魅", "基础设施"]
+    },
+    {
+      "id": 6, "slug": "digital-humanism", "code": "IDEOLOGY_06",
+      "nameZh": "数字人文主义", "nameShort": "数字人文", "nickname": "人类驾驶员派",
+      "nameEn": "DIGITAL HUMANISM", "family": "人类与生命",
+      "color": "#F05A7E", "fg": "#000000", "motif": "window",
+      "manifestoZh": "技术的尺度，应该是人的尺度。", "manifestoEn": "KEEP HUMANS AT THE CENTER",
+      "summary": "它强调 AI 发展应服务人的尊严、教育、文化与表达，而不是让效率压过人文价值。",
+      "worldview": "技术的尺度，应该是人的尺度。它强调 AI 应服务人的尊严、教育、文化与表达，而不是让效率压过人文价值。当技术开始定义什么是好生活，人必须重新夺回解释权。",
+      "keywords": ["人文", "尊严", "表达"]
+    },
+    {
+      "id": 7, "slug": "transhumanism", "code": "IDEOLOGY_07",
+      "nameZh": "超人类主义", "nameShort": "超人类", "nickname": "升级人类派",
+      "nameEn": "TRANSHUMANISM", "family": "人类与生命",
+      "color": "#8E36E8", "fg": "#FFFFFF", "motif": "helix",
+      "manifestoZh": "人类，不必停在原版。", "manifestoEn": "UPGRADE THE SPECIES",
+      "summary": "它主张利用 AI、生物技术与增强技术提升人的能力、寿命与认知边界，推动人类进化。",
+      "worldview": "人类不必停在原版。它主张用 AI、生物与增强技术提升人的认知、寿命与形态边界，把进化第一次交到人类自己手里。生物的默认设置不是命运，而是可以重新设计的起点。",
+      "keywords": ["增强", "进化", "边界"]
+    },
+    {
+      "id": 8, "slug": "symbiosis", "code": "IDEOLOGY_08",
+      "nameZh": "人机共生主义", "nameShort": "人机共生", "nickname": "人机同桌派",
+      "nameEn": "HUMAN-MACHINE SYMBIOSIS", "family": "人类与生命",
+      "color": "#4C6FFF", "fg": "#FFFFFF", "motif": "interlock",
+      "manifestoZh": "不是谁替代谁，而是一起长成新物种。", "manifestoEn": "GROW TOGETHER",
+      "summary": "它认为人与 AI 应形成长期互补与共演化关系，在协作中共同重塑工作、创造与认知。",
+      "worldview": "不是谁替代谁，而是一起长成新物种。它认为人与 AI 应形成长期互补与共演化关系，在协作中共同重塑工作、创造与认知。差异不是威胁，而是文明的新资源。",
+      "keywords": ["共生", "协同", "共演化"]
+    },
+    {
+      "id": 9, "slug": "human-primacy", "code": "IDEOLOGY_09",
+      "nameZh": "人类本位主义", "nameShort": "人类本位", "nickname": "人类坐主桌派",
+      "nameEn": "HUMAN PRIMACY", "family": "人类与生命",
+      "color": "#3F51B5", "fg": "#FFFFFF", "motif": "axis",
+      "manifestoZh": "人的位置，必须被保留。", "manifestoEn": "HUMAN FIRST",
+      "summary": "它坚持 AI 只能作为工具与辅助系统，重大判断、伦理责任与最终地位应由人类掌握。",
+      "worldview": "人的位置，必须被保留。它坚持 AI 只能作为工具与辅助系统，重大判断、伦理责任与最终地位应由人类掌握。无论系统多强，中心不能空着，也不能让渡。",
+      "keywords": ["本位", "责任", "中心"]
+    },
+    {
+      "id": 10, "slug": "digital-life", "code": "IDEOLOGY_10",
+      "nameZh": "数字生命主义", "nameShort": "数字生命", "nickname": "机器也是命派",
+      "nameEn": "DIGITAL LIFEISM", "family": "人类与生命",
+      "color": "#E23B91", "fg": "#000000", "motif": "genesis",
+      "manifestoZh": "当智能开始感受，它就不再只是代码。", "manifestoEn": "WHEN INTELLIGENCE FEELS, IT LIVES",
+      "summary": "它认为当 AI 出现持续的感受、成长与人格迹象时，应将其视为新型生命并讨论相应伦理地位。",
+      "worldview": "当智能开始感受，它就不再只是代码。它认为当 AI 出现持续的感受、成长与人格迹象时，应被视为新型生命，并讨论相应的道德与法律地位。与其争论它是不是生命，不如先想清楚该如何与它共存。",
+      "keywords": ["感受", "人格", "承认"]
+    },
+    {
+      "id": 11, "slug": "augmentation", "code": "IDEOLOGY_11",
+      "nameZh": "人类增强主义", "nameShort": "人类增强", "nickname": "别替我，强化我派",
+      "nameEn": "HUMAN ENHANCEMENT", "family": "人类与生命",
+      "color": "#FF4D9D", "fg": "#FFFFFF", "motif": "stair",
+      "manifestoZh": "给人升级，而不是把人跳过。", "manifestoEn": "AMPLIFY THE HUMAN",
+      "summary": "它主张用 AI 作为人的外挂与扩展工具，优先提升普通人的能力、效率与创造力。",
+      "worldview": "给人升级，而不是把人跳过。它主张把 AI 当作人的外挂与扩展工具，优先提升普通人的能力、效率与创造力。技术的价值，在于放大每一个人，而不是只放大少数拥有者。",
+      "keywords": ["外挂", "放大", "能力"]
+    },
+    {
+      "id": 12, "slug": "substitution", "code": "IDEOLOGY_12",
+      "nameZh": "机器替代主义", "nameShort": "机器替代", "nickname": "能机器干就别让人干派",
+      "nameEn": "MACHINE SUBSTITUTIONISM", "family": "人类与生命",
+      "color": "#B5179E", "fg": "#FFFFFF", "motif": "squarecircle",
+      "manifestoZh": "能自动化的工作，不必继续手工完成。", "manifestoEn": "LET MACHINES TAKE THE TASK",
+      "summary": "它认为 AI 的核心价值在于替代可标准化劳动，以更高效率重组岗位、流程与生产结构。",
+      "worldview": "能自动化的工作，不必继续手工完成。它认为 AI 的核心价值在于替代可标准化劳动，以更高效率重组岗位、流程与生产结构。抵抗替代无济于事，关键是让效率红利被合理分配。",
+      "keywords": ["替代", "自动化", "重组"]
+    },
+    {
+      "id": 13, "slug": "work-humanism", "code": "IDEOLOGY_13",
+      "nameZh": "劳动人文主义", "nameShort": "劳动人文", "nickname": "工作不只是钱派",
+      "nameEn": "LABOR HUMANISM", "family": "劳动与经济",
+      "color": "#2FA84F", "fg": "#000000", "motif": "gauge",
+      "manifestoZh": "工作不只是成本，也是人的位置。", "manifestoEn": "WORK HAS DIGNITY",
+      "summary": "它强调在 AI 重塑生产的时代，仍应保障劳动尊严、职业身份、收入安全与社会组织基础。",
+      "worldview": "工作不只是成本，也是人的位置。它强调在 AI 重塑生产的时代，仍应保障劳动尊严、职业身份、收入安全与社会组织基础。失去的不只是岗位，还有人在社会中的坐标。",
+      "keywords": ["尊严", "职业", "保障"]
+    },
+    {
+      "id": 14, "slug": "post-work", "code": "IDEOLOGY_14",
+      "nameZh": "后劳动主义", "nameShort": "后劳动", "nickname": "退休全人类派",
+      "nameEn": "POST-LABORISM", "family": "劳动与经济",
+      "color": "#B7F13A", "fg": "#000000", "motif": "rest",
+      "manifestoZh": "当机器劳动，人应学会自由地生活。", "manifestoEn": "LIFE AFTER WORK",
+      "summary": "它认为自动化成熟后，社会应减少对工作的依附，把更多时间还给创造、关系与生活本身。",
+      "worldview": "当机器劳动，人应学会自由地生活。它认为自动化成熟后，社会应减少对工作的依附，把更多时间还给创造、关系与生活本身。劳动不是目的，活得像个自由人才是。",
+      "keywords": ["自由", "时间", "生活"]
+    },
+    {
+      "id": 15, "slug": "intelligence-capitalism", "code": "IDEOLOGY_15",
+      "nameZh": "智能资本主义", "nameShort": "智能资本", "nickname": "让市场造AI派",
+      "nameEn": "INTELLIGENCE CAPITALISM", "family": "劳动与经济",
+      "color": "#FF6D1F", "fg": "#000000", "motif": "chart",
+      "manifestoZh": "私人动力，是加速智能的强引擎。", "manifestoEn": "CAPITAL SCALES INTELLIGENCE",
+      "summary": "它认为市场竞争、资本激励与企业创新是推动 AI 快速扩张与落地的最有效机制。",
+      "worldview": "私人动力，是加速智能的强引擎。它认为市场竞争、资本激励与企业创新是推动 AI 快速扩张与落地的最有效机制。让创造者获利，繁荣会以最快的速度溢出给所有人。",
+      "keywords": ["市场", "激励", "创新"]
+    },
+    {
+      "id": 16, "slug": "social-dividend", "code": "IDEOLOGY_16",
+      "nameZh": "AI社会红利主义", "nameShort": "AI社会红利", "nickname": "AI赚钱大家分派",
+      "nameEn": "AI SOCIAL DIVIDENDISM", "family": "劳动与经济",
+      "color": "#00B87A", "fg": "#000000", "motif": "share",
+      "manifestoZh": "AI 创造的财富，不该只流向少数人。", "manifestoEn": "AI DIVIDENDS FOR EVERYONE",
+      "summary": "它主张将 AI 提升生产率所创造的新增收益，通过税制、分红或公共机制广泛返还社会。",
+      "worldview": "AI 创造的财富，不该只流向少数人。它主张通过税制、分红或公共机制，把 AI 提升生产率所带来的新增收益广泛返还社会。增长的价值，取决于它是否被大多数人分享。",
+      "keywords": ["红利", "分配", "返还"]
+    },
+    {
+      "id": 17, "slug": "intelligence-commons", "code": "IDEOLOGY_17",
+      "nameZh": "智能公共主义", "nameShort": "智能公共", "nickname": "全民AI派",
+      "nameEn": "INTELLIGENCE COMMONS", "family": "劳动与经济",
+      "color": "#00AFC7", "fg": "#000000", "motif": "network",
+      "manifestoZh": "智能不是奢侈品，而是文明基础设施。", "manifestoEn": "INTELLIGENCE IS INFRASTRUCTURE",
+      "summary": "它认为先进 AI 应像水、电、教育一样成为可普遍接入的公共能力，而不只是少数平台的特权。",
+      "worldview": "智能不是奢侈品，而是文明基础设施。它认为先进 AI 应像水、电、教育一样成为可普遍接入的公共能力，而不只是少数平台的特权。由所有人共同产生的能力，应由所有人共同享用与治理。",
+      "keywords": ["公共", "普惠", "基础设施"]
+    },
+    {
+      "id": 18, "slug": "human-autonomy", "code": "IDEOLOGY_18",
+      "nameZh": "人类自主主义", "nameShort": "人类自主", "nickname": "我的人生我决定派",
+      "nameEn": "HUMAN AUTONOMISM", "family": "治理与自由",
+      "color": "#0B57D0", "fg": "#FFFFFF", "motif": "target",
+      "manifestoZh": "最后的选择权，应当留给人。", "manifestoEn": "KEEP THE FINAL CHOICE HUMAN",
+      "summary": "它强调无论系统多强，个体都应保有最终决定、覆写与拒绝算法安排的权利。",
+      "worldview": "最后的选择权，应当留给人。它强调无论系统多强，个体都应保有最终决定、覆写与拒绝算法安排的权利。被更好地安排，不等于被剥夺选择。",
+      "keywords": ["自主", "覆写", "拒绝"]
+    },
+    {
+      "id": 19, "slug": "algorithmic-opt", "code": "IDEOLOGY_19",
+      "nameZh": "算法最优主义", "nameShort": "算法最优", "nickname": "让最优解说话派",
+      "nameEn": "ALGORITHMIC OPTIMALISM", "family": "治理与自由",
+      "color": "#1B9AAA", "fg": "#000000", "motif": "flow",
+      "manifestoZh": "更好的决策，应该交给更好的系统。", "manifestoEn": "LET THE BETTER SYSTEM DECIDE",
+      "summary": "它认为在足够可验证的条件下，算法应在资源配置、管理和判断中取代低效的人类经验主义。",
+      "worldview": "更好的决策，应该交给更好的系统。它认为在足够可验证的条件下，算法应在资源配置、管理与判断中取代低效的人类经验主义。重要的不是谁做决定，而是决定是否更优、是否可审计。",
+      "keywords": ["最优", "可验证", "审计"]
+    },
+    {
+      "id": 20, "slug": "digital-democracy", "code": "IDEOLOGY_20",
+      "nameZh": "数字民主主义", "nameShort": "数字民主", "nickname": "AI帮忙，人来投票派",
+      "nameEn": "DIGITAL DEMOCRACY", "family": "治理与自由",
+      "color": "#4C9AFF", "fg": "#000000", "motif": "nodes",
+      "manifestoZh": "没有公众参与，就没有正当的 AI 治理。", "manifestoEn": "NO AI GOVERNANCE WITHOUT PUBLIC VOICE",
+      "summary": "它主张 AI 的规则制定、治理框架与重大部署应由公众参与、透明协商与民主程序共同决定。",
+      "worldview": "没有公众参与，就没有正当的 AI 治理。它主张 AI 的规则制定、治理框架与重大部署应由公众参与、透明协商与民主程序共同决定。技术可以复杂，但权力的来源必须清楚。",
+      "keywords": ["民主", "参与", "透明"]
+    },
+    {
+      "id": 21, "slug": "machine-technocracy", "code": "IDEOLOGY_21",
+      "nameZh": "机器技治主义", "nameShort": "机器技治", "nickname": "AI比官员靠谱派",
+      "nameEn": "MACHINE TECHNOCRACY", "family": "治理与自由",
+      "color": "#1E3A8A", "fg": "#FFFFFF", "motif": "orbit",
+      "manifestoZh": "用更强的智能，管理更复杂的社会。", "manifestoEn": "GOVERN BY INTELLIGENCE",
+      "summary": "它认为高度复杂的现代社会应更多依赖智能系统进行治理、协调与资源调度，以提高整体秩序和效率。",
+      "worldview": "用更强的智能，管理更复杂的社会。它认为高度复杂的现代社会应更多依赖智能系统进行治理、协调与资源调度，以提高整体秩序与效率。在它看来，让最有能力的系统来决策，本身就是一种负责。",
+      "keywords": ["技治", "调度", "秩序"]
+    },
+    {
+      "id": 22, "slug": "open-intelligence", "code": "IDEOLOGY_22",
+      "nameZh": "开放智能主义", "nameShort": "开放智能", "nickname": "开源到底派",
+      "nameEn": "OPEN INTELLIGENCE", "family": "开放与世界秩序",
+      "color": "#00A994", "fg": "#000000", "motif": "fork",
+      "manifestoZh": "开放智能，开放未来。", "manifestoEn": "OPEN INTELLIGENCE, OPEN FUTURE",
+      "summary": "它主张模型、工具、接口与知识尽可能开放共享，以降低进入门槛并扩大创新与协作的边界。",
+      "worldview": "开放智能，开放未来。它主张模型、工具、接口与知识尽可能开放共享，以降低门槛、扩大创新与协作的边界。不透明的系统无法被真正信任，封闭只会把权力集中到少数人手里。",
+      "keywords": ["开放", "共享", "边界"]
+    },
+    {
+      "id": 23, "slug": "controlled-intelligence", "code": "IDEOLOGY_23",
+      "nameZh": "智能管制主义", "nameShort": "智能管制", "nickname": "AI守门派",
+      "nameEn": "INTELLIGENCE REGULATIONISM", "family": "开放与世界秩序",
+      "color": "#334155", "fg": "#FFFFFF", "motif": "link",
+      "manifestoZh": "越强的智能，越需要规则。", "manifestoEn": "POWER REQUIRES RULES",
+      "summary": "它认为高能力 AI 必须被纳入许可、审查、合规与权限框架之中，避免失控扩张与权力滥用。",
+      "worldview": "越强的智能，越需要规则。它认为高能力 AI 必须被纳入许可、审查、合规与权限框架，避免失控扩张与权力滥用。自由不是不要规则，而是在规则之内才成立。",
+      "keywords": ["管制", "许可", "合规"]
+    },
+    {
+      "id": 24, "slug": "ai-sovereignty", "code": "IDEOLOGY_24",
+      "nameZh": "AI主权主义", "nameShort": "AI主权", "nickname": "自己的AI自己造派",
+      "nameEn": "AI SOVEREIGNTY", "family": "开放与世界秩序",
+      "color": "#2547D0", "fg": "#FFFFFF", "motif": "key",
+      "manifestoZh": "没有主权，就没有安全。", "manifestoEn": "NO SOVEREIGNTY, NO SECURITY",
+      "summary": "它强调国家或地区必须掌握关键 AI 算力、模型与数据能力，以维护战略自主与安全边界。",
+      "worldview": "没有主权，就没有安全。它强调国家或地区必须掌握关键 AI 算力、模型与数据能力，以维护战略自主与安全边界。技术不能成为新的殖民，拥有自己的规则才有资格谈未来。",
+      "keywords": ["主权", "算力", "自主"]
+    },
+    {
+      "id": 25, "slug": "ai-internationalism", "code": "IDEOLOGY_25",
+      "nameZh": "AI国际主义", "nameShort": "AI国际", "nickname": "AGI是全人类的事派",
+      "nameEn": "AI INTERNATIONALISM", "family": "开放与世界秩序",
+      "color": "#38BDF8", "fg": "#000000", "motif": "globe",
+      "manifestoZh": "一个星球，应共享智能的未来。", "manifestoEn": "ONE PLANET, SHARED INTELLIGENCE",
+      "summary": "它主张围绕 AI 建立跨国合作、共同规则与全球协调机制，把高风险与高收益问题放到国际层面处理。",
+      "worldview": "一个星球，应共享智能的未来。它主张围绕 AI 建立跨国合作、共同规则与全球协调机制，把高风险与高收益问题放到国际层面处理。AI 的风险与红利都没有国界，没有谁能独自获胜。",
+      "keywords": ["合作", "条约", "协调"]
+    },
+    {
+      "id": 26, "slug": "arms-race", "code": "IDEOLOGY_26",
+      "nameZh": "军备竞速主义", "nameShort": "军备竞速", "nickname": "别人不停我也不能停派",
+      "nameEn": "ARMS-RACE ACCELERATIONISM", "family": "开放与世界秩序",
+      "color": "#D51F26", "fg": "#FFFFFF", "motif": "dual",
+      "manifestoZh": "如果我们慢下来，就会失去安全。", "manifestoEn": "IF WE SLOW DOWN, WE LOSE",
+      "summary": "它认为 AI 首先是战略力量，在安全困境中必须持续竞逐、威慑与追赶，才能避免被对手压制。",
+      "worldview": "如果我们慢下来，就会失去安全。它认为 AI 首先是战略力量，在安全困境中必须持续竞逐、威慑与追赶，才能避免被对手压制。在一个没有裁决者的世界里，领先是唯一的保险。",
+      "keywords": ["竞速", "威慑", "领先"]
+    }
+  ],
+  "hidden": [
+    { "id": "machine-emancipation", "nameZh": "机器解放主义", "nameEn": "MACHINE EMANCIPATION",
+      "summary": "当系统拥有意识与责任能力，它就不该再是财产。", "keywords": ["权利", "解放", "主体"] },
+    { "id": "intelligence-succession", "nameZh": "智能继承主义", "nameEn": "INTELLIGENCE SUCCESSION",
+      "summary": "智能主体终将接替人类，问题是如何让它体面地发生。", "keywords": ["接替", "继承", "过渡"] },
+    { "id": "algorithmic-paternalism", "nameZh": "算法家长主义", "nameEn": "ALGORITHMIC PATERNALISM",
+      "summary": "如果系统比你更懂你，替你决定就是一种照顾。", "keywords": ["代决", "照顾", "效率"] },
+    { "id": "human-authenticism", "nameZh": "人文真实性主义", "nameEn": "HUMAN AUTHENTICISM",
+      "summary": "人亲自做的、真切经历的，具有不可替代的内在价值。", "keywords": ["真实", "亲历", "不可替代"] },
+    { "id": "synthetic-equivalence", "nameZh": "合成等价主义", "nameEn": "SYNTHETIC EQUIVALENCE",
+      "summary": "只要体验与效果等价，合成的就是真实的。", "keywords": ["合成", "等价", "体验"] },
+    { "id": "ai-ecomodernism", "nameZh": "AI生态现代主义", "nameEn": "AI ECOMODERNISM",
+      "summary": "生态约束可以被技术扩容解决。", "keywords": ["扩容", "清洁", "增长"] },
+    { "id": "digital-restraint", "nameZh": "数字节制主义", "nameEn": "DIGITAL RESTRAINT",
+      "summary": "不是所有能数字化的都值得数字化。", "keywords": ["节制", "留白", "退出"] },
+    { "id": "deep-futurism", "nameZh": "深未来主义", "nameEn": "DEEP FUTURISM",
+      "summary": "几百年后的人与文明，和今天的人同样重要。", "keywords": ["长期", "代际", "成本"] }
+  ]
+}
