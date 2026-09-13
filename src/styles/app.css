@@ -2291,9 +2291,11 @@ main { flex: 1 0 auto; }
 }
 
 /* ============================================================
-   Detail banner: full ideology composite, no overlay copy/buttons
+   Detail banner: full ideology composite, inset to the content
+   column so it aligns with the body below (not full-bleed).
    ============================================================ */
 .detail__banner {
+  padding: var(--s6) var(--pad-x);
   border-bottom: var(--bw-xl) solid var(--black);
   background: var(--paper);
 }
