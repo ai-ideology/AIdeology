@@ -2210,10 +2210,21 @@ main { flex: 1 0 auto; }
    Detail hero: colored text panel (left) + cropped character art (right).
    Full-bleed split on desktop, stacked on mobile (art first).
    ============================================================ */
+/*
+ * Hero is capped to the centred content column at every width. This keeps the
+ * half-width text panel a sane measure on ultra-wide screens (previously the
+ * viewport-relative inset was applied inside the half-width panel, which
+ * squeezed the text into a narrow column), and keeps the hero's edges aligned
+ * with the header / body / footer content.
+ */
 .detail__hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  border-bottom: var(--bw-xl) solid var(--black);
+  width: calc(100% - 32px);
+  max-width: calc(var(--maxw) - 32px);
+  margin: var(--s7) auto;
+  border: var(--bw-lg) solid var(--black);
+  background: var(--white);
 }
 @media (min-width: 900px) {
   .detail__hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
@@ -2223,7 +2234,7 @@ main { flex: 1 0 auto; }
   display: grid;
   align-content: center;
   gap: var(--s3);
-  padding: var(--s7) var(--pad-x);
+  padding: clamp(28px, 3.6vw, 60px);
   background: var(--c, var(--paper));
   color: var(--f, var(--ink));
 }
