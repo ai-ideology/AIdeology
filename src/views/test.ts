@@ -61,23 +61,10 @@ const STEP_LABEL: Record<string, string> = {
 
 /** Shown once before the first question. */
 export function renderIntro(): string {
-  const notes = [
-    { h: '题量与结构', p: '48 道核心情景题，随后约 6–10 道根据你坐标动态生成的判别题。' },
-    { h: '作答方式', p: '每题只有一个更接近你的选项，选定后自动进入下一题。' },
-    { h: '随时修改', p: '点「上一题」即可返回重选，进度自动保留，可分次完成。' },
-    { h: '没有时间限制', p: '选一个最像你的，不必兼顾所有立场。' },
-  ];
   return `<section class="test test--intro">
     <p class="mono tag-line">BEFORE YOU START</p>
-    <h1 id="view-title" tabindex="-1" class="test__q">先凭第一感觉作答</h1>
-    <p class="test__lead">这不是考试，没有标准答案。请按当下最真实的第一反应选择，而不是你认为「应该」选的那一个。犹豫太久反而会失真。</p>
-    <ol class="intro-list">
-      ${notes.map((n, i) => `<li class="intro-i">
-        <span class="intro-i__n" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
-        <h2 class="intro-i__h">${esc(n.h)}</h2>
-        <p class="intro-i__p">${esc(n.p)}</p>
-      </li>`).join('')}
-    </ol>
+    <h1 id="view-title" tabindex="-1" class="test__q">凭第一感觉作答</h1>
+    <p class="test__lead">没有标准答案，也没有时间限制，按第一反应选择即可，可随时返回修改。</p>
     <div class="test__nav">
       <button type="button" class="btn btn--primary btn--lg" data-act="start-questions">开始答题 →</button>
       <a class="btn btn--quiet btn--lg" href="#/library">先看图鉴</a>
@@ -114,7 +101,7 @@ export function renderTest(state: SessionState = getState()): string {
       <span class="progress__fill" id="test-bar-fill" style="width:${pct.toFixed(1)}%"></span>
     </div>
     ${q.scenario ? `<p class="test__scenario"><span class="mono test__scenario-tag">情景</span>${esc(q.scenario)}</p>` : ''}
-    <h1 id="view-title" tabindex="-1" class="test__q">${esc(q.prompt)}</h1>
+    <h1 id="view-title" tabindex="-1" class="test__q test__q--question">${esc(q.prompt)}</h1>
     ${q.note ? `<p class="test__note mono">${esc(q.note)}</p>` : ''}
     <div class="test__opts" id="test-opts">${opts}</div>
     <div class="test__nav">

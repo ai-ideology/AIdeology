@@ -120,80 +120,112 @@ export function renderShareError(): string {
 
 export interface CardInput {
   nameZh: string; nameEn: string; code: string; manifestoZh: string; manifestoEn: string;
-  color: string; fg: string; match: number | null; confidence: Confidence; typeLabel: string;
+  summary: string; color: string; fg: string; match: number | null;
+  confidence: Confidence; typeLabel: string; imageUrl: string;
 }
 
 export async function drawShareCard(input: CardInput): Promise<Blob | null> {
   const W = 1080;
-  const H = 1350;
+  const IMG_H = 607;          // 16:9 artwork
+  const BAND_H = 620;
+  const FOOT_H = 150;
+  const H = IMG_H + BAND_H + FOOT_H;
   const canvas = document.createElement('canvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
   if (!ctx) return null;
 
-  const sans = '"Space Grotesk","MiSans","PingFang SC","Microsoft YaHei",sans-serif';
+  const sans = '"Space Grotesk","Noto Sans SC","MiSans","PingFang SC","Microsoft YaHei",sans-serif';
   const mono = '"JetBrains Mono",monospace';
 
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, W, H);
+  // artwork banner
   ctx.fillStyle = input.color;
-  ctx.fillRect(0, 0, W, H - 220);
+  ctx.fillRect(0, 0, W, IMG_H);
+  const img = await loadImage(input.imageUrl);
+  if (img) drawCover(ctx, img, 0, 0, W, IMG_H);
+  // hairline under the artwork
   ctx.fillStyle = '#000000';
-  ctx.fillRect(0, H - 220, W, 220);
+  ctx.fillRect(0, IMG_H, W, 6);
 
-  // brand
+  // identity band in the ideology color
+  ctx.fillStyle = input.color;
+  ctx.fillRect(0, IMG_H + 6, W, BAND_H - 6);
   ctx.fillStyle = input.fg;
-  ctx.font = `700 30px ${mono}`;
-  ctx.fillText('AIdeology', 64, 92);
 
-  // code + match
   ctx.font = `700 26px ${mono}`;
+  ctx.fillText('我的意识形态', 64, IMG_H + 78);
+
   const codeLine = input.match !== null ? `${input.code} · MATCH ${input.match.toFixed(1)}` : input.code;
-  ctx.fillText(codeLine, 64, 150);
+  ctx.font = `700 24px ${mono}`;
+  ctx.fillText(codeLine, 64, IMG_H + 122);
 
-  // name
-  ctx.font = `900 92px ${sans}`;
-  wrapText(ctx, input.nameZh, 64, 290, W - 128, 96);
+  ctx.font = `900 84px ${sans}`;
+  wrapText(ctx, input.nameZh, 64, IMG_H + 240, W - 128, 92);
 
-  // english
-  ctx.font = `700 30px ${mono}`;
-  ctx.fillText(input.nameEn, 64, 400);
+  ctx.font = `700 28px ${mono}`;
+  ctx.fillText(input.nameEn, 64, IMG_H + 300);
 
-  // manifesto
-  ctx.font = `800 52px ${sans}`;
-  wrapText(ctx, input.manifestoZh, 64, 520, W - 128, 62);
+  // main claim (the ideology's one-line manifesto)
+  ctx.font = `800 46px ${sans}`;
+  const mfLines = wrapText(ctx, input.manifestoZh, 64, IMG_H + 410, W - 128, 58);
 
-  ctx.font = `800 40px ${sans}`;
-  wrapText(ctx, input.manifestoEn, 64, 640, W - 128, 50);
-
-  // type + confidence strip
-  ctx.font = `600 26px ${mono}`;
-  ctx.fillText(`${input.typeLabel} · IDENTITY ${input.confidence.identity.label} / DISCRIM ${input.confidence.discrimination.label}`, 64, 760);
+  // one-line definition, a touch quieter
+  ctx.globalAlpha = 0.85;
+  ctx.font = `500 28px ${sans}`;
+  wrapText(ctx, input.summary, 64, IMG_H + 410 + mfLines * 58 + 22, W - 128, 42);
+  ctx.globalAlpha = 1;
 
   // footer
+  ctx.fillStyle = '#000000';
+  ctx.fillRect(0, H - FOOT_H, W, FOOT_H);
   ctx.fillStyle = '#FFFFFF';
-  ctx.font = `700 34px ${sans}`;
-  ctx.fillText('不同思想，争夺不同的未来。', 64, H - 120);
+  ctx.font = `700 32px ${sans}`;
+  ctx.fillText('不同思想，争夺不同的未来。', 64, H - 82);
   ctx.fillStyle = input.color;
-  ctx.font = `500 24px ${mono}`;
-  ctx.fillText('AIDEOLOGY — 26 POSSIBLE FUTURES', 64, H - 70);
+  ctx.font = `500 22px ${mono}`;
+  ctx.fillText('AIDEOLOGY — 26 POSSIBLE FUTURES', 64, H - 42);
 
   return await new Promise((resolve) => canvas.toBlob((b) => resolve(b), 'image/png'));
 }
 
-function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxW: number, lineH: number): void {
+function loadImage(src: string): Promise<HTMLImageElement | null> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
+}
+
+/** Draw an image cropped to cover the target box, centred. */
+function drawCover(
+  ctx: CanvasRenderingContext2D, img: HTMLImageElement,
+  x: number, y: number, w: number, h: number,
+): void {
+  const scale = Math.max(w / img.naturalWidth, h / img.naturalHeight);
+  const dw = img.naturalWidth * scale;
+  const dh = img.naturalHeight * scale;
+  ctx.drawImage(img, x + (w - dw) / 2, y + (h - dh) / 2, dw, dh);
+}
+
+function wrapText(
+  ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxW: number, lineH: number,
+): number {
   const chars = [...text];
   let line = '';
   let cy = y;
+  let n = 0;
   for (const ch of chars) {
     const test = line + ch;
     if (ctx.measureText(test).width > maxW && line) {
       ctx.fillText(line, x, cy);
       line = ch;
       cy += lineH;
+      n += 1;
     } else {
       line = test;
     }
   }
-  if (line) ctx.fillText(line, x, cy);
+  if (line) { ctx.fillText(line, x, cy); n += 1; }
+  return n;
 }

@@ -399,8 +399,10 @@ async function doShareCard(): Promise<void> {
   const blob = await drawShareCard({
     nameZh: x.copy.nameZh, nameEn: x.copy.nameEn, code: x.code,
     manifestoZh: x.copy.manifestoZh, manifestoEn: x.copy.manifestoEn,
+    summary: x.copy.summary,
     color: x.copy.color, fg: x.copy.fg, match: r.primary.finalFit,
     confidence: r.confidence, typeLabel: RESULT_TYPE_LABEL[r.type],
+    imageUrl: new URL(`./assets/hero/${x.slug}.webp`, window.location.href).href,
   });
   if (!blob) { toast('生成分享图失败'); return; }
   const url = URL.createObjectURL(blob);
