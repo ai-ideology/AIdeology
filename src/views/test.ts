@@ -9,11 +9,10 @@ export interface QuestionView {
   prompt: string;
   note?: string;
   options: string[];
-  index: number;       // 1-based position within the full run
-  total: number;
+  index: number;       // 1-based position within the current step
+  total: number;       // items in the current step
   stepIndex: number;   // 0-based within the current step
   selected: number | null;
-  canSkip: boolean;
 }
 
 export function currentQuestion(state: SessionState = getState()): QuestionView | null {
@@ -22,17 +21,10 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
     const item = coreItems[state.coreIndex];
     if (!item) return null;
     return {
-      kind: 'core',
-      id: item.id,
-      code: item.id,
-      prompt: item.prompt,
-      note: item.note,
+      kind: 'core', id: item.id, code: item.id, prompt: item.prompt, note: item.note,
       options: item.options.map((o) => o.label),
-      index: state.coreIndex + 1,
-      total: coreItems.length,
-      stepIndex: state.coreIndex,
+      index: state.coreIndex + 1, total: coreItems.length, stepIndex: state.coreIndex,
       selected: a.core[item.id] ?? null,
-      canSkip: true,
     };
   }
   if (state.step === 'adaptive') {
@@ -40,32 +32,20 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
     const item = id ? adaptiveById.get(id) : undefined;
     if (!item) return null;
     return {
-      kind: 'adaptive',
-      id: item.id,
-      code: `DISCRIMINANT · ${item.id}`,
-      prompt: item.prompt,
+      kind: 'adaptive', id: item.id, code: `DISCRIMINANT · ${item.id}`, prompt: item.prompt,
       options: item.options.map((o) => o.label),
-      index: state.adaptiveIndex + 1,
-      total: state.adaptivePlan.length,
-      stepIndex: state.adaptiveIndex,
+      index: state.adaptiveIndex + 1, total: state.adaptivePlan.length, stepIndex: state.adaptiveIndex,
       selected: a.adaptive[item.id] ?? null,
-      canSkip: true,
     };
   }
   const id = state.hiddenPlan[state.hiddenIndex];
   const item = id ? hiddenById.get(id) : undefined;
   if (!item) return null;
   return {
-    kind: 'hidden',
-    id: item.id,
-    code: `SPECIAL · ${item.id}`,
-    prompt: item.prompt,
+    kind: 'hidden', id: item.id, code: `SPECIAL · ${item.id}`, prompt: item.prompt,
     options: item.options.map((o) => o.label),
-    index: state.hiddenIndex + 1,
-    total: state.hiddenPlan.length,
-    stepIndex: state.hiddenIndex,
+    index: state.hiddenIndex + 1, total: state.hiddenPlan.length, stepIndex: state.hiddenIndex,
     selected: a.hidden[item.id] ?? null,
-    canSkip: false,
   };
 }
 
@@ -75,10 +55,31 @@ const STEP_LABEL: Record<string, string> = {
   hidden: '专题题',
 };
 
+/** Shown once before the first question. */
+export function renderIntro(): string {
+  return `<section class="test test--intro">
+    <p class="mono tag-line">BEFORE YOU START</p>
+    <h1 id="view-title" tabindex="-1" class="test__q">先凭第一感觉作答</h1>
+    <p class="test__lead">这不是考试，没有标准答案。请按当下最真实的第一反应选择，而不是你认为「应该」选的那一个。犹豫太久反而会失真。</p>
+    <ol class="intro-list">
+      <li class="intro-i"><span class="mono intro-i__n">01</span><p class="intro-i__p">48 道核心情景题，随后会有 6–10 道根据你坐标动态生成的判别题。</p></li>
+      <li class="intro-i"><span class="mono intro-i__n">02</span><p class="intro-i__p">每题只有一个更接近你的选项，选定后会自动进入下一题。</p></li>
+      <li class="intro-i"><span class="mono intro-i__n">03</span><p class="intro-i__p">想改就直接点「上一题」返回，进度会自动保留，可以分次完成。</p></li>
+      <li class="intro-i"><span class="mono intro-i__n">04</span><p class="intro-i__p">没有时间限制；选一个最像你的，不必兼顾所有立场。</p></li>
+    </ol>
+    <div class="test__nav">
+      <button type="button" class="btn btn--primary btn--lg" data-act="start-questions">开始答题 →</button>
+      <a class="btn btn--quiet btn--lg" href="#/library">先看图鉴</a>
+    </div>
+    <p class="test__hint mono">凭直觉 · 没有对错 · 可随时返回修改</p>
+  </section>`;
+}
+
 export function renderTest(state: SessionState = getState()): string {
   const q = currentQuestion(state);
   if (!q) {
-    return `<section class="test"><h1 id="view-title" tabindex="-1" class="test__q">题目已全部作答</h1>
+    return `<section class="test">
+      <h1 id="view-title" tabindex="-1" class="test__q">题目已全部作答</h1>
       <p class="test__hint mono">准备生成结果</p>
       <div class="test__nav"><button type="button" class="btn btn--primary" data-act="finish">查看结果 →</button></div>
     </section>`;
@@ -106,10 +107,9 @@ export function renderTest(state: SessionState = getState()): string {
     ${q.note ? `<p class="test__note mono">${esc(q.note)}</p>` : ''}
     <div class="test__opts" id="test-opts">${opts}</div>
     <div class="test__nav">
-      <button type="button" class="btn" data-act="prev"${q.index === 1 ? ' disabled' : ''}>← 上一题</button>
-      ${q.canSkip ? '<button type="button" class="btn btn--quiet" data-act="skip">稍后回答</button>' : ''}
-      <button type="button" class="btn btn--primary" data-act="next"${q.selected === null ? ' disabled' : ''}>${esc(nextLabel)}</button>
+      <button type="button" class="btn" data-act="prev"${q.stepIndex === 0 && state.step === 'core' ? ' disabled' : ''}>← 上一题</button>
+      <button type="button" class="btn btn--primary" data-act="next">${esc(nextLabel)}</button>
     </div>
-    <p class="test__hint mono">键盘：A–E / 1–5 选择 · ← → 翻题 · ENTER 下一题</p>
+    <p class="test__hint mono">键盘：A–E / 1–5 选择（选完自动下一题）· ← → 翻题</p>
   </section>`;
 }

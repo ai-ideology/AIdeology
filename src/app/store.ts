@@ -1,7 +1,7 @@
 /** Persisted session state + scoring result, with localStorage fallback. */
 import { emptyAnswers, type ResultPackage, type SessionAnswers } from '../scoring/engine';
 
-export type TestStep = 'core' | 'adaptive' | 'hidden';
+export type TestStep = 'intro' | 'core' | 'adaptive' | 'hidden';
 
 export interface SessionState {
   answers: SessionAnswers;
@@ -21,7 +21,7 @@ const KEY = 'aideology.v2';
 export function freshState(): SessionState {
   return {
     answers: emptyAnswers(),
-    step: 'core',
+    step: 'intro',
     coreIndex: 0,
     adaptivePlan: [],
     adaptiveIndex: 0,

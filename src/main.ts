@@ -1,11 +1,11 @@
 import './styles/primitives.css';
 import './styles/app.css';
-import { hiddenRules, ideologies } from './content';
+import { hiddenRules, ideologies, coreItems } from './content';
 import { axisScores, computeResult, planAdaptive, RESULT_TYPE_LABEL, scoreItems } from './scoring/engine';
 import { clearState, getState, resetState, setState, type SessionState } from './app/store';
 import { decodeShare, shareText, shareUrl } from './app/share';
 import { renderLanding } from './views/landing';
-import { renderTest, currentQuestion } from './views/test';
+import { renderTest, renderIntro, currentQuestion } from './views/test';
 import { renderResult, renderResultEmpty } from './views/result';
 import { renderLibrary, libraryCountText, libraryGridHtml, type LibraryState } from './views/library';
 import { renderDetail } from './views/detail';
@@ -68,34 +68,46 @@ function beginTest(): void {
   go('#/test');
 }
 
-function setAnswer(kind: 'core' | 'adaptive' | 'hidden', id: string, index: number): void {
+/** Leave the intro screen and show the first core question. */
+function enterQuestions(): void {
+  const s = getState();
+  const hasProgress = Object.keys(s.answers.core).length > 0;
+  if (hasProgress) resetState();
+  setState({ step: 'core', coreIndex: 0, adaptiveIndex: 0, hiddenIndex: 0, startedAt: Date.now() });
+  go('#/test');
+}
+
+/** Record an answer, then move on immediately (no confirm step). */
+function selectAnswer(kind: 'core' | 'adaptive' | 'hidden', id: string, index: number): void {
   const s = getState();
   const answers = { ...s.answers, [kind]: { ...s.answers[kind], [id]: index } };
   setState({ answers });
-  paintQuestion();
+  move(1);
 }
 
-function skipQuestion(): void {
-  const s = getState();
-  const q = currentQuestion(s);
-  if (!q || !q.canSkip) { step(1); return; }
-  const answers = { ...s.answers, [q.kind]: { ...s.answers[q.kind] } };
-  delete (answers[q.kind] as Record<string, number>)[q.id];
-  setState({ answers });
-  step(1);
-}
-
-function step(delta: number): void {
+function move(delta: number): void {
   const s = getState();
   const q = currentQuestion(s);
   if (!q) return;
   const next = q.stepIndex + delta;
-  if (next < 0) return;
+
+  if (next < 0) {
+    // step backwards across a boundary: return to the previous step's last item
+    if (s.step === 'adaptive') {
+      setState({ step: 'core', coreIndex: coreItems.length - 1 });
+      render();
+    } else if (s.step === 'hidden') {
+      setState({ step: 'adaptive', adaptiveIndex: Math.max(0, s.adaptivePlan.length - 1) });
+      render();
+    }
+    return;
+  }
   if (next >= q.total) { advanceStep(s); return; }
+
   if (s.step === 'core') setState({ coreIndex: next });
   else if (s.step === 'adaptive') setState({ adaptiveIndex: next });
   else setState({ hiddenIndex: next });
-  paintQuestion();
+  render();
 }
 
 function advanceStep(s: SessionState): void {
@@ -103,7 +115,7 @@ function advanceStep(s: SessionState): void {
     const axes = axisScores(scoreItems(s.answers));
     const plan = planAdaptive(axes);
     setState({ step: 'adaptive', adaptiveIndex: 0, adaptivePlan: plan.itemIds });
-    go('#/test');
+    render();
     return;
   }
   if (s.step === 'adaptive') {
@@ -111,7 +123,7 @@ function advanceStep(s: SessionState): void {
     const plan = decideHidden(s);
     if (plan.length) {
       setState({ step: 'hidden', hiddenIndex: 0, hiddenPlan: plan });
-      go('#/test');
+      render();
       return;
     }
     finishTest();
@@ -150,7 +162,7 @@ function decideHidden(s: SessionState): string[] {
 function finishTest(): void {
   const s = getState();
   const result = computeResult(s.answers);
-  setState({ result, step: 'core' });
+  setState({ result, step: 'intro', coreIndex: 0, adaptiveIndex: 0, hiddenIndex: 0 });
   go('#/computing');
 }
 
@@ -165,19 +177,8 @@ function afterComputing(): void {
 
 /* ---------- render ---------- */
 
-function paintQuestion(): void {
-  const q = currentQuestion();
-  if (!q) { renderTest(); paintApp(renderTest()); return; }
-  const opts = document.querySelectorAll('#test-opts .opt');
-  opts.forEach((el, i) => {
-    const on = q.selected === i;
-    el.classList.toggle('is-selected', on);
-    el.setAttribute('aria-pressed', String(on));
-    const mark = el.querySelector('.opt__mark');
-    if (mark) mark.textContent = on ? '■' : '';
-  });
-  const nxt = document.querySelector<HTMLButtonElement>('[data-act="next"]');
-  if (nxt) nxt.disabled = q.selected === null;
+function testView(): string {
+  return getState().step === 'intro' ? renderIntro() : renderTest();
 }
 
 function paintApp(html: string): void {
@@ -198,7 +199,7 @@ function render(): void {
   } else if (route.view === 'landing') {
     paintApp(renderLanding());
   } else if (route.view === 'test') {
-    paintApp(renderTest());
+    paintApp(testView());
   } else if (route.view === 'computing') {
     paintApp(renderComputing());
   } else if (route.view === 'result') {
@@ -431,10 +432,13 @@ APP.addEventListener('click', (e) => {
   if (!el) return;
   const act = (el as HTMLElement).dataset.act!;
   if (act === 'start-test') beginTest();
-  else if (act === 'ans') setAnswer(currentQuestion()!.kind, currentQuestion()!.id, Number((el as HTMLElement).dataset.i));
-  else if (act === 'prev') step(-1);
-  else if (act === 'next') step(1);
-  else if (act === 'skip') skipQuestion();
+  else if (act === 'start-questions') enterQuestions();
+  else if (act === 'ans') {
+    const q = currentQuestion();
+    if (q) selectAnswer(q.kind, q.id, Number((el as HTMLElement).dataset.i));
+  }
+  else if (act === 'prev') move(-1);
+  else if (act === 'next') move(1);
   else if (act === 'finish') finishTest();
   else if (act === 'to-result') go('#/result');
   else if (act === 'share') openShare();
@@ -491,6 +495,10 @@ document.addEventListener('keydown', (e) => {
     return;
   }
   if (document.body.dataset.view !== 'test') return;
+  if (getState().step === 'intro') {
+    if (e.key === 'Enter') { e.preventDefault(); enterQuestions(); }
+    return;
+  }
   const tag = (e.target as HTMLElement)?.tagName;
   if (tag === 'INPUT' || tag === 'TEXTAREA') return;
   const q = currentQuestion();
@@ -498,13 +506,13 @@ document.addEventListener('keydown', (e) => {
   const keyMap: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4, a: 0, b: 1, c: 2, d: 3, e: 4 };
   const letter = e.key.toLowerCase();
   if (letter in keyMap && keyMap[letter] < q.options.length) {
-    setAnswer(q.kind, q.id, keyMap[letter]);
+    selectAnswer(q.kind, q.id, keyMap[letter]);
     e.preventDefault();
     return;
   }
-  if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); return; }
-  if (e.key === 'ArrowRight') { e.preventDefault(); step(1); return; }
-  if (e.key === 'Enter' && tag !== 'BUTTON' && tag !== 'A') { e.preventDefault(); step(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); move(-1); return; }
+  if (e.key === 'ArrowRight') { e.preventDefault(); move(1); return; }
+  if (e.key === 'Enter' && tag !== 'BUTTON' && tag !== 'A') { e.preventDefault(); move(1); }
 });
 
 /* ---------- boot ---------- */

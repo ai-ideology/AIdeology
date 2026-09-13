@@ -2030,3 +2030,93 @@ img, svg { display: block; max-width: 100%; }
 @media (max-width: 380px) {
   .site-nav a { padding: 5px 4px; font-size: 11px; }
 }
+
+/* ============================================================
+   Layout alignment: page shell shares one content column.
+   --pad-x resolves against each element so header, footer and
+   every page container line up on the same left/right edges.
+   ============================================================ */
+:root {
+  --pad-x: max(16px, calc((100% - var(--maxw)) / 2 + 16px));
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1 0 auto; }
+
+.site-head { padding: 0 var(--pad-x); }
+
+.site-foot {
+  flex: none;
+  padding: 56px var(--pad-x) 32px;
+}
+.site-foot__main,
+.site-foot__meta { max-width: none; margin: 0; }
+
+.landing { max-width: none; margin: 0; padding: 0 var(--pad-x); }
+.lib { max-width: none; margin: 0; padding: var(--s7) var(--pad-x) var(--s8); }
+.atlas { max-width: none; margin: 0; padding: var(--s7) var(--pad-x) var(--s8); }
+
+.detail__hero { padding: var(--s7) var(--pad-x); }
+.detail__body { max-width: none; margin: 0; padding: 0 var(--pad-x); }
+.result__hero { padding: var(--s7) var(--pad-x) var(--s6); }
+.result__body { max-width: none; margin: 0; padding: 0 var(--pad-x); }
+
+@media (min-width: 900px) {
+  .detail__hero { padding: 64px var(--pad-x); }
+}
+@media (min-width: 1024px) {
+  .result__hero { padding: 64px var(--pad-x); }
+}
+
+/* ============================================================
+   Test intro screen
+   ============================================================ */
+.test--intro .test__q { margin-top: var(--s5); }
+
+.test__lead {
+  margin-top: var(--s5);
+  max-width: 62ch;
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.intro-list {
+  list-style: none;
+  margin: var(--s6) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s3);
+}
+
+.intro-i {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s4);
+  padding: 16px 18px;
+  background: var(--white);
+  border: var(--bw) solid var(--black);
+  box-shadow: var(--sh-sm);
+}
+
+.intro-i__n {
+  flex: none;
+  padding: 3px 8px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.intro-i__p { flex: 1 1 auto; min-width: 0; font-size: 15px; }
+
+.test--intro .test__nav { margin-top: var(--s7); }
+
+/* intro CTA sits on the left, unlike the per-question prev/next layout */
+.test--intro .test__nav .btn--primary { margin-left: 0; }
