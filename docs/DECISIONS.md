@@ -80,3 +80,15 @@ engine top to bottom.
 
 All three are plain JSON: copy and taxonomy are configurable without touching
 TypeScript.
+
+## Question bank revision
+
+The bank in `src/content/frozen/` is the product owner's readable revision
+(`设计方案/题库/*_readable.json`). It is score-identical to the earlier frozen
+bank — same ids, axes, option scores and evidence channels — with clearer
+wording and an added `scenario` setup field, which the test view renders above
+the question. No engine change was needed.
+
+The public-facing explanation of the whole design lives on the wiki page
+(`src/views/wiki.ts` + `src/content/wiki.json`); its per-axis questions and
+debate-map copy are editable there.

@@ -23,6 +23,8 @@ export interface CoreItem {
   note?: string;
   type?: string;
   agree_direction?: number;
+  /** Optional scenario setup shown above the question. */
+  scenario?: string;
   options: CoreOption[];
   version?: string;
   scoring_note?: string;
@@ -39,6 +41,8 @@ export interface AdaptiveItem {
   id: string;
   target_a: string; // ideology Chinese name
   target_b: string;
+  /** Optional scenario setup shown above the question. */
+  scenario?: string;
   prompt: string;
   options: AdaptiveOption[];
   version?: string;
@@ -52,6 +56,8 @@ export interface HiddenOption {
 export interface HiddenItem {
   id: string;
   hidden_id: string;
+  /** Optional scenario setup shown above the question. */
+  scenario?: string;
   prompt: string;
   options: HiddenOption[];
 }

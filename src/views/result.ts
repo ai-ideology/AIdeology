@@ -50,16 +50,20 @@ export function renderResult(r: ResultPackage): string {
     ? `<div class="mini-grid">${tensions.map((s) => miniHtml(bySlug(s.slug)!)).join('')}</div>`
     : `<p class="rsec__p">没有出现明显冲突的立场。</p>`;
 
-  const hiddenHtml = r.hidden.length
-    ? `<div class="badges">${r.hidden.map((h) => `<article class="badge">
-        <p class="mono badge__code">HIDDEN · ${esc(h.id)}</p>
-        <h3 class="badge__h">${esc(h.nameZh)}</h3>
-        <p class="mono badge__en">${esc(h.nameEn)}</p>
-        <p class="badge__p">${esc(h.summary)}</p>
-        ${keywordChips(h.keywords)}
-        <p class="mono badge__why">${h.reasons.map(esc).join(' · ')}</p>
-      </article>`).join('')}</div>`
-    : `<p class="rsec__p">没有触发隐藏徽章。隐藏徽章代表稀有的边界立场，不会替代你的主人格。</p>`;
+  const hiddenSection = r.hidden.length
+    ? `<section class="rsec">
+        <h2 class="rsec__h">隐藏徽章</h2>
+        <p class="mono rsec__sub">HIDDEN BADGES · 稀有的边界立场，不替代主人格</p>
+        <div class="badges">${r.hidden.map((h) => `<article class="badge">
+          <p class="mono badge__code">HIDDEN · ${esc(h.id)}</p>
+          <h3 class="badge__h">${esc(h.nameZh)}</h3>
+          <p class="mono badge__en">${esc(h.nameEn)}</p>
+          <p class="badge__p">${esc(h.summary)}</p>
+          ${keywordChips(h.keywords)}
+          <p class="mono badge__why">${h.reasons.map(esc).join(' · ')}</p>
+        </article>`).join('')}</div>
+      </section>`
+    : '';
 
   const topList = r.scores.slice(0, 8).map((s, i) => {
     const x = bySlug(s.slug)!;
@@ -112,10 +116,7 @@ export function renderResult(r: ResultPackage): string {
         ${resonanceCards}
       </section>
 
-      <section class="rsec">
-        <h2 class="rsec__h">隐藏徽章</h2>
-        ${hiddenHtml}
-      </section>
+      ${hiddenSection}
 
       <section class="rsec">
         <h2 class="rsec__h">与你冲突</h2>

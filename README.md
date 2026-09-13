@@ -36,6 +36,7 @@ src/
     types.ts               冻结数据的 TypeScript 形状
     ideologies.json        26 + 8 个主义的展示文案（Hero 文案，可编辑）
     detail-copy.json       详情页核心信念与思想来源（可编辑）
+    wiki.json              维基页：每条轴背后的开放问题、分歧地图（可编辑）
     families.json          五个谱系分组
     derived-colors.json    从美术图提取的参考色（辅色选取参考）
   scoring/engine.ts        v1 评分与判别引擎
@@ -43,7 +44,7 @@ src/
     store.ts               会话状态（localStorage）
     share.ts               分享结果编解码（URL-safe base64）
   ui/                      组件与 DOM 工具
-  views/                   landing / test / result / detail / library / atlas / share
+  views/                   landing / test / result / detail / library / atlas / wiki / share
   styles/                  primitives（od-layout 层）+ app（设计系统令牌与组件）
 scripts/
   assets.ts                从 26 张主视觉生成 WebP 资产并提取主题色
@@ -57,6 +58,17 @@ docs-reference/            设计文档与冻结包原文（参考，不参与�
 
 `single_primary`（主人格）· `primary_plus_resonance`（主人格 + 共鸣）·
 `dual_core`（双核心）· `mixed`（混合型）· `low_information`（未定型）。
+
+## 页面
+
+- **首页** — 品牌与立场冲突场
+- **测试** — 答题前提示 → 48 核心题 → 6–10 判别题 → 必要时专题题
+- **我的结果** — 主人格海报、价值轴、置信度、相近/冲突、完整贴合度；触发隐藏徽章时才显示徽章区
+- **图鉴** — 26 张海报墙，可按谱系筛选与搜索
+- **谱系** — 可交互的主义节点图
+- **维基** — 讲述这套测试的设计：信念 vs 立场、四层模型、16 条轴、分歧地图、谱系、隐藏立场、判别流程与命名体系
+- **主义详情 ×26** — 每种立场的人物化介绍页
+- **分享页** — 从 URL 快照复现的结果页
 
 ## 分享
 

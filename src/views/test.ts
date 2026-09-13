@@ -6,6 +6,7 @@ export interface QuestionView {
   kind: 'core' | 'adaptive' | 'hidden';
   id: string;
   code: string;
+  scenario?: string;
   prompt: string;
   note?: string;
   options: string[];
@@ -21,7 +22,8 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
     const item = coreItems[state.coreIndex];
     if (!item) return null;
     return {
-      kind: 'core', id: item.id, code: item.id, prompt: item.prompt, note: item.note,
+      kind: 'core', id: item.id, code: item.id, scenario: item.scenario,
+      prompt: item.prompt, note: item.note,
       options: item.options.map((o) => o.label),
       index: state.coreIndex + 1, total: coreItems.length, stepIndex: state.coreIndex,
       selected: a.core[item.id] ?? null,
@@ -32,7 +34,8 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
     const item = id ? adaptiveById.get(id) : undefined;
     if (!item) return null;
     return {
-      kind: 'adaptive', id: item.id, code: `DISCRIMINANT · ${item.id}`, prompt: item.prompt,
+      kind: 'adaptive', id: item.id, code: `DISCRIMINANT · ${item.id}`, scenario: item.scenario,
+      prompt: item.prompt,
       options: item.options.map((o) => o.label),
       index: state.adaptiveIndex + 1, total: state.adaptivePlan.length, stepIndex: state.adaptiveIndex,
       selected: a.adaptive[item.id] ?? null,
@@ -42,7 +45,8 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
   const item = id ? hiddenById.get(id) : undefined;
   if (!item) return null;
   return {
-    kind: 'hidden', id: item.id, code: `SPECIAL · ${item.id}`, prompt: item.prompt,
+    kind: 'hidden', id: item.id, code: `SPECIAL · ${item.id}`, scenario: item.scenario,
+    prompt: item.prompt,
     options: item.options.map((o) => o.label),
     index: state.hiddenIndex + 1, total: state.hiddenPlan.length, stepIndex: state.hiddenIndex,
     selected: a.hidden[item.id] ?? null,
@@ -103,6 +107,7 @@ export function renderTest(state: SessionState = getState()): string {
     <div class="progress" id="test-progress" role="progressbar" aria-label="测试进度" aria-valuemin="1" aria-valuemax="${q.total}" aria-valuenow="${q.index}">
       <span class="progress__fill" id="test-bar-fill" style="width:${pct.toFixed(1)}%"></span>
     </div>
+    ${q.scenario ? `<p class="test__scenario"><span class="mono test__scenario-tag">情景</span>${esc(q.scenario)}</p>` : ''}
     <h1 id="view-title" tabindex="-1" class="test__q">${esc(q.prompt)}</h1>
     ${q.note ? `<p class="test__note mono">${esc(q.note)}</p>` : ''}
     <div class="test__opts" id="test-opts">${opts}</div>

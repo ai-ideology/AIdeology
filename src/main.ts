@@ -9,6 +9,7 @@ import { renderTest, renderIntro, currentQuestion } from './views/test';
 import { renderResult, renderResultEmpty } from './views/result';
 import { renderLibrary, libraryCountText, libraryGridHtml, type LibraryState } from './views/library';
 import { renderDetail } from './views/detail';
+import { renderWiki } from './views/wiki';
 import { atlasPanelHtml, atlasIntroHtml, atlasTipHtml, renderAtlas } from './views/atlas';
 import { drawShareCard, renderShare, renderShareError } from './views/share';
 
@@ -18,7 +19,8 @@ const ANNOUNCER = document.getElementById('route-announcer') as HTMLElement;
 
 const TITLES: Record<string, string> = {
   landing: '首页', test: '测试', computing: '计算中', result: '我的结果',
-  library: '意识形态图鉴', detail: '主义详情', atlas: '意识形态谱系', share: '分享结果',
+  library: '意识形态图鉴', detail: '主义详情', atlas: '意识形态谱系',
+  wiki: '设计维基', share: '分享结果',
 };
 
 const lib: LibraryState = { family: 'all', query: '' };
@@ -35,6 +37,7 @@ type Route =
   | { view: 'result' }
   | { view: 'library' }
   | { view: 'atlas' }
+  | { view: 'wiki' }
   | { view: 'detail'; slug: string }
   | { view: 'share'; data: string | null };
 
@@ -49,7 +52,7 @@ function parseHash(): Route {
     const m = /(?:^|&)d=([^&]+)/.exec(query);
     return { view: 'share', data: m ? m[1] : null };
   }
-  if (name === 'test' || name === 'computing' || name === 'result' || name === 'library' || name === 'atlas') {
+  if (name === 'test' || name === 'computing' || name === 'result' || name === 'library' || name === 'atlas' || name === 'wiki') {
     return { view: name };
   }
   return { view: 'landing' };
@@ -211,6 +214,8 @@ function render(): void {
   } else if (route.view === 'atlas') {
     paintApp(renderAtlas());
     afterAtlas();
+  } else if (route.view === 'wiki') {
+    paintApp(renderWiki());
   } else {
     // share
     if (!route.data) { paintApp(renderShareError()); }
