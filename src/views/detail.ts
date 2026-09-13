@@ -1,10 +1,27 @@
 import {
   declaredNeighbors, detailCopyBySlug, dimensionById,
-  farthestIdeologies, ideologies,
+  farthestIdeologies, ideologies, type Ideology,
 } from '../content';
 import { CORE_AXES, EXTENDED_AXES, type AxisId } from '../content/types';
 import { esc } from '../ui/dom';
-import { axisRowHtml, ideologyHero, keywordChips, miniHtml } from '../ui/components';
+import { axisRowHtml, keywordChips, miniHtml } from '../ui/components';
+
+/**
+ * Detail hero: the full ideology composite already carries the name, English
+ * name, manifesto and one-line definition, so the banner shows it directly and
+ * keeps only a screen-reader heading for structure.
+ */
+function detailBanner(x: Ideology): string {
+  const c = x.copy;
+  return `<header class="detail__banner">
+    <h1 id="view-title" tabindex="-1" class="sr-only">${esc(c.nameZh)}</h1>
+    <figure class="detail__banner-figure">
+      <img class="detail__banner-img" src="./assets/hero/${x.slug}.webp"
+        alt="${esc(`${c.nameZh} ${c.nameEn}｜${c.manifestoZh} ${c.summary}`)}"
+        width="1600" height="900" loading="eager" decoding="async">
+    </figure>
+  </header>`;
+}
 
 /** The four canonical issue positions shown on every detail page. */
 const ISSUES: { label: string; axis: AxisId }[] = [
@@ -54,10 +71,7 @@ export function renderDetail(slug: string): string | null {
     .join('');
 
   return `<article class="detail" style="--c:${c.color};--f:${c.fg}">
-    ${ideologyHero(x, {
-      actions: '<button type="button" class="btn btn--lg" data-act="start-test">测试我的立场</button>' +
-        '<a class="btn btn--quiet btn--lg" href="#/library">← 返回图鉴</a>',
-    })}
+    ${detailBanner(x)}
     <div class="detail__body">
       <section class="dsec">
         <h2 class="dsec__h">这个主义是什么</h2>

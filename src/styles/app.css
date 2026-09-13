@@ -2081,6 +2081,9 @@ main { flex: 1 0 auto; }
 
 /* ============================================================
    Test intro screen
+   The four notes are reference information, not choices, so they
+   deliberately avoid the option-card look (no full border, no
+   shadow, no white panel) and sit as a numbered rule strip.
    ============================================================ */
 .test--intro .test__q { margin-top: var(--s5); }
 
@@ -2094,34 +2097,41 @@ main { flex: 1 0 auto; }
 
 .intro-list {
   list-style: none;
-  margin: var(--s6) 0 0;
+  margin: var(--s7) 0 0;
   padding: 0;
   display: grid;
-  gap: var(--s3);
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s6) var(--s5);
 }
+@media (min-width: 560px) { .intro-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .intro-list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 
 .intro-i {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--s4);
-  padding: 16px 18px;
-  background: var(--white);
-  border: var(--bw) solid var(--black);
-  box-shadow: var(--sh-sm);
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  padding-top: var(--s4);
+  border-top: var(--bw-lg) solid var(--black);
 }
 
 .intro-i__n {
-  flex: none;
-  padding: 3px 8px;
-  background: var(--black);
-  color: var(--white);
-  font-size: 12px;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -.03em;
 }
 
-.intro-i__p { flex: 1 1 auto; min-width: 0; font-size: 15px; }
+.intro-i__h {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.3;
+}
 
-.test--intro .test__nav { margin-top: var(--s7); }
+.intro-i__p { font-size: 14px; color: var(--muted); }
+
+.test--intro .test__nav { margin-top: var(--s8); }
 
 /* intro CTA sits on the left, unlike the per-question prev/next layout */
 .test--intro .test__nav .btn--primary { margin-left: 0; }
@@ -2311,3 +2321,53 @@ main { flex: 1 0 auto; }
 @media (max-width: 640px) {
   .topic { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ============================================================
+   Detail banner: full ideology composite, no overlay copy/buttons
+   ============================================================ */
+.detail__banner {
+  border-bottom: var(--bw-xl) solid var(--black);
+  background: var(--paper);
+}
+.detail__banner-figure { margin: 0; }
+.detail__banner-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1672 / 941;
+  object-fit: cover;
+}
+
+/* ============================================================
+   Result hero: full composite as the identity reveal backdrop
+   ============================================================ */
+.result__figure { margin: 0; }
+
+/* Result banner hero overrides (big image + slim caption bar) */
+.result__hero--banner {
+  display: block;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+.result__hero--banner .result__figure { margin: 0; }
+.result__hero--banner .result__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1672 / 941;
+  object-fit: cover;
+}
+.result__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3) var(--s5);
+  padding: var(--s4) var(--pad-x);
+  background: var(--black);
+  color: var(--white);
+}
+.result__caption .result__code { color: var(--white); margin: 0; }
+.result__caption .result__cta { margin: 0; }
+.result__caption .btn--quiet { color: var(--white); border-color: var(--white); }

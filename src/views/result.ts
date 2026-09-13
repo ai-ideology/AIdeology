@@ -1,6 +1,6 @@
 import { CORE_AXES, EXTENDED_AXES } from '../content/types';
 import { ideologies, type Ideology } from '../content';
-import { esc, motifSvg, pad2 } from '../ui/dom';
+import { esc, pad2 } from '../ui/dom';
 import { axisRowHtml, keywordChips, miniHtml } from '../ui/components';
 import { RESULT_TYPE_LABEL, type ResultPackage } from '../scoring/engine';
 
@@ -150,27 +150,22 @@ function resultHero(x: Ideology, r: ResultPackage): string {
   const match = r.primary!.finalFit;
   const typeLabel = RESULT_TYPE_LABEL[r.type];
   const dual = r.type === 'dual_core' && r.dual[1]
-    ? `<p class="result__dual mono">双核心 · 同时贴合 ${esc(bySlug(r.dual[1].slug)!.copy.nameZh)} ${r.dual[1].finalFit.toFixed(1)}</p>`
+    ? ` · 同时贴合 ${esc(bySlug(r.dual[1].slug)!.copy.nameZh)} ${r.dual[1].finalFit.toFixed(1)}`
     : '';
-  return `<header class="result__hero">
-    <div class="result__left">
-      <p class="mono result__code">${x.code} · MATCH ${match.toFixed(1)} · ${esc(typeLabel)}</p>
-      <h1 id="view-title" tabindex="-1" class="result__zh">${esc(c.nameZh)}</h1>
-      <p class="mono result__en">${esc(c.nameEn)}</p>
-      <p class="result__mfzh">${esc(c.manifestoZh)}</p>
-      <p class="result__mf">${esc(c.manifestoEn)}</p>
-      ${dual}
+  return `<header class="result__hero result__hero--banner">
+    <figure class="result__figure">
+      <img class="result__art" src="./assets/hero/${x.slug}.webp"
+        alt="${esc(`${c.nameZh} ${c.nameEn}｜${c.manifestoZh}`)}"
+        width="1600" height="900" loading="eager" decoding="async">
+    </figure>
+    <div class="result__caption">
+      <p class="mono result__code">${x.code} · MATCH ${match.toFixed(1)} · ${esc(typeLabel)}${dual}</p>
+      <h1 id="view-title" tabindex="-1" class="sr-only">${esc(c.nameZh)}</h1>
       <div class="result__cta od-cluster">
-        <button type="button" class="btn btn--lg" data-act="share">分享我的结果</button>
+        <button type="button" class="btn btn--primary btn--lg" data-act="share">分享我的结果</button>
         <button type="button" class="btn btn--lg" data-act="share-card">生成分享图</button>
         <a class="btn btn--quiet btn--lg" href="#/ideology/${x.slug}">查看完整主义</a>
       </div>
-    </div>
-    <div class="result__right">
-      <div class="result__num" aria-hidden="true">${pad2(x.id)}</div>
-      <figure class="result__figure"><img class="result__char" src="./assets/char/${x.slug}.webp" alt="${esc(c.nameZh)}主视觉" loading="eager" decoding="async"></figure>
-      <div class="result__kw od-cluster">${c.keywords.map((k) => `<span class="kw">${esc(k)}</span>`).join('')}</div>
-      <div class="result__motif" aria-hidden="true">${motifSvg(c.motif)}</div>
     </div>
   </header>`;
 }

@@ -2,7 +2,7 @@
 import { dimensionById } from '../content';
 import type { Ideology } from '../content';
 import type { AxisId } from '../content/types';
-import { esc, motifSvg, pad2 } from './dom';
+import { esc, motifSvg } from './dom';
 
 export function posterHtml(x: Ideology, match?: number | null): string {
   const c = x.copy;
@@ -64,29 +64,4 @@ export function axisRowHtml(axisId: AxisId, value: number, accent?: string): str
     `</div>` +
     `<div class="axis__poles od-row"><span>${esc(axis.left)}</span><span class="od-fill"></span><span>${esc(axis.right)}</span></div>` +
   `</div>`;
-}
-
-/** Vertical, character-led hero with the hero-copy information hierarchy. */
-export function ideologyHero(x: Ideology, opts: { match?: number; badge?: string; actions?: string } = {}): string {
-  const c = x.copy;
-  const codeLine = opts.match !== undefined
-    ? `${x.code} · MATCH ${opts.match.toFixed(1)}`
-    : `${x.code} · ${c.family}`;
-  return `<header class="detail__hero" style="--c:${c.color};--f:${c.fg}">` +
-    `<div class="detail__hero-main">` +
-      `<p class="mono detail__code">${esc(codeLine)}</p>` +
-      `<h1 id="view-title" tabindex="-1" class="detail__zh">${esc(c.nameZh)}</h1>` +
-      `<p class="mono detail__en">${esc(c.nameEn)}</p>` +
-      `<p class="detail__mfzh">${esc(c.manifestoZh)}</p>` +
-      `<p class="detail__mfen mono">${esc(c.manifestoEn)}</p>` +
-      (opts.actions ? `<div class="detail__cta od-cluster">${opts.actions}</div>` : '') +
-    `</div>` +
-    `<div class="detail__hero-side">` +
-      `<div class="detail__num" aria-hidden="true">${pad2(x.id)}</div>` +
-      `<figure class="detail__figure">` +
-        `<img class="detail__char" src="./assets/char/${x.slug}.webp" alt="${esc(c.nameZh)}主视觉" loading="eager" decoding="async">` +
-        (opts.badge ? `<figcaption class="detail__badge">${esc(opts.badge)}</figcaption>` : '') +
-      `</figure>` +
-    `</div>` +
-  `</header>`;
 }

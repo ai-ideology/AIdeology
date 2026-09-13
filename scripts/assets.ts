@@ -131,7 +131,7 @@ for (const [slug, name] of Object.entries(MAP)) {
   const meta = await sharp(file).metadata();
   const w = meta.width!, h = meta.height!;
   colors[slug] = await accentColor(file);
-  await sharp(file).resize(1280).webp({ quality: 80 }).toFile(`${OUT}/hero/${slug}.webp`);
+  await sharp(file).resize(1600).webp({ quality: 82 }).toFile(`${OUT}/hero/${slug}.webp`);
   // character crop: right 58% of the frame, keeping full height
   await sharp(file)
     .extract({ left: Math.round(w * 0.42), top: 0, width: Math.round(w * 0.58), height: h })
