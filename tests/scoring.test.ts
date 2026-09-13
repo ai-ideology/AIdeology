@@ -134,6 +134,11 @@ function blendProfiles(s1: string, s2: string, w: number): SessionAnswers {
   return a;
 }
 
+test('a weighted blend stays a legal result type', () => {
+  const r = computeResult(blendProfiles('safe-progress', 'survival', 0.6));
+  expect(['single_primary', 'primary_plus_resonance', 'dual_core', 'mixed', 'low_information']).toContain(r.type);
+});
+
 describe('discrimination sweep across all 26 prototypes', () => {
   test('each prototype-shaped profile puts that prototype in the top 3', () => {
     const misses: string[] = [];
