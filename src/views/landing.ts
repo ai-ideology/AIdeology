@@ -2,7 +2,11 @@ import { ideologies } from '../content';
 import { esc } from '../ui/dom';
 import { posterHtml } from '../ui/components';
 
-const FEATURED = ['promethean', 'pause', 'digital-life', 'intelligence-commons', 'arms-race', 'open-intelligence'];
+// Eight previews so the 4-column grid fills two even rows.
+const FEATURED = [
+  'promethean', 'pause', 'digital-life', 'human-primacy',
+  'post-work', 'intelligence-commons', 'machine-technocracy', 'arms-race',
+];
 
 export function renderLanding(): string {
   const preview = FEATURED
@@ -42,13 +46,6 @@ export function renderLanding(): string {
       </div>
       <div class="hero__field" aria-hidden="true"><div class="cf">${conflict}</div></div>
     </div>
-
-    <section class="stats" aria-label="系统规模">
-      <div class="stats__i od-stat"><span class="stats__n">26</span><span class="mono stats__l">IDEOLOGIES</span></div>
-      <div class="stats__i od-stat"><span class="stats__n">48</span><span class="mono stats__l">CORE ITEMS</span></div>
-      <div class="stats__i od-stat"><span class="stats__n">16</span><span class="mono stats__l">AXES</span></div>
-      <div class="stats__i od-stat"><span class="stats__n">08</span><span class="mono stats__l">HIDDEN STANCES</span></div>
-    </section>
 
     <section class="how">
       <header class="sec-head"><h2 class="sec-title">怎么玩</h2><span class="mono sec-tag">3 STEPS</span></header>

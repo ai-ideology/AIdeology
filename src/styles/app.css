@@ -436,38 +436,6 @@ img, svg { display: block; max-width: 100%; }
 .cf__b--6 { transform: rotate(1deg); }
 .cf__b--7 { grid-column: 1 / -1; transform: rotate(-1.5deg) translateY(-4px); }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--s3);
-  padding: var(--s5) 0;
-  border-bottom: var(--bw-lg) solid var(--black);
-}
-
-@media (min-width: 768px) {
-  .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-
-.stats__i {
-  padding: 20px 16px;
-  background: var(--white);
-  border: var(--bw) solid var(--black);
-  box-shadow: var(--sh-sm);
-}
-
-.stats__n {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(36px, 5vw, 56px);
-  line-height: 1;
-}
-
-.stats__l {
-  color: var(--muted);
-  font-size: 11px;
-  letter-spacing: .12em;
-}
-
 .sec-head {
   display: flex;
   align-items: baseline;
@@ -1791,7 +1759,6 @@ img, svg { display: block; max-width: 100%; }
   .brand { font-size: 18px; }
   .brand__mark { width: 28px; height: 28px; }
   .site-nav a { padding: 6px 8px; font-size: 13px; }
-  .stats__i { padding: 14px 12px; }
   .dsec { padding: var(--s6) 0; }
   .rsec { padding: var(--s6) 0; }
   .detail__nav { display: grid; grid-template-columns: 1fr; }
@@ -2139,19 +2106,20 @@ main { flex: 1 0 auto; }
 /* ---------- test scenario setup ---------- */
 .test__scenario {
   margin-top: var(--s5);
-  padding: 16px 18px;
+  padding: 20px 22px;
   background: var(--cool);
   border-left: var(--bw-xl) solid var(--black);
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: clamp(17px, 1.9vw, 19px);
+  line-height: 1.8;
+  color: var(--ink);
 }
 .test__scenario-tag {
   display: inline-block;
-  margin-right: 8px;
-  padding: 2px 7px;
+  margin-right: 10px;
+  padding: 3px 9px;
   background: var(--black);
   color: var(--white);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   vertical-align: 2px;
 }
@@ -2343,10 +2311,10 @@ main { flex: 1 0 auto; }
    ============================================================ */
 .result__figure { margin: 0; }
 
-/* Result banner hero overrides (big image + slim caption bar) */
+/* Result banner hero: image + caption share the body content column */
 .result__hero--banner {
   display: block;
-  padding: 0;
+  padding: 0 var(--pad-x);
   background: var(--paper);
   color: var(--ink);
 }
@@ -2364,7 +2332,7 @@ main { flex: 1 0 auto; }
   align-items: center;
   justify-content: space-between;
   gap: var(--s3) var(--s5);
-  padding: var(--s4) var(--pad-x);
+  padding: var(--s4) var(--s5);
   background: var(--black);
   color: var(--white);
 }
