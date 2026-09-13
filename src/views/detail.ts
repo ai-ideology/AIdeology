@@ -1,27 +1,10 @@
 import {
   declaredNeighbors, detailCopyBySlug, dimensionById,
-  farthestIdeologies, ideologies, type Ideology,
+  farthestIdeologies, ideologies,
 } from '../content';
 import { CORE_AXES, EXTENDED_AXES, type AxisId } from '../content/types';
 import { esc } from '../ui/dom';
-import { axisRowHtml, keywordChips, miniHtml } from '../ui/components';
-
-/**
- * Detail hero: the full ideology composite already carries the name, English
- * name, manifesto and one-line definition, so the banner shows it directly and
- * keeps only a screen-reader heading for structure.
- */
-function detailBanner(x: Ideology): string {
-  const c = x.copy;
-  return `<header class="detail__banner">
-    <h1 id="view-title" tabindex="-1" class="sr-only">${esc(c.nameZh)}</h1>
-    <figure class="detail__banner-figure">
-      <img class="detail__banner-img" src="./assets/hero/${x.slug}.webp"
-        alt="${esc(`${c.nameZh} ${c.nameEn}｜${c.manifestoZh} ${c.summary}`)}"
-        width="1600" height="900" loading="eager" decoding="async">
-    </figure>
-  </header>`;
-}
+import { axisRowHtml, keywordChips, miniHtml, splitHero } from '../ui/components';
 
 /** The four canonical issue positions shown on every detail page. */
 const ISSUES: { label: string; axis: AxisId }[] = [
@@ -31,7 +14,7 @@ const ISSUES: { label: string; axis: AxisId }[] = [
   { label: 'AI 治理方式', axis: 'V9' },
 ];
 
-export function renderDetail(slug: string): string | null {
+export function renderDetail(slug: string, hasResult = false): string | null {
   const x = ideologies.find((y) => y.slug === slug);
   if (!x) return null;
   const c = x.copy;
@@ -71,7 +54,12 @@ export function renderDetail(slug: string): string | null {
     .join('');
 
   return `<article class="detail" style="--c:${c.color};--f:${c.fg}">
-    ${detailBanner(x)}
+    ${splitHero(x, {
+      codeLine: `${x.code} · ${c.family}`,
+      actions:
+        `<button type="button" class="btn btn--hero" data-act="start-test">${hasResult ? '重新测试' : '开始测试'} <span aria-hidden="true">→</span></button>` +
+        '<a class="btn btn--hero" href="#/library">查看图鉴</a>',
+    })}
     <div class="detail__body">
       <section class="dsec">
         <h2 class="dsec__h">这个主义是什么</h2>

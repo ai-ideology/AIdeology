@@ -196,7 +196,7 @@ function render(): void {
 
   if (route.view === 'computing' && !getState().result) { go('#/test'); return; }
   if (route.view === 'detail') {
-    const html = renderDetail(route.slug);
+    const html = renderDetail(route.slug, !!getState().result);
     if (!html) { go('#/library'); return; }
     paintApp(html);
   } else if (route.view === 'landing') {

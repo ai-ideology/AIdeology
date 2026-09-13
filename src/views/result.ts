@@ -1,7 +1,7 @@
 import { CORE_AXES, EXTENDED_AXES } from '../content/types';
 import { ideologies, type Ideology } from '../content';
 import { esc, pad2 } from '../ui/dom';
-import { axisRowHtml, keywordChips, miniHtml } from '../ui/components';
+import { axisRowHtml, keywordChips, miniHtml, splitHero } from '../ui/components';
 import { RESULT_TYPE_LABEL, type ResultPackage } from '../scoring/engine';
 
 function bySlug(slug: string): Ideology | undefined {
@@ -146,30 +146,19 @@ export function renderResult(r: ResultPackage): string {
 }
 
 function resultHero(x: Ideology, r: ResultPackage): string {
-  const c = x.copy;
   const match = r.primary!.finalFit;
   const typeLabel = RESULT_TYPE_LABEL[r.type];
   const dual = r.type === 'dual_core' && r.dual[1]
     ? ` · 同时贴合 ${esc(bySlug(r.dual[1].slug)!.copy.nameZh)} ${r.dual[1].finalFit.toFixed(1)}`
     : '';
-  return `<header class="result__hero result__hero--banner">
-    <div class="result__card">
-      <figure class="result__figure">
-        <img class="result__art" src="./assets/hero/${x.slug}.webp"
-          alt="${esc(`${c.nameZh} ${c.nameEn}｜${c.manifestoZh}`)}"
-          width="1600" height="900" loading="eager" decoding="async">
-      </figure>
-      <div class="result__caption">
-        <p class="mono result__code">${x.code} · MATCH ${match.toFixed(1)} · ${esc(typeLabel)}${dual}</p>
-        <h1 id="view-title" tabindex="-1" class="sr-only">${esc(c.nameZh)}</h1>
-        <div class="result__cta od-cluster">
-          <button type="button" class="btn btn--primary btn--lg" data-act="share">分享我的结果</button>
-          <button type="button" class="btn btn--lg" data-act="share-card">生成分享图</button>
-          <a class="btn btn--quiet btn--lg" href="#/ideology/${x.slug}">查看完整主义</a>
-        </div>
-      </div>
-    </div>
-  </header>`;
+  return splitHero(x, {
+    codeLine: `${x.code} · MATCH ${match.toFixed(1)} · ${typeLabel}${dual}`,
+    note: r.normalism.tagOnly ? '同时呈现明显的 AI 常态倾向' : undefined,
+    actions:
+      '<button type="button" class="btn btn--hero" data-act="share">分享我的结果</button>' +
+      '<button type="button" class="btn btn--hero" data-act="share-card">生成分享图</button>' +
+      `<a class="btn btn--hero btn--quiet" href="#/ideology/${x.slug}">查看完整主义</a>`,
+  });
 }
 
 function lowInfoHero(r: ResultPackage): string {

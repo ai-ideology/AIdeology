@@ -45,6 +45,34 @@ export function keywordChips(words: string[]): string {
   return `<div class="od-cluster">${words.map((w) => `<span class="kw">${esc(w)}</span>`).join('')}</div>`;
 }
 
+/**
+ * Shared identity hero: colored text panel on the left, cropped character art
+ * on the right. Used by both the ideology detail page and the result page.
+ */
+export function splitHero(
+  x: Ideology,
+  opts: { codeLine: string; note?: string; actions: string },
+): string {
+  const c = x.copy;
+  return `<header class="detail__hero" style="--c:${c.color};--f:${c.fg}">
+    <div class="detail__hero-text">
+      <p class="mono detail__hero-code">${esc(opts.codeLine)}</p>
+      <h1 id="view-title" tabindex="-1" class="detail__hero-zh">${esc(c.nameZh)}</h1>
+      <p class="mono detail__hero-en">${esc(c.nameEn)}</p>
+      <p class="detail__hero-mfzh">${esc(c.manifestoZh)}</p>
+      <p class="mono detail__hero-mfen">${esc(c.manifestoEn)}</p>
+      <p class="detail__hero-summary">${esc(c.summary)}</p>
+      ${opts.note ? `<p class="mono detail__hero-note">${opts.note}</p>` : ''}
+      <div class="detail__hero-cta">${opts.actions}</div>
+    </div>
+    <figure class="detail__hero-art">
+      <img src="./assets/char/${x.slug}.webp"
+        alt="${esc(`${c.nameZh} ${c.nameEn}｜${c.manifestoZh}`)}"
+        width="1000" height="941" loading="eager" decoding="async">
+    </figure>
+  </header>`;
+}
+
 export function axisRowHtml(axisId: AxisId, value: number, accent?: string): string {
   const axis = dimensionById.get(axisId);
   if (!axis) return '';
