@@ -1,7 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import { coreItems, adaptiveItems, hiddenItems, prototypeRules, ideologies, hiddenCopy } from '../src/content';
 import { axisScores, axisFit, computeResult, emptyAnswers, planAdaptive, scoreItems } from '../src/scoring/engine';
-import type { AxisId } from '../src/content/types';
 import type { SessionAnswers } from '../src/scoring/engine';
 
 /** Pick, for every core item, the option closest to a prototype's axis target. */

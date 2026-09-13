@@ -11,6 +11,7 @@ import dimensionsJson from './frozen/dimensions_v1.json';
 import scoringSpecJson from './frozen/scoring_spec_v1.json';
 import familiesJson from './families.json';
 import ideologiesJson from './ideologies.json';
+import detailCopyJson from './detail-copy.json';
 
 import type {
   AdaptiveItem, AxisId, CoreItem, Dimension, Family, HiddenCopy, HiddenItem,
@@ -27,6 +28,10 @@ export const scoringSpec = scoringSpecJson as unknown as Record<string, any>;
 export const families = familiesJson as unknown as Family[];
 export const ideologyCopy = ideologiesJson.ideologies as unknown as IdeologyCopy[];
 export const hiddenCopy = ideologiesJson.hidden as unknown as HiddenCopy[];
+
+export interface DetailCopyItem { h: string; p: string }
+export interface DetailCopy { items: DetailCopyItem[]; origin: string }
+export const detailCopyBySlug = detailCopyJson.beliefs as unknown as Record<string, DetailCopy>;
 
 export const coreById = new Map(coreItems.map((i) => [i.id, i]));
 export const adaptiveById = new Map(adaptiveItems.map((i) => [i.id, i]));
@@ -77,6 +82,50 @@ export function familyOf(ideology: Ideology): Family | undefined {
 
 export const VALID_AXIS = new Set<AxisId>(dimensions.map((d) => d.id));
 
+/** L1 distance between two prototypes' axis targets. */
+function targetDistance(a: Ideology, b: Ideology): number {
+  const ax = a.rule.axis_targets;
+  const bx = b.rule.axis_targets;
+  const keys = new Set<AxisId>([...(Object.keys(ax) as AxisId[]), ...(Object.keys(bx) as AxisId[])]);
+  let d = 0;
+  for (const k of keys) d += Math.abs((ax[k] ?? 0) - (bx[k] ?? 0));
+  return d;
+}
+
+export function nearestIdeologies(x: Ideology, n: number): Ideology[] {
+  return ideologies
+    .filter((y) => y.slug !== x.slug)
+    .map((y) => ({ y, d: targetDistance(x, y) }))
+    .sort((a, b) => a.d - b.d)
+    .slice(0, n)
+    .map((o) => o.y);
+}
+
+/** Frozen-declared neighbors first, then distance fill. */
+export function declaredNeighbors(x: Ideology, n: number): Ideology[] {
+  const declared = x.rule.neighbors
+    .map((name) => ideologyByName.get(name))
+    .filter((v): v is Ideology => !!v && v.slug !== x.slug);
+  if (declared.length >= n) return declared.slice(0, n);
+  const seen = new Set(declared.map((d) => d.slug));
+  for (const y of nearestIdeologies(x, n + 4)) {
+    if (declared.length >= n) break;
+    if (seen.has(y.slug)) continue;
+    seen.add(y.slug);
+    declared.push(y);
+  }
+  return declared.slice(0, n);
+}
+
+export function farthestIdeologies(x: Ideology, n: number): Ideology[] {
+  return ideologies
+    .filter((y) => y.slug !== x.slug)
+    .map((y) => ({ y, d: targetDistance(x, y) }))
+    .sort((a, b) => b.d - a.d)
+    .slice(0, n)
+    .map((o) => o.y);
+}
+
 if (import.meta.env?.DEV) {
   // Light integrity checks so misconfigured content fails loudly in dev.
   const errs: string[] = [];
@@ -87,6 +136,9 @@ if (import.meta.env?.DEV) {
   if (ideologies.length !== 26) errs.push(`ideologies = ${ideologies.length}, expected 26`);
   for (const r of prototypeRules) {
     if (!copyBySlug.has(r.id)) errs.push(`prototype ${r.id} has no presentation copy`);
+  }
+  for (const slug of copyBySlug.keys()) {
+    if (!detailCopyBySlug[slug]) errs.push(`ideology ${slug} has no detail copy`);
   }
   if (errs.length) console.error('[content] integrity:\n' + errs.join('\n'));
 }

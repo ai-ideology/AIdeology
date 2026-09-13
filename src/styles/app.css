@@ -1823,3 +1823,210 @@ img, svg { display: block; max-width: 100%; }
     transform: none;
   }
 }
+
+/* ============================================================
+   AIdeology v1 app additions — character-led heroes, report
+   sections, atlas/detail/library refinements. Tokens above.
+   ============================================================ */
+
+/* ---------- character hero figures ---------- */
+.detail__figure,
+.result__figure {
+  position: relative;
+  margin: 0;
+  border: var(--bw-lg) solid var(--black);
+  background: var(--white);
+  box-shadow: var(--sh-md);
+  overflow: hidden;
+}
+
+.detail__char,
+.result__char {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 70% 30%;
+}
+
+.detail__badge {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 6px 12px;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.detail__mfen { margin-top: var(--s4); font-size: 12px; letter-spacing: .12em; }
+
+.result__meta-line {
+  margin-top: var(--s4);
+  font-size: 12px;
+  letter-spacing: .06em;
+  opacity: .9;
+}
+
+.result__dual {
+  margin-top: var(--s3);
+  padding: 4px 8px;
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+/* low-information hero keeps a calm blue, not an ideology color */
+.result__hero--low { background: var(--sys-blue); color: var(--black); }
+.result__zh--low { font-size: clamp(30px, 5vw, 64px); line-height: 1.12; }
+
+/* ---------- detail sections ---------- */
+.dsec__sub { margin-bottom: var(--s4); color: var(--muted); font-size: 11px; letter-spacing: .1em; }
+.dsec__origin {
+  margin-top: var(--s5);
+  padding-top: var(--s4);
+  border-top: 1px solid rgba(10, 10, 10, .18);
+  font-size: 15px;
+  color: var(--muted);
+}
+.dsec__origin b { display: block; margin-bottom: 4px; color: var(--ink); font-size: 11px; letter-spacing: .1em; }
+
+.belief-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
+@media (min-width: 768px) { .belief-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.belief-card {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 22px 20px;
+  background: var(--paper);
+  border: var(--bw) solid var(--black);
+  box-shadow: var(--sh-md);
+}
+.belief-card__n {
+  justify-self: start;
+  padding: 2px 8px;
+  background: var(--c, var(--black));
+  color: var(--f, var(--white));
+  font-size: 12px;
+  font-weight: 700;
+}
+.belief-card__h { font-family: var(--font-display); font-size: 19px; font-weight: 800; line-height: 1.25; }
+.belief-card__p { font-size: 15px; }
+
+.positions { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
+@media (min-width: 768px) { .positions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.position { gap: 6px; padding: 18px 20px; background: var(--white); border: var(--bw) solid var(--black); box-shadow: var(--sh-sm); }
+.position__label { color: var(--muted); font-size: 11px; letter-spacing: .1em; }
+.position__view { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--c, var(--ink)); -webkit-text-stroke: 0; }
+.position__bar {
+  position: relative;
+  display: block;
+  height: 14px;
+  margin: 6px 0 4px;
+  background: var(--white);
+  border: 2px solid var(--black);
+}
+.position__mid { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--black); opacity: .3; }
+.position__pin {
+  position: absolute; top: 50%;
+  width: 14px; height: 14px;
+  background: var(--c, var(--sys-blue));
+  border: 2px solid var(--black);
+  transform: translate(-50%, -50%);
+}
+.position__poles { display: flex; justify-content: space-between; color: var(--muted); font-size: 11px; }
+
+/* ---------- report: confidence ---------- */
+.conf-list { display: grid; gap: var(--s3); margin-top: var(--s4); }
+.conf { gap: var(--s4); }
+.conf__label { display: grid; gap: 2px; }
+.conf__en { color: var(--muted); font-size: 10px; letter-spacing: .06em; }
+.conf__bar {
+  flex: none;
+  width: clamp(120px, 34%, 320px);
+  height: 14px;
+  background: var(--white);
+  border: 2px solid var(--black);
+}
+.conf__fill { display: block; height: 100%; background: var(--c, var(--sys-blue)); }
+.conf__val { flex: none; width: 40px; text-align: right; font-weight: 700; }
+
+.normalism-note {
+  margin-top: var(--s5);
+  padding: 14px 16px;
+  background: var(--cool);
+  border-left: var(--bw-xl) solid var(--sys-blue);
+}
+
+/* ---------- report: hidden badges ---------- */
+.badges { display: grid; gap: var(--s4); margin-top: var(--s5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .badges { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.badge {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 20px;
+  background: var(--black);
+  color: var(--white);
+  border: var(--bw-lg) solid var(--black);
+  box-shadow: var(--sh-md);
+}
+.badge__code { color: var(--sys-yellow); font-size: 10px; letter-spacing: .14em; }
+.badge__h { font-family: var(--font-display); font-size: 22px; font-weight: 900; }
+.badge__en { opacity: .7; font-size: 10px; letter-spacing: .1em; }
+.badge__p { font-size: 15px; opacity: .92; }
+.badge .kw { background: transparent; color: var(--white); border-color: var(--white); }
+.badge__why { margin-top: 4px; opacity: .6; font-size: 10px; }
+
+/* ---------- report: ranking ---------- */
+.ranking { list-style: none; margin: var(--s5) 0 0; padding: 0; display: grid; gap: 8px; }
+.rank { display: grid; grid-template-columns: 34px minmax(0, 1fr) 96px 52px; align-items: center; gap: var(--s3); padding: 8px 10px; border: 2px solid var(--black); background: var(--white); }
+.rank.is-primary { background: var(--c, var(--sys-blue)); color: var(--f, var(--ink)); border-width: var(--bw-lg); }
+.rank__i { color: inherit; opacity: .7; }
+.rank__name { font-weight: 800; text-decoration: none; }
+.rank__bar { height: 12px; background: var(--paper); border: 2px solid var(--black); }
+.rank.is-primary .rank__bar { background: rgba(255,255,255,.5); }
+.rank__fill { display: block; height: 100%; background: var(--c, var(--black)); }
+.rank.is-primary .rank__fill { background: var(--black); }
+.rank__v { text-align: right; font-weight: 700; }
+@media (max-width: 560px) {
+  .rank { grid-template-columns: 28px minmax(0, 1fr) 52px; }
+  .rank__bar { display: none; }
+}
+
+/* ---------- beliefs module ---------- */
+.beliefs { display: grid; gap: var(--s3); margin-top: var(--s4); }
+.belief { justify-content: space-between; gap: var(--s4); padding: 12px 14px; background: var(--paper); border: 2px solid var(--black); }
+.belief__label { font-weight: 700; }
+
+/* ---------- test note ---------- */
+.test__note { margin-top: var(--s4); color: var(--muted); font-size: 12px; letter-spacing: .04em; }
+
+/* ---------- atlas pointer cursor on panel buttons ---------- */
+.atlas__panel .btn { cursor: pointer; }
+
+/* ---------- landing hero: keep the two slogan lines from wrapping again ---------- */
+.hero__title {
+  font-size: clamp(34px, 4.6vw, 74px);
+  line-height: 1.08;
+}
+@media (min-width: 1024px) {
+  .hero__title { font-size: clamp(40px, 4.4vw, 72px); }
+}
+
+/* ---------- responsive header: 5 nav items must not wrap per character ---------- */
+.site-nav a { white-space: nowrap; }
+@media (max-width: 640px) {
+  .site-head { gap: 6px; }
+  .site-nav { gap: 0; }
+  .site-nav a { padding: 6px; font-size: 12px; letter-spacing: -.01em; }
+  .brand__word { font-size: 16px; }
+}
+@media (max-width: 380px) {
+  .site-nav a { padding: 5px 4px; font-size: 11px; }
+}
