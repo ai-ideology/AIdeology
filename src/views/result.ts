@@ -153,18 +153,20 @@ function resultHero(x: Ideology, r: ResultPackage): string {
     ? ` · 同时贴合 ${esc(bySlug(r.dual[1].slug)!.copy.nameZh)} ${r.dual[1].finalFit.toFixed(1)}`
     : '';
   return `<header class="result__hero result__hero--banner">
-    <figure class="result__figure">
-      <img class="result__art" src="./assets/hero/${x.slug}.webp"
-        alt="${esc(`${c.nameZh} ${c.nameEn}｜${c.manifestoZh}`)}"
-        width="1600" height="900" loading="eager" decoding="async">
-    </figure>
-    <div class="result__caption">
-      <p class="mono result__code">${x.code} · MATCH ${match.toFixed(1)} · ${esc(typeLabel)}${dual}</p>
-      <h1 id="view-title" tabindex="-1" class="sr-only">${esc(c.nameZh)}</h1>
-      <div class="result__cta od-cluster">
-        <button type="button" class="btn btn--primary btn--lg" data-act="share">分享我的结果</button>
-        <button type="button" class="btn btn--lg" data-act="share-card">生成分享图</button>
-        <a class="btn btn--quiet btn--lg" href="#/ideology/${x.slug}">查看完整主义</a>
+    <div class="result__card">
+      <figure class="result__figure">
+        <img class="result__art" src="./assets/hero/${x.slug}.webp"
+          alt="${esc(`${c.nameZh} ${c.nameEn}｜${c.manifestoZh}`)}"
+          width="1600" height="900" loading="eager" decoding="async">
+      </figure>
+      <div class="result__caption">
+        <p class="mono result__code">${x.code} · MATCH ${match.toFixed(1)} · ${esc(typeLabel)}${dual}</p>
+        <h1 id="view-title" tabindex="-1" class="sr-only">${esc(c.nameZh)}</h1>
+        <div class="result__cta od-cluster">
+          <button type="button" class="btn btn--primary btn--lg" data-act="share">分享我的结果</button>
+          <button type="button" class="btn btn--lg" data-act="share-card">生成分享图</button>
+          <a class="btn btn--quiet btn--lg" href="#/ideology/${x.slug}">查看完整主义</a>
+        </div>
       </div>
     </div>
   </header>`;

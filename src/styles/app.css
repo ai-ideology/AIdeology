@@ -2292,14 +2292,20 @@ main { flex: 1 0 auto; }
 
 /* ============================================================
    Detail banner: full ideology composite, inset to the content
-   column so it aligns with the body below (not full-bleed).
+   column. Side whitespace is pure white (matches the body) and
+   the image carries the standard hard border + offset shadow.
    ============================================================ */
 .detail__banner {
-  padding: var(--s6) var(--pad-x);
-  border-bottom: var(--bw-xl) solid var(--black);
-  background: var(--paper);
+  padding: var(--s7) var(--pad-x);
+  background: var(--white);
+  border-bottom: var(--bw-lg) solid var(--black);
 }
-.detail__banner-figure { margin: 0; }
+.detail__banner-figure {
+  margin: 0;
+  border: var(--bw-lg) solid var(--black);
+  box-shadow: var(--sh-lg);
+  background: var(--white);
+}
 .detail__banner-img {
   display: block;
   width: 100%;
@@ -2313,12 +2319,19 @@ main { flex: 1 0 auto; }
    ============================================================ */
 .result__figure { margin: 0; }
 
-/* Result banner hero: image + caption share the body content column */
+/* Result banner hero: a bordered card inside the content column, so the
+   image and caption share the body's white side whitespace. */
 .result__hero--banner {
   display: block;
-  padding: 0 var(--pad-x);
-  background: var(--paper);
+  padding: var(--s7) var(--pad-x);
+  background: var(--white);
   color: var(--ink);
+  border-bottom: var(--bw-lg) solid var(--black);
+}
+.result__card {
+  border: var(--bw-lg) solid var(--black);
+  box-shadow: var(--sh-lg);
+  background: var(--white);
 }
 .result__hero--banner .result__figure { margin: 0; }
 .result__hero--banner .result__art {
