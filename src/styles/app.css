@@ -1824,9 +1824,17 @@ img, svg { display: block; max-width: 100%; }
 
 .positions { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
 @media (min-width: 768px) { .positions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.position { gap: 6px; padding: 18px 20px; background: var(--white); border: var(--bw) solid var(--black); box-shadow: var(--sh-sm); }
+.position { display: flex; flex-direction: column; gap: 8px; padding: 18px 20px; background: var(--white); border: var(--bw) solid var(--black); box-shadow: var(--sh-sm); }
+.position__top { gap: var(--s3); align-items: center; }
 .position__label { color: var(--muted); font-size: 11px; letter-spacing: .1em; }
-.position__view { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--c, var(--ink)); -webkit-text-stroke: 0; }
+.position__chip { flex: none; background: var(--black); color: var(--white); border-color: var(--black); }
+.position__q {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 900;
+  line-height: 1.3;
+}
+.position__view { font-size: 15px; line-height: 1.7; }
 .position__bar {
   position: relative;
   display: block;
@@ -2391,6 +2399,19 @@ main { flex: 1 0 auto; }
    Turns axis numbers into plain-language stance cards.
    ============================================================ */
 .wv__lead { margin-top: var(--s4); max-width: 68ch; font-size: 16px; }
+.wv__claim {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: var(--s5);
+  padding: 18px 22px;
+  background: var(--c, var(--black));
+  color: var(--f, var(--white));
+  border: var(--bw-lg) solid var(--black);
+  box-shadow: var(--sh-md);
+}
+.wv__claim-k { font-size: 11px; letter-spacing: .12em; opacity: .8; }
+.wv__claim-v { font-size: clamp(17px, 2vw, 20px); font-weight: 700; line-height: 1.6; }
 .wv-grid {
   display: grid;
   gap: var(--s4);

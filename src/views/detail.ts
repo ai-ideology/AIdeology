@@ -1,10 +1,10 @@
 import {
-  declaredNeighbors, detailCopyBySlug, dimensionById,
+  axisBand, axisCopyById, declaredNeighbors, detailCopyBySlug,
   farthestIdeologies, ideologies, profileBySlug,
 } from '../content';
 import { CORE_AXES, EXTENDED_AXES, type AxisId } from '../content/types';
 import { esc } from '../ui/dom';
-import { axisRowHtml, keywordChips, miniHtml, splitHero } from '../ui/components';
+import { axisRowHtml, miniHtml, splitHero } from '../ui/components';
 
 /** The four canonical issue positions shown on every detail page. */
 const ISSUES: { label: string; axis: AxisId }[] = [
@@ -34,19 +34,28 @@ export function renderDetail(slug: string, hasResult = false): string | null {
     </li>`,
   ).join('');
 
+  // Same plain-language treatment as the result page's 「你的 AI 世界观」:
+  // the issue label stays as the category, but the card leads with the axis's
+  // plain question and states the ideology's stance in words, not a technical
+  // pole name. Band copy is second-person for the reader, so switch it to 它.
   const positions = ISSUES.map((issue) => {
-    const axis = dimensionById.get(issue.axis)!;
+    const copy = axisCopyById[issue.axis];
     const v = x.rule.axis_targets[issue.axis] ?? 0;
-    const pole = v >= 0 ? axis.right : axis.left;
+    const lean = v >= 0 ? copy.right.label : copy.left.label;
+    const stance = copy.bands[axisBand(v)].replaceAll('你', '它');
     const pct = 50 + Math.max(-1, Math.min(1, v)) * 50;
     return `<li class="position od-tile">
-      <span class="mono position__label">${esc(issue.label)}</span>
-      <span class="position__view">${esc(pole)}</span>
-      <span class="position__bar" role="img" aria-label="${esc(`${axis.name}：偏向 ${pole}`)}">
+      <div class="position__top od-row">
+        <span class="mono position__label od-fill">${esc(issue.label)}</span>
+        <span class="kw position__chip">${esc(lean)}</span>
+      </div>
+      <p class="position__q">${esc(copy.plain)}</p>
+      <p class="position__view">${esc(stance)}</p>
+      <span class="position__bar" role="img" aria-label="${esc(`${copy.plain}：偏向 ${lean}`)}">
         <span class="position__mid" aria-hidden="true"></span>
         <span class="position__pin" style="left:${pct.toFixed(1)}%"></span>
       </span>
-      <span class="mono position__poles"><span>${esc(axis.left)}</span><span>${esc(axis.right)}</span></span>
+      <span class="mono position__poles"><span>${esc(copy.left.label)}</span><span>${esc(copy.right.label)}</span></span>
     </li>`;
   }).join('');
 
@@ -106,11 +115,6 @@ export function renderDetail(slug: string, hasResult = false): string | null {
         <h2 class="dsec__h">世界观摘要</h2>
         <p class="dsec__p">${esc(c.worldview)}</p>
         ${detail?.origin ? `<p class="dsec__origin"><b class="mono">思想来源</b>${esc(detail.origin)}</p>` : ''}
-      </section>
-
-      <section class="dsec">
-        <h2 class="dsec__h">关键词</h2>
-        ${keywordChips(c.keywords)}
       </section>
 
       <section class="dsec">

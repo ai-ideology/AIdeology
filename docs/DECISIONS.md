@@ -133,6 +133,15 @@ the earlier v1 bank. What changed and why:
   copy (`sharedStance` / `boundaryStance`) now always names the pole each side
   holds, and a same-pole split names whose position is stronger. The two-row
   position-bar comparator was removed in favour of these direct sentences.
+- **Detail page: no 关键词 block, stances in plain words.** The 「关键词」 section
+  was dropped (keywords still drive hidden badges). 「对关键问题的态度」 now leads
+  each card with the axis's plain question (`axis-copy.json` `plain`) and the
+  band text, with the pole as a black chip — the axis's technical pole names no
+  longer appear as headings. The band copy is second-person, so the detail page
+  swaps 你 → 它 (`copy.bands[axisBand(v)].replaceAll('你', '它')`).
+- **Worldview carries the primary's claim.** The result page's 「你的 AI 世界观」
+  shows the primary ideology's one-line `summary` in a color bar under the lead,
+  so the plain-language cards have an explicit stance to compare against.
 
 The public-facing explanation of the whole design lives on the wiki page
 (`src/views/wiki.ts` + `src/content/wiki.json`); its per-axis questions and

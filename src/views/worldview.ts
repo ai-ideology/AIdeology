@@ -55,6 +55,7 @@ export function worldviewCards(r: ResultPackage): Card[] {
 export function renderWorldview(r: ResultPackage): string {
   const cards = worldviewCards(r);
   if (!cards.length) return '';
+  const primary = r.primary ? ideologyBySlug.get(r.primary.slug) : undefined;
   const items = cards.map((c, i) => {
     const copy = axisCopyById[c.axis];
     const band = copy.bands[axisBand(c.value)];
@@ -84,6 +85,10 @@ export function renderWorldview(r: ResultPackage): string {
       <p class="mono rsec__sub">YOUR WORLDVIEW, IN PLAIN WORDS</p>
     </header>
     <p class="rsec__p wv__lead">一个主义名称不能说明全部。下面这些判断，更接近你真正相信的东西。</p>
+    ${primary ? `<aside class="wv__claim" style="--c:${primary.copy.color};--f:${primary.copy.fg}">
+      <span class="mono wv__claim-k">主意识形态主张 · ${esc(primary.copy.nameZh)}</span>
+      <span class="wv__claim-v">${esc(primary.copy.summary)}</span>
+    </aside>` : ''}
     <div class="wv-grid">${items}</div>
   </section>`;
 }
