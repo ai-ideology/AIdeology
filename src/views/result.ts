@@ -53,10 +53,12 @@ export function renderResult(r: ResultPackage): string {
     const isPrimary = s.slug === r.primary?.slug;
     const pct = Math.max(0, Math.min(100, s.finalFit));
     return `<li class="rank${isPrimary ? ' is-primary' : ''}" style="--c:${x.copy.color};--f:${x.copy.fg};--w:${pct.toFixed(1)}%">
-      <span class="mono rank__i">${pad2(i + 1)}</span>
-      <a class="rank__name" href="#/ideology/${x.slug}">${esc(x.copy.nameZh)}</a>
+      <div class="rank__head od-row">
+        <span class="mono rank__i">${pad2(i + 1)}</span>
+        <a class="rank__name od-fill" href="#/ideology/${x.slug}">${esc(x.copy.nameZh)}</a>
+        <span class="mono rank__v">${s.finalFit.toFixed(1)}</span>
+      </div>
       <span class="rank__bar" aria-hidden="true"></span>
-      <span class="mono rank__v">${s.finalFit.toFixed(1)}</span>
     </li>`;
   }).join('');
 
@@ -102,8 +104,8 @@ export function renderResult(r: ResultPackage): string {
       ${hiddenSection}
 
       <section class="rsec">
-        <h2 class="rsec__h">完整贴合度</h2>
-        <p class="mono rsec__sub">FINAL FIT · TOP 8 OF 26</p>
+        <h2 class="rsec__h">贴合度排行</h2>
+        <p class="mono rsec__sub">FIT RANKING · TOP 8 OF 26</p>
         <ol class="ranking">${topList}</ol>
       </section>
 
