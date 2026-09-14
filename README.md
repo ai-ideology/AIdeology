@@ -7,6 +7,9 @@
 视觉系统：**Ideological Neo-Brutalism / 意识形态新野兽派**
 （见 `docs-reference/AIdeology_Ideological_Neo_Brutalism_Design_System_v1.0.md`）。
 
+> 工程向导览（给 AI / 新协作者快速上手）见 [`AGENTS.md`](./AGENTS.md)；
+> 实现取舍的原委见 [`docs/DECISIONS.md`](./docs/DECISIONS.md)。
+
 ## 技术栈
 
 - **bun** + **TypeScript**（严格模式）
