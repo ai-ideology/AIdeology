@@ -78,7 +78,7 @@ export function renderShare(payload: SharePayload): string {
         <p class="mono result__en">${esc(c.nameEn)}</p>
         <p class="result__mfzh">${esc(c.manifestoZh)}</p>
         <p class="result__mf">${esc(c.manifestoEn)}</p>
-        <p class="mono result__meta-line">${primary.code} · 来自好友分享 · 置信度 ${esc(r.confidence.identity.label)}</p>
+        <p class="mono result__meta-line">${primary.code} · 来自好友分享 · 可信度 ${esc(r.confidence.identity.label)}</p>
         <div class="result__cta od-cluster">
           <button type="button" class="btn btn--primary btn--lg" data-act="start-test">测测我是哪一种</button>
           <a class="btn btn--lg" href="#/ideology/${primary.slug}">查看这个主义</a>
@@ -98,11 +98,11 @@ export function renderShare(payload: SharePayload): string {
       <section class="rsec"><h2 class="rsec__h">相近主义</h2>${resonance}</section>
       ${hiddenSection}
       <section class="rsec">
-        <h2 class="rsec__h">置信度</h2>
+        <h2 class="rsec__h">可信度</h2>
         <div class="conf-list">
-          ${confLine('身份置信', r.confidence.identity)}
-          ${confLine('判别置信', r.confidence.discrimination)}
-          ${confLine('测量置信', r.confidence.measurement)}
+          ${confLine('主义匹配度', r.confidence.identity)}
+          ${confLine('结果明确度', r.confidence.discrimination)}
+          ${confLine('回答一致性', r.confidence.measurement)}
         </div>
       </section>
       <section class="rsec rsec--cta">

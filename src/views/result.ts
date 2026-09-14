@@ -94,12 +94,12 @@ export function renderResult(r: ResultPackage): string {
       </section>
 
       <section class="rsec">
-        <h2 class="rsec__h">结果置信度</h2>
-        <p class="mono rsec__sub">CONFIDENCE · 结果类型：${esc(typeLabel)}</p>
+        <h2 class="rsec__h">结果可信度</h2>
+        <p class="mono rsec__sub">CREDIBILITY · 结果类型：${esc(typeLabel)}</p>
         <div class="conf-list">
-          ${confidenceRow('身份置信', r.confidence.identity.value, 'IDENTITY — 与主意识形态的贴合度')}
-          ${confidenceRow('判别置信', r.confidence.discrimination.value, 'DISCRIMINATION — 与第二名的区分度')}
-          ${confidenceRow('测量置信', r.confidence.measurement.value, 'MEASUREMENT — 题量与作答一致性')}
+          ${confidenceRow('主义匹配度', r.confidence.identity.value, 'IDEOLOGY MATCH — 与主意识形态的贴合度')}
+          ${confidenceRow('结果明确度', r.confidence.discrimination.value, 'RESULT CLARITY — 与第二名的区分度')}
+          ${confidenceRow('回答一致性', r.confidence.measurement.value, 'ANSWER CONSISTENCY — 题量与作答一致性')}
         </div>
         ${normalismNote}
       </section>
