@@ -21,6 +21,7 @@ export interface CoreItem {
   axis: AxisId;
   prompt: string;
   note?: string;
+  /** `L5` stance item or `S5` single-variable degree item (v1.1). */
   type?: string;
   agree_direction?: number;
   /** Optional scenario setup shown above the question. */
@@ -29,6 +30,10 @@ export interface CoreItem {
   version?: string;
   scoring_note?: string;
   v1_revision?: string;
+  /** v1.1: the one variable an S5 ladder moves along. */
+  ordinal_variable?: string;
+  ordinal_audit?: string;
+  dataset_version?: string;
 }
 
 export interface AdaptiveOption {
@@ -47,6 +52,10 @@ export interface AdaptiveItem {
   options: AdaptiveOption[];
   version?: string;
   scoring_note?: string;
+  /** v1.1: the single discriminating variable and its relation type. */
+  degree_variable?: string;
+  relation_type?: string;
+  dataset_version?: string;
 }
 
 export interface HiddenOption {
@@ -145,11 +154,39 @@ export interface IdeologyProfile {
   future: string;
 }
 
+/**
+ * How two ideologies actually differ (v1.1 relation-type system). Deciding the
+ * type first stops the copy from inventing a head-on conflict where there is
+ * only a difference of priority.
+ */
+export type RelationType =
+  | 'opposite_direction'      // R1 同一根问题站在两端
+  | 'same_direction_degree'   // R2 方向一致，一方走得更远
+  | 'threshold_difference'    // R3 原则接近，跨线条件不同
+  | 'motive_difference'       // R4 选择相近，理由不同
+  | 'priority_difference'     // R5 不互相反对，只是优先项不同
+  | 'scope_difference';       // 适用范围不同（personal vs public）
+
+export const RELATION_TYPE_LABEL: Record<RelationType, string> = {
+  opposite_direction: '方向相反',
+  same_direction_degree: '同向·程度不同',
+  threshold_difference: '阈值不同',
+  motive_difference: '动机不同',
+  priority_difference: '关注重心不同',
+  scope_difference: '适用范围不同',
+};
+
 /** Hand-written two-ideology relation copy; `pair` is stored sorted. */
 export interface RelationPair {
   pair: [string, string];
-  shared: string;
-  difference: string;
+  relationType: RelationType;
+  relationTypeAlt?: RelationType;
+  /** Canonical axis the relation turns on, when the doc names one. */
+  keyAxis?: AxisId;
+  /** 共鸣点 — what the two share. May be absent for pure priority splits. */
+  shared?: string;
+  /** 程度差 / 阈值差 / 动机差 / 差异 — the v1.1 "who is further" clause. */
+  degree?: string;
   oneLine: string;
 }
 

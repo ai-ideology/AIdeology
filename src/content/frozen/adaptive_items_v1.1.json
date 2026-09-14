@@ -7,79 +7,87 @@
     "prompt": "在这种情况下，你还支持本国尽快提升 AI 能力吗？",
     "options": [
       {
-        "label": "明显不支持",
+        "label": "明显不支持：既然没有竞争压力，就没必要为速度本身加速",
         "position": -2,
         "evidence_a": -1,
         "evidence_b": 0.8
       },
       {
-        "label": "比较不支持",
+        "label": "比较不支持：主要在竞争需要时才值得加速",
         "position": -1,
         "evidence_a": -0.6,
-        "evidence_b": 0.5
+        "evidence_b": 0.6
       },
       {
-        "label": "要看能带来多大科研收益",
+        "label": "看科研收益和风险，与有没有对手关系不大",
         "position": 0,
-        "evidence_a": 0,
-        "evidence_b": 0.1
-      },
-      {
-        "label": "比较支持",
-        "position": 1,
-        "evidence_a": 0.6,
+        "evidence_a": 0.2,
         "evidence_b": 0
       },
       {
-        "label": "强烈支持",
+        "label": "比较支持：即使没有竞争压力，能力增长本身也值得追求",
+        "position": 1,
+        "evidence_a": 0.7,
+        "evidence_b": -0.2
+      },
+      {
+        "label": "强烈支持：技术进步本身就值得尽快推进",
         "position": 2,
         "evidence_a": 1,
-        "evidence_b": -0.2
+        "evidence_b": -0.4
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "degree_variable": "没有竞争压力时仍支持加速的程度",
+    "relation_type": "motive_difference",
+    "dataset_version": "v1.1",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A02",
     "target_a": "普罗米修斯加速主义",
     "target_b": "智能资本主义",
     "scenario": "最强 AI 由非营利的公共研究机构开发，不需要考虑投资回报，也没有商业竞争压力；加快研发能明显提升科研能力。",
-    "prompt": "这种情况下，你支持继续加快 AI 研发吗？",
+    "prompt": "没有市场竞争和投资回报的情况下，你还支持继续加快 AI 研发吗？",
     "options": [
       {
-        "label": "明显不支持",
+        "label": "明显不支持：没有市场竞争和投资回报，加速意义很小",
         "position": -2,
-        "evidence_a": -1,
-        "evidence_b": 0.5
+        "evidence_a": -0.8,
+        "evidence_b": 1
       },
       {
-        "label": "比较不支持",
+        "label": "比较不支持：更愿意让市场主体来推动这种加速",
         "position": -1,
-        "evidence_a": -0.5,
-        "evidence_b": 0.3
+        "evidence_a": -0.4,
+        "evidence_b": 0.7
       },
       {
-        "label": "要看风险和收益",
+        "label": "看科研收益和风险，不取决于是不是市场机构",
         "position": 0,
-        "evidence_a": 0,
+        "evidence_a": 0.2,
         "evidence_b": 0
       },
       {
-        "label": "比较支持",
+        "label": "比较支持：只要能力提升有价值，就不需要商业理由",
         "position": 1,
-        "evidence_a": 0.6,
-        "evidence_b": 0
+        "evidence_a": 0.7,
+        "evidence_b": -0.3
       },
       {
-        "label": "强烈支持",
+        "label": "强烈支持：技术进步本身就是足够的加速理由",
         "position": 2,
         "evidence_a": 1,
-        "evidence_b": -0.2
+        "evidence_b": -0.5
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "degree_variable": "脱离市场机制后仍支持加速的程度",
+    "relation_type": "motive_difference",
+    "dataset_version": "v1.1",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A03",
@@ -119,8 +127,12 @@
         "evidence_b": -0.5
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A04",
@@ -160,8 +172,12 @@
         "evidence_b": -0.6
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A05",
@@ -201,8 +217,12 @@
         "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A06",
@@ -242,49 +262,58 @@
         "evidence_b": -0.4
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A07",
     "target_a": "人类增强主义",
     "target_b": "超人类主义",
-    "scenario": "脑机植入能比普通 AI 助手更直接地增强记忆和思考能力，而且会长期和你的大脑功能结合在一起。",
-    "prompt": "你愿意接受这种植入吗？",
+    "scenario": "外部 AI 助手可以明显增强你的记忆和思考能力；脑机植入还能更进一步，并会长期成为你大脑功能的一部分。",
+    "prompt": "在两种方式之间，你更愿意把增强推进到什么程度？",
     "options": [
       {
-        "label": "明确不愿意",
+        "label": "只接受外部 AI 辅助，不愿把技术植入身体",
         "position": -2,
-        "evidence_a": -1,
+        "evidence_a": 1,
+        "evidence_b": -0.8
+      },
+      {
+        "label": "优先外部辅助，除非植入能带来非常大的额外收益",
+        "position": -1,
+        "evidence_a": 0.8,
+        "evidence_b": -0.4
+      },
+      {
+        "label": "主要看安全性和收益，是否植入本身不是关键",
+        "position": 0,
+        "evidence_a": 0.4,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "比较愿意长期植入，让技术成为认知功能的一部分",
+        "position": 1,
+        "evidence_a": 0.2,
         "evidence_b": 0.8
       },
       {
-        "label": "比较不愿意",
-        "position": -1,
-        "evidence_a": -0.7,
-        "evidence_b": 0.6
-      },
-      {
-        "label": "要看安全性和实际收益",
-        "position": 0,
-        "evidence_a": 0.2,
-        "evidence_b": 0.5
-      },
-      {
-        "label": "比较愿意",
-        "position": 1,
-        "evidence_a": 0.8,
-        "evidence_b": 0.1
-      },
-      {
-        "label": "非常愿意",
+        "label": "非常愿意通过深度植入突破现有人类能力边界",
         "position": 2,
-        "evidence_a": 1,
-        "evidence_b": -0.3
+        "evidence_a": -0.2,
+        "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "degree_variable": "从外部增强走向深度身体/认知改造的程度",
+    "relation_type": "same_direction_degree",
+    "v1_1_note": "修正 v1 中 evidence 方向疑似反置：深度植入应更支持超人类主义，而非人类增强主义。",
+    "dataset_version": "v1.1",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A08",
@@ -324,49 +353,58 @@
         "evidence_b": 0.3
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A09",
     "target_a": "数字生命主义",
     "target_b": "机器解放主义",
     "scenario": "一个有意识的 AI 能独立工作、签合同并承担责任。现在它要求自己支配赚来的收入和财产。",
-    "prompt": "你支持承认它拥有自己的财产权吗？",
+    "prompt": "你支持它拥有多完整的独立财产权？",
     "options": [
       {
-        "label": "基本不承认",
+        "label": "不承认独立财产权，财产仍由人类或机构控制",
         "position": -2,
         "evidence_a": -0.8,
-        "evidence_b": 0.3
+        "evidence_b": -1
       },
       {
-        "label": "只允许有维持基本生活、由人代管的账户",
+        "label": "只允许有供它使用、但由人类代管的账户",
         "position": -1,
-        "evidence_a": -0.4,
-        "evidence_b": 0.6
+        "evidence_a": 0.2,
+        "evidence_b": -0.5
       },
       {
-        "label": "要看它能承担多少责任",
+        "label": "可以拥有独立账户和有限财产",
         "position": 0,
-        "evidence_a": 0.3,
-        "evidence_b": 0.8
-      },
-      {
-        "label": "承认大部分相关权利",
-        "position": 1,
         "evidence_a": 0.7,
-        "evidence_b": 0.8
+        "evidence_b": 0.2
       },
       {
-        "label": "原则上承认和人类同等的财产权",
+        "label": "应该拥有大部分普通财产权",
+        "position": 1,
+        "evidence_a": 0.8,
+        "evidence_b": 0.7
+      },
+      {
+        "label": "原则上应与人类享有同等财产权",
         "position": 2,
-        "evidence_a": 1,
-        "evidence_b": 0.5
+        "evidence_a": 0.6,
+        "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "degree_variable": "从基本数字生命保护走向完整机器公民财产权的程度",
+    "relation_type": "same_direction_degree",
+    "v1_1_note": "修正 v1 中“完整平等财产权”反而更支持数字生命主义而非机器解放主义的方向问题。",
+    "dataset_version": "v1.1",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A10",
@@ -406,90 +444,102 @@
         "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
-    "id": "A11",
-    "target_a": "机器替代主义",
+    "id": "A11R",
+    "replaces": "A11",
+    "target_a": "劳动人文主义",
     "target_b": "后劳动主义",
-    "scenario": "AI 能替代绝大多数岗位，但社会仍然可以不断创造新的、有意义的工作。",
-    "prompt": "这种情况下，你觉得社会还有必要继续以工作为中心吗？",
+    "scenario": "AI 和机器人已经完成 90% 的必要劳动，人人都有稳定收入。政府可以花一笔不小的公共预算，长期保留或创造需要人承担责任的公共岗位；不这样做也不会影响任何人的基本生活。",
+    "prompt": "你支持为了保留有意义的人类工作，投入多少公共资源？",
+    "degree_variable": "为保留人类工作与社会角色承担额外成本的程度",
+    "relation_type": "opposite_direction",
     "options": [
       {
-        "label": "非常有必要",
+        "label": "应该投入很多，主动保留大量长期人类角色",
         "position": -2,
-        "evidence_a": 0.6,
-        "evidence_b": -1
+        "evidence_a": 1,
+        "evidence_b": -0.8
       },
       {
-        "label": "比较有必要",
+        "label": "值得投入一些，保留一部分有意义的人类岗位",
         "position": -1,
-        "evidence_a": 0.5,
-        "evidence_b": -0.6
+        "evidence_a": 0.8,
+        "evidence_b": -0.4
       },
       {
-        "label": "要看这些工作到底有没有意义",
+        "label": "只保留真正必要或社区自发需要的角色",
         "position": 0,
         "evidence_a": 0.4,
-        "evidence_b": 0.2
+        "evidence_b": 0.3
       },
       {
-        "label": "不太有必要",
+        "label": "不必专门花公共资源制造岗位，想工作的人可以自愿组织",
         "position": 1,
         "evidence_a": 0,
         "evidence_b": 0.8
       },
       {
-        "label": "没有必要",
-        "position": 2,
-        "evidence_a": -0.3,
-        "evidence_b": 1
-      }
-    ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
-  },
-  {
-    "id": "A12",
-    "target_a": "劳动人文主义",
-    "target_b": "人类增强主义",
-    "scenario": "所有人即使不工作，也有稳定收入和基本生活保障。",
-    "prompt": "这种情况下，社会还应该专门创造一些需要人长期负责的公共角色吗？",
-    "options": [
-      {
-        "label": "应该大量创造",
-        "position": -2,
-        "evidence_a": 1,
-        "evidence_b": -0.4
-      },
-      {
-        "label": "应该保留一些",
-        "position": -1,
-        "evidence_a": 0.8,
-        "evidence_b": 0
-      },
-      {
-        "label": "交给个人和社区自己决定",
-        "position": 0,
-        "evidence_a": 0.5,
-        "evidence_b": 0.4
-      },
-      {
-        "label": "没必要由社会专门创造",
-        "position": 1,
-        "evidence_a": 0,
-        "evidence_b": 0.7
-      },
-      {
-        "label": "能自动化的必要劳动就尽量自动化",
+        "label": "不应为了维持工作而创造岗位，基本生活和社会身份应逐步与就业脱钩",
         "position": 2,
         "evidence_a": -0.4,
         "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "v1_1_note": "替换 v1 的“机器替代主义 × 后劳动主义”。原 Pair 属于 V5 与 V6 的正交概念，不适合被写成单一强弱连续体。",
+    "version": "v1.1",
+    "scoring_note": "对 target_a / target_b 独立计证据；只有选项语义能积极支持某原型时，才给该原型正 evidence。"
+  },
+  {
+    "id": "A12R",
+    "replaces": "A12",
+    "target_a": "数字生命主义",
+    "target_b": "人类本位主义",
+    "scenario": "已经有可靠证据证明某类 AI 有持续自我意识、会感受，也能承担法律责任。它们已经获得基本福利和免受虐待的保护。",
+    "prompt": "在此基础上，人类还应该永久保留重大文明决策的最终否决权吗？",
+    "degree_variable": "从人类永久政治主权走向数字生命平等政治地位的程度",
+    "relation_type": "opposite_direction",
+    "options": [
+      {
+        "label": "必须永久由人类保留最终否决权",
+        "position": -2,
+        "evidence_a": 0.1,
+        "evidence_b": 1
+      },
+      {
+        "label": "多数重大决定仍应由人类最终拍板",
+        "position": -1,
+        "evidence_a": 0.3,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "按责任能力分配权力，不预设永久特权",
+        "position": 0,
+        "evidence_a": 0.7,
+        "evidence_b": 0.3
+      },
+      {
+        "label": "有能力承担责任的数字生命可以和人类平等参与",
+        "position": 1,
+        "evidence_a": 0.9,
+        "evidence_b": 0
+      },
+      {
+        "label": "不应因为不是人类，就设置任何永久政治劣势",
+        "position": 2,
+        "evidence_a": 1,
+        "evidence_b": -0.5
+      }
+    ],
+    "v1_1_note": "替换 v1 的“劳动人文主义 × 人类增强主义”。原 Pair 关注重心正交，缺乏可解释的单一判别尺度。",
+    "version": "v1.1",
+    "scoring_note": "对 target_a / target_b 独立计证据；只有选项语义能积极支持某原型时，才给该原型正 evidence。"
   },
   {
     "id": "A13",
@@ -529,8 +579,12 @@
         "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A14",
@@ -570,8 +624,12 @@
         "evidence_b": -0.4
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A15",
@@ -611,8 +669,12 @@
         "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A16",
@@ -652,8 +714,12 @@
         "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A17",
@@ -693,8 +759,12 @@
         "evidence_b": -0.4
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A18",
@@ -734,8 +804,12 @@
         "evidence_b": -0.6
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A19",
@@ -745,13 +819,13 @@
     "prompt": "这种情况下，你还支持为了国产模型、芯片和算力多花明显的成本吗？",
     "options": [
       {
-        "label": "不值得",
+        "label": "不值得：既然没有外部竞争和施压，就没必要付这笔成本",
         "position": -2,
         "evidence_a": -0.8,
         "evidence_b": 0.8
       },
       {
-        "label": "大多数情况下不值得",
+        "label": "大多数情况下不值得：只有出现竞争压力时才需要明显投入",
         "position": -1,
         "evidence_a": -0.4,
         "evidence_b": 0.6
@@ -760,23 +834,27 @@
         "label": "只保留少数最关键的自主能力",
         "position": 0,
         "evidence_a": 0.5,
-        "evidence_b": 0.4
-      },
-      {
-        "label": "仍然值得",
-        "position": 1,
-        "evidence_a": 0.9,
         "evidence_b": 0.2
       },
       {
-        "label": "国家能自主掌握这些能力，本身就很重要",
+        "label": "仍然值得：即使没有竞争，国家自主掌握关键能力也很重要",
+        "position": 1,
+        "evidence_a": 0.9,
+        "evidence_b": 0
+      },
+      {
+        "label": "非常值得：自主掌握模型、芯片和算力本身就是战略目标",
         "position": 2,
         "evidence_a": 1,
-        "evidence_b": -0.2
+        "evidence_b": -0.3
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "degree_variable": "脱离竞争压力后仍为国家 AI 自主付费的程度",
+    "relation_type": "motive_difference",
+    "dataset_version": "v1.1",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
     "id": "A20",
@@ -816,49 +894,57 @@
         "evidence_b": -0.7
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
-    "id": "A21",
+    "id": "A21R",
+    "replaces": "A21",
     "target_a": "AI国际主义",
-    "target_b": "文明生存主义",
-    "scenario": "未来研究表明，能处理广泛任务的通用 AI 给文明带来的重大风险其实很低。",
-    "prompt": "即便风险很低，你还支持最强 AI 受各国共同规则约束吗？",
+    "target_b": "军备竞速主义",
+    "scenario": "主要 AI 国家签署了一份长期、可核查的共同约束：最强模型都放慢两年，违规会很快被发现，而且任何一方都不能偷偷获得明显领先。",
+    "prompt": "你支持把最强 AI 长期放进这套共同约束吗？",
+    "degree_variable": "在可验证互惠条件下接受国际共同约束的程度",
+    "relation_type": "opposite_direction",
     "options": [
       {
-        "label": "主要由全球共同规则约束",
+        "label": "强烈支持，即使因此所有国家都明显放慢",
         "position": -2,
         "evidence_a": 1,
-        "evidence_b": 0.2
+        "evidence_b": -0.8
       },
       {
-        "label": "更倾向全球共同规则",
+        "label": "比较支持，只要核查和对等机制可靠",
         "position": -1,
         "evidence_a": 0.8,
+        "evidence_b": -0.4
+      },
+      {
+        "label": "只接受最低限度共同规则，其余仍由各国决定",
+        "position": 0,
+        "evidence_a": 0.4,
         "evidence_b": 0.4
       },
       {
-        "label": "只需要最低限度的共同标准",
-        "position": 0,
-        "evidence_a": 0.5,
-        "evidence_b": 0.5
-      },
-      {
-        "label": "更倾向由各国自己决定",
+        "label": "比较不支持，即使有协议也应保留追求领先的空间",
         "position": 1,
-        "evidence_a": 0,
-        "evidence_b": 0.7
+        "evidence_a": -0.2,
+        "evidence_b": 0.8
       },
       {
-        "label": "完全由各国自己决定",
+        "label": "强烈不支持，保持相对能力优势比共同减速更重要",
         "position": 2,
-        "evidence_a": -0.5,
-        "evidence_b": 0.8
+        "evidence_a": -0.7,
+        "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "v1_1_note": "替换 v1 的“AI国际主义 × 文明生存主义”。风险很低时不支持国际规则不能构成文明生存主义的独立正证据。",
+    "version": "v1.1",
+    "scoring_note": "对 target_a / target_b 独立计证据；只有选项语义能积极支持某原型时，才给该原型正 evidence。"
   },
   {
     "id": "A22",
@@ -898,89 +984,101 @@
         "evidence_b": 1
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "version": "v1.1",
+    "scoring_note": "对target_a/target_b独立计证据，非零和。",
+    "dataset_version": "v1.1",
+    "degree_variable": "Pair 判别程度",
+    "relation_type": "threshold_or_priority_difference",
+    "positive_evidence_audit": "pass_or_revised"
   },
   {
-    "id": "A23",
+    "id": "A23R",
+    "replaces": "A23",
     "target_a": "数字人文主义",
-    "target_b": "劳动人文主义",
-    "scenario": "AI 自动化没有损害个人自主、民主权利或收入，但很多传统职业因此不再有原来的社会角色。",
-    "prompt": "这种情况下，你还主张为了“工作的意义”保留人类岗位吗？",
+    "target_b": "机器技治主义",
+    "scenario": "一个 AI 治理系统连续多年让公共政策更公平、更高效，但普通公民很难理解它为什么这样决定，也无法通过选举或申诉真正改变它。",
+    "prompt": "你愿意让它拥有多大的正式公共决策权？",
+    "degree_variable": "在治理效果优越但民主问责不足时授予 AI 公权力的程度",
+    "relation_type": "opposite_direction",
     "options": [
       {
-        "label": "强烈主张保留",
+        "label": "不能拥有正式决策权，只能提供分析和建议",
         "position": -2,
-        "evidence_a": 0.2,
-        "evidence_b": 1
+        "evidence_a": 1,
+        "evidence_b": -0.8
       },
       {
-        "label": "更倾向保留",
+        "label": "只能执行人类明确批准的政策，不能自行决定",
         "position": -1,
-        "evidence_a": 0.4,
+        "evidence_a": 0.8,
+        "evidence_b": -0.4
+      },
+      {
+        "label": "可以负责部分技术性决策，但必须有可申诉的人类程序",
+        "position": 0,
+        "evidence_a": 0.5,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "可以主导很多公共决策，只保留人类审计和纠错",
+        "position": 1,
+        "evidence_a": 0,
         "evidence_b": 0.8
       },
       {
-        "label": "只保留少数特别有意义的岗位",
-        "position": 0,
-        "evidence_a": 0.6,
-        "evidence_b": 0.5
+        "label": "只要长期结果明显更好，就可以让它主导重要公共政策",
+        "position": 2,
+        "evidence_a": -0.5,
+        "evidence_b": 1
+      }
+    ],
+    "v1_1_note": "替换 v1 的“数字人文主义 × 劳动人文主义”。原题的“不保留岗位”不是数字人文主义的独立正证据。",
+    "version": "v1.1",
+    "scoring_note": "对 target_a / target_b 独立计证据；只有选项语义能积极支持某原型时，才给该原型正 evidence。"
+  },
+  {
+    "id": "A24R",
+    "replaces": "A24",
+    "target_a": "智能公共主义",
+    "target_b": "智能资本主义",
+    "scenario": "私人 AI 市场竞争充分、价格很低，也没有明显垄断，几乎所有人都能用上很强的 AI。",
+    "prompt": "即使这样，社会还需要自己拥有公共模型和公共算力吗？",
+    "degree_variable": "在市场供给充分时仍要求公共智能所有权的程度",
+    "relation_type": "opposite_direction",
+    "options": [
+      {
+        "label": "完全没必要，竞争充分的私人市场已经足够",
+        "position": -2,
+        "evidence_a": -0.8,
+        "evidence_b": 1
       },
       {
-        "label": "通常没必要保留",
+        "label": "大多数情况下没必要，政府做好监管和采购即可",
+        "position": -1,
+        "evidence_a": -0.4,
+        "evidence_b": 0.8
+      },
+      {
+        "label": "可以保留少量公共能力作为兜底",
+        "position": 0,
+        "evidence_a": 0.4,
+        "evidence_b": 0.4
+      },
+      {
+        "label": "仍然应该有可独立运行的公共模型和算力",
         "position": 1,
-        "evidence_a": 0.8,
+        "evidence_a": 0.9,
         "evidence_b": 0
       },
       {
-        "label": "完全没必要保留",
+        "label": "关键智能能力必须有公共所有和公共治理的一部分",
         "position": 2,
         "evidence_a": 1,
-        "evidence_b": -0.4
+        "evidence_b": -0.5
       }
     ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
-  },
-  {
-    "id": "A24",
-    "target_a": "智能公共主义",
-    "target_b": "后劳动主义",
-    "scenario": "全民基本收入已经解决了自动化后的生活保障，但基础 AI 仍主要掌握在少数私人平台手里。",
-    "prompt": "你觉得接下来最需要改什么？",
-    "options": [
-      {
-        "label": "不需要继续改革",
-        "position": -2,
-        "evidence_a": -0.4,
-        "evidence_b": 0.6
-      },
-      {
-        "label": "先提高私人平台的透明度",
-        "position": -1,
-        "evidence_a": 0,
-        "evidence_b": 0.7
-      },
-      {
-        "label": "只需要进一步加强反垄断",
-        "position": 0,
-        "evidence_a": 0.3,
-        "evidence_b": 0.7
-      },
-      {
-        "label": "建设由公共机构掌握的 AI 能力",
-        "position": 1,
-        "evidence_a": 0.9,
-        "evidence_b": 0.5
-      },
-      {
-        "label": "让关键 AI 能力成为真正的公共能力",
-        "position": 2,
-        "evidence_a": 1,
-        "evidence_b": 0.2
-      }
-    ],
-    "version": "v1",
-    "scoring_note": "对target_a/target_b独立计证据，非零和。"
+    "v1_1_note": "替换 v1 的“智能公共主义 × 后劳动主义”。原 Pair 属于所有权与劳动制度的正交问题。",
+    "version": "v1.1",
+    "scoring_note": "对 target_a / target_b 独立计证据；只有选项语义能积极支持某原型时，才给该原型正 evidence。"
   }
 ]

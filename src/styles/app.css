@@ -2566,3 +2566,58 @@ main { flex: 1 0 auto; }
   letter-spacing: .08em;
   opacity: .5;
 }
+
+/* v1.1 comparison: relation-type chip + degree comparator */
+.xpanel__type {
+  margin-left: auto;
+  padding: 3px 10px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+.xpanel--vs .xpanel__type { background: #B0121B; }
+
+.degblock {
+  margin-top: var(--s5);
+  padding-top: var(--s5);
+  border-top: 2px solid var(--black);
+}
+.degblock__k { margin-bottom: 12px; font-size: 10px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+.deg { gap: var(--s3); align-items: center; padding: 4px 0; }
+.deg__who {
+  flex: 0 0 auto;
+  max-width: 34%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 700;
+}
+.deg__track {
+  position: relative;
+  flex: 1 1 auto;
+  height: 12px;
+  background: var(--paper);
+  border: 2px solid var(--black);
+}
+.deg__track::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: -3px; bottom: -3px;
+  width: 2px;
+  background: var(--black);
+  opacity: .3;
+}
+.deg__pin {
+  position: absolute;
+  top: -4px; bottom: -4px;
+  width: 6px;
+  margin-left: -3px;
+  border: 2px solid var(--black);
+  background: var(--black);
+}
+.deg--user .deg__pin { background: var(--c, var(--sys-blue)); }
+.deg--other .deg__pin { background: var(--white); }
+.degblock__v { margin-top: 10px; font-size: 12px; font-weight: 700; }

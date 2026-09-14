@@ -1,5 +1,8 @@
 import { describe, expect, test } from 'bun:test';
-import { coreItems, adaptiveItems, hiddenItems, prototypeRules, ideologies, hiddenCopy } from '../src/content';
+import {
+  coreItems, adaptiveItems, hiddenItems, prototypeRules, ideologies, hiddenCopy,
+  adaptiveItemsByPrototype, compareDegree, degreeBand, relationFor, relations,
+} from '../src/content';
 import { axisScores, axisFit, computeResult, emptyAnswers, planAdaptive, scoreItems } from '../src/scoring/engine';
 import type { SessionAnswers } from '../src/scoring/engine';
 
@@ -51,6 +54,63 @@ describe('content integrity', () => {
         expect(proto.has(t) || hidden.has(t) || t === '强AI中心原型').toBe(true);
       }
     }
+  });
+
+  test('v1.1 core bank keeps one ordinal variable per S5 item', () => {
+    const s5 = coreItems.filter((i) => i.type === 'S5');
+    expect(s5.length).toBe(23);
+    for (const item of s5) {
+      expect(typeof item.ordinal_variable).toBe('string');
+      expect(item.ordinal_variable!.length).toBeGreaterThan(0);
+      // one option per ladder step; a few items present it strongest-first, so
+      // compare as a set rather than a fixed order
+      expect([...item.options.map((o) => o.score)].sort((a, b) => a - b))
+        .toEqual([-2, -1, 0, 1, 2]);
+    }
+  });
+
+  test('adaptive linkage is derived from the bank and covers every prototype', () => {
+    // v1.1 replaced A11/A12/A21/A23/A24 with *R, so the frozen per-rule lists
+    // are stale; the bank declaration is the source of truth.
+    expect(adaptiveItemsByPrototype.get('work-humanism')).toContain('A11R');
+    expect(adaptiveItemsByPrototype.get('post-work')).toContain('A11R');
+    expect(adaptiveItemsByPrototype.get('digital-life')).toContain('A12R');
+    expect(adaptiveItemsByPrototype.get('human-primacy')).toContain('A12R');
+    // no stale v1 ids survive as the only link for a replaced pair
+    const all = [...adaptiveItemsByPrototype.values()].flat();
+    for (const dead of ['A11', 'A12', 'A21', 'A23', 'A24']) {
+      if (dead === 'A22') continue;
+      // A11/A12/... must not be linked; only *R variants exist in the v1.1 bank
+      expect(all).not.toContain(dead);
+    }
+  });
+
+  test('degree comparator bands and direction follow the v1.1 thresholds', () => {
+    expect(degreeBand(0.1)).toBe('equal');
+    expect(degreeBand(0.2)).toBe('slightly');
+    expect(degreeBand(0.5)).toBe('clearly');
+    expect(degreeBand(0.8)).toBe('far');
+    const other = ideologies.find((x) => x.slug === 'post-work')!;
+    // user far on the "labour-human" side vs a post-work prototype -> opposite
+    const cmp = compareDegree('V6', -1, other);
+    expect(cmp.prototype).toBeGreaterThan(0);
+    expect(Math.sign(cmp.user)).not.toBe(Math.sign(cmp.prototype));
+    expect(cmp.relevant).toBe(true);
+  });
+
+  test('v1.1 relations carry a typed relation and one-line comparison', () => {
+    expect(relations.length).toBeGreaterThanOrEqual(18);
+    for (const r of relations) {
+      expect(r.pair.length).toBe(2);
+      expect(r.oneLine.length).toBeGreaterThan(0);
+      expect(typeof r.relationType).toBe('string');
+    }
+    // order-independent lookup
+    expect(relationFor('post-work', 'work-humanism')?.oneLine)
+      .toBe(relationFor('work-humanism', 'post-work')?.oneLine);
+    // a pair that must be typed as opposite directions
+    expect(relationFor('work-humanism', 'post-work')?.relationType).toBe('opposite_direction');
+    expect(relationFor('work-humanism', 'post-work')?.keyAxis).toBe('V6');
   });
 });
 

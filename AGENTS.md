@@ -17,7 +17,7 @@
 
 ## 2. 三条最重要的不变量（改代码前必读）
 
-1. **`src/content/frozen/` 是权威数据，不是普通配置。** 它来自产品方冻结的 v1 包，定义题库、轴、原型规则、阈值。**不要手改其中的数值**——引擎的测试会因此失败。要改行为，改 `src/scoring/engine.ts` 或 `docs/DECISIONS.md` 里记录的「spec 未定义处的选择」。
+1. **`src/content/frozen/` 是权威数据，不是普通配置。** 它来自产品方冻结的 v1 包，定义题库、轴、原型规则、阈值。**不要手改其中的数值**——引擎的测试会因此失败。要改行为，改 `src/scoring/engine.ts` 或 `docs/DECISIONS.md` 里记录的「spec 未定义处的选择」。注意：v1.1 题库（`*_v1.1.json`）替换了旧 v1 题库，且 `prototype_rules_v1.json` 里的 `adaptive_items` 列表已过时——原型↔判别题的对应关系改由题库自身的 `target_a`/`target_b` 推导（`adaptiveItemsByPrototype`）。
 2. **`axis_score` 全中间作答必须让所有原型的 AxisFit = 50。** 这是冻结保证，`tests/scoring.test.ts` 有专项测试。任何触碰 `axisFit` 的改动都要跑测试。
 3. **题库的选项分数是方向已编码的**（score 直接进入所属轴，无需运行时翻转符号）。`scenario` 字段是展示用，不参与计分。
 
@@ -30,11 +30,17 @@ src/scoring/engine.ts      计分与判别引擎（纯函数，694 行，无 DOM
 src/content/               内容层：所有文案/题库的加载与派生
   index.ts                 统一加载 + join（rule + copy），并导出查询辅助函数
   types.ts                 全部数据类型的唯一来源
-  frozen/                  ★ 冻结 v1 数据（8 个 JSON，权威，勿改数值）
+  frozen/                  ★ 冻结数据（权威，勿改数值）
+    core_items_v1.1.json       48 核心题（25 L5 立场题 + 23 S5 单变量程度题）
+    adaptive_items_v1.1.json   24 判别题（A11R/A12R/A21R/A23R/A24R 为 v1.1 替换对）
+    hidden_items_v1.json       16 专题题
+    prototype_rules_v1.json    26 原型：轴目标 / 信条 / 反证 / 近邻
+    hidden_rules_v1.json       8 隐藏立场的触发规则
+    dimensions_v1.json / scoring_spec_v1.json
   ideologies.json          26 个呈现文案 + 8 个隐藏立场呈现文案
   axis-copy.json           15 轴：通俗名 / 用户问题 / 两极定义 / 5 档文案
   ideology-profiles.json   26 主义：一句话核心 / 最在意 / 最大担忧 / 理想未来
-  relations.json           20 组手写主义关系（共鸣点 / 分界 / 一句话边界）
+  relations.json           18 组关系：relationType + keyAxis + 程度句 + 一句话对照
   detail-copy.json         每主义 3 条核心信念 + 思想来源
   wiki.json                维基页文案
   families.json            5 个谱系分组

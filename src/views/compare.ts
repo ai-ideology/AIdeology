@@ -7,10 +7,11 @@
  * on its own so the whole page does not repaint.
  */
 import {
-  axisCopyById, differingAxes, ideologies, relationFor, relationPreview,
-  resonanceAxes, sharedStance, versusStance,
+  axisCopyById, compareDegree, contrastingAxes, DEGREE_BAND_LABEL, ideologies,
+  inferRelationType, relationFor, relationPreview, resonanceAxes, sharedStance,
 } from '../content';
 import type { Ideology } from '../content';
+import { RELATION_TYPE_LABEL, type RelationType } from '../content/types';
 import type { AxisId } from '../content/types';
 import { esc, motifSvg } from '../ui/dom';
 import type { ResultPackage } from '../scoring/engine';
@@ -81,7 +82,48 @@ function axisChip(axisId: string): string {
 
 type Axes = Partial<Record<AxisId, number>>;
 
+/** Relation types where "who is further on the axis" is a valid statement.
+ *  Per the doc, priority/motive splits must NOT be framed as a degree contest. */
+const DEGREE_COMPARABLE = new Set<RelationType>([
+  'opposite_direction', 'same_direction_degree', 'threshold_difference',
+]);
+
 const otherValue = (other: Ideology, axis: AxisId): number => other.rule.axis_targets[axis] ?? 0;
+
+/**
+ * Two-row comparison on one axis: your position vs the prototype's frozen
+ * position, as labeled bars. Shows where each side actually sits (v1.1 §9/§11).
+ */
+function degreeBlock(axisId: AxisId, axes: Axes, other: Ideology): string {
+  const copy = axisCopyById[axisId];
+  const cmp = compareDegree(axisId, axes[axisId] ?? 0, other);
+  const pct = (v: number) => Math.round(50 + Math.max(-1, Math.min(1, v)) * 50);
+  const sideOf = (v: number) => (v >= 0 ? copy?.right.label : copy?.left.label) ?? '';
+  const name = other.copy.nameZh;
+
+  // Opposite sides: name each side's camp. Same side: say who goes further.
+  let verdict: string;
+  if (cmp.user !== 0 && cmp.prototype !== 0 && Math.sign(cmp.user) !== Math.sign(cmp.prototype)) {
+    verdict = `你偏「${sideOf(cmp.user)}」；「${name}」偏「${sideOf(cmp.prototype)}」`;
+  } else if (cmp.stronger === 'user') {
+    verdict = `同向，但你${DEGREE_BAND_LABEL[cmp.band]}（偏「${sideOf(cmp.user)}」）`;
+  } else if (cmp.stronger === 'other') {
+    verdict = `同向，但「${name}」${DEGREE_BAND_LABEL[cmp.band]}（偏「${sideOf(cmp.prototype)}」）`;
+  } else {
+    verdict = '双方位置几乎相同';
+  }
+
+  const row = (who: string, v: number, cls: string) =>
+    `<div class="deg od-row ${cls}">
+      <span class="deg__who mono od-fixed">${esc(who)}</span>
+      <span class="deg__track"><span class="deg__pin" style="left:${pct(v)}%" aria-hidden="true"></span></span>
+    </div>`;
+  return `<div class="degblock">
+    <p class="mono degblock__k">同一问题上的位置 · ${axisId} ${esc(copy?.plain ?? '')}</p>
+    ${row('你', cmp.user, 'deg--user')}
+    ${row(name, cmp.prototype, 'deg--other')}
+    <p class="degblock__v">${esc(verdict)}</p>
+  </div>`;}
 
 function panelHtml(kind: Kind, self: Ideology, other: Ideology, axes: Axes): string {
   const c = other.copy;
@@ -90,31 +132,39 @@ function panelHtml(kind: Kind, self: Ideology, other: Ideology, axes: Axes): str
   const isRes = kind === 'resonance';
 
   const sharedAxis = resonanceAxes(self, other, 1)[0];
-  const diffAxis = differingAxes(self, other, 1)[0];
+  const diffAxis = manual?.keyAxis ?? contrastingAxes(self, other, 1)[0];
+
+  // relation type: hand-written when available, otherwise judged from the axes
+  // (v1.1 §10.1 step 4 — decide the type before writing the copy).
+  const typeAxis = isRes ? (sharedAxis ?? diffAxis) : diffAxis;
+  const relType: RelationType = manual?.relationType
+    ?? (isRes ? 'same_direction_degree' : inferRelationType(typeAxis, axes[typeAxis] ?? 0, other));
 
   // Concrete, stance-level copy — never the raw axis question.
   const sharedBody = manual?.shared ?? (sharedAxis
     ? sharedStance(sharedAxis, axes[sharedAxis] ?? 0, otherValue(other, sharedAxis), name)
     : `你和「${name}」的整体价值排序很接近。`);
-  const diffBody = manual?.difference ?? (diffAxis
-    ? versusStance(diffAxis, axes[diffAxis] ?? 0, otherValue(other, diffAxis), name)
-    : `你和「${name}」的整体价值排序差异明显。`);
+  const diffBody = manual?.degree ?? `你和「${name}」在「${axisCopyById[diffAxis]?.plain ?? '价值排序'}」上差异明显。`;
 
-  // Resonance leads with what you share; contrast leads with where you split,
-  // so the two columns swap order and headings but keep the same two sources.
-  const firstCol = isRes
-    ? { k: '为什么相近', b: sharedBody }
-    : { k: '最大分歧', b: diffBody };
-  const secondCol = isRes
-    ? { k: '真正的分界', b: diffBody }
-    : { k: '你们也有共识', b: sharedBody };
+  // Column labels depend on the relation type: a degree/threshold split is a
+  // "who goes further" question, a priority/motive split is not.
+  const splitLabel = relType === 'threshold_difference'
+    ? '跨线条件'
+    : relType === 'priority_difference' || relType === 'motive_difference' || relType === 'scope_difference'
+      ? '真正的分界'
+      : relType === 'opposite_direction'
+        ? '各自站在哪一边'
+        : '谁走得更远';
+  const firstCol = isRes ? { k: '为什么相近', b: sharedBody } : { k: splitLabel, b: diffBody };
+  const secondCol = isRes ? { k: '真正的分界', b: diffBody } : { k: '你们也有共识', b: sharedBody };
 
-  const keyAxes = isRes ? resonanceAxes(self, other, 3) : differingAxes(self, other, 3);
+  const keyAxes = isRes ? resonanceAxes(self, other, 3) : contrastingAxes(self, other, 3);
   const oneLine = manual?.oneLine ?? autoOneLineText(self, other, isRes);
+  const typeChip = `<span class="mono xpanel__type">${esc(RELATION_TYPE_LABEL[relType])}</span>`;
 
   const banner = isRes
-    ? `<div class="xpanel__banner"><span class="xpanel__sym">＋</span><span class="mono xpanel__kind">OVERLAP · 共鸣</span></div>`
-    : `<div class="xpanel__banner xpanel__banner--vs"><span class="xpanel__sym">×</span><span class="mono xpanel__kind">CONTRAST · 分歧</span></div>`;
+    ? `<div class="xpanel__banner"><span class="xpanel__sym">＋</span><span class="mono xpanel__kind">OVERLAP · 共鸣</span>${typeChip}</div>`
+    : `<div class="xpanel__banner xpanel__banner--vs"><span class="xpanel__sym">×</span><span class="mono xpanel__kind">CONTRAST · 分歧</span>${typeChip}</div>`;
 
   return `<div class="xpanel${isRes ? '' : ' xpanel--vs'}" style="--c:${c.color};--f:${c.fg}">
     ${banner}
@@ -133,6 +183,7 @@ function panelHtml(kind: Kind, self: Ideology, other: Ideology, axes: Axes): str
         <div class="od-cluster">${keyAxes.map(axisChip).join('')}</div>
       </div>
     </div>
+    ${!isRes && DEGREE_COMPARABLE.has(relType) ? degreeBlock(typeAxis, axes, other) : ''}
     <p class="xpanel__oneline">${esc(oneLine)}</p>
     <a class="btn btn--lg xpanel__goto" href="#/ideology/${other.slug}">查看 ${esc(name)} 详情 <span aria-hidden="true">→</span></a>
   </div>`;
@@ -141,7 +192,7 @@ function panelHtml(kind: Kind, self: Ideology, other: Ideology, axes: Axes): str
 function autoOneLineText(self: Ideology, other: Ideology, resonance: boolean): string {
   const a = self.copy.nameZh;
   const b = other.copy.nameZh;
-  const axes = resonance ? resonanceAxes(self, other, 1) : differingAxes(self, other, 1);
+  const axes = resonance ? resonanceAxes(self, other, 1) : contrastingAxes(self, other, 1);
   const copy = axes[0] ? axisCopyById[axes[0]] : undefined;
   if (!copy) return `${a} 与 ${b} 的整体价值排序${resonance ? '接近' : '差异明显'}。`;
   return resonance

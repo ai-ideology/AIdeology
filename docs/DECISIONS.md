@@ -82,10 +82,13 @@ engine top to bottom.
 - `src/content/ideology-profiles.json` — the doc's §6 four-field profile
   (一句话核心 / 最在意 / 最大担忧 / 理想未来) per ideology, shown on the detail
   page as 「快速认识它」.
-- `src/content/relations.json` — the doc's §8 hand-written pair copy
-  (共鸣点 / 真正的分界 / 一句话边界), keyed order-independently. Pairs without
-  manual copy fall back to axis-derived copy (`relationPreview` in
-  `src/content/index.ts`).
+- `src/content/relations.json` — the v1.1 doc's §10 hand-written pair copy, now
+  typed. Each entry carries `relationType` (`opposite_direction` /
+  `same_direction_degree` / `threshold_difference` / `motive_difference` /
+  `priority_difference` / `scope_difference`), an optional `keyAxis`, a `degree`
+  clause stating who goes further, and `oneLine`. Keyed order-independently.
+  Pairs without manual copy get their type inferred (`inferRelationType`) and a
+  stance-level fallback (`relationPreview` / `versusStance` / `sharedStance`).
 - `src/content/families.json` — five family groups, matching the Hero pack and
   detail-layout spec (IDs 22–23 sit in F4 there; `naming.md` places 22–26 in
   “开放与世界秩序”. We follow the pack used by the images and layout spec).
@@ -96,16 +99,32 @@ engine top to bottom.
   emblem tile (`hiddenBadgesHtml`). If artwork is generated later, add a
   `public/assets/char/<id>.webp` and the badge can switch to an image.
 
-All three are plain JSON: copy and taxonomy are configurable without touching
+All are plain JSON: copy and taxonomy are configurable without touching
 TypeScript.
 
-## Question bank revision
+## Question bank revision (v1.1)
 
-The bank in `src/content/frozen/` is the product owner's readable revision
-(`设计方案/题库/*_readable.json`). It is score-identical to the earlier frozen
-bank — same ids, axes, option scores and evidence channels — with clearer
-wording and an added `scenario` setup field, which the test view renders above
-the question. No engine change was needed.
+`src/content/frozen/core_items_v1.1.json` and `adaptive_items_v1.1.json` are the
+product owner's v1.1 revision (`设计方案/文案v1/*_v1.1_readable.json`), replacing
+the earlier v1 bank. What changed and why:
+
+- **Core: score-identical.** Same 48 ids, axes and option scores; 9 prompts and
+  14 option-label sets were rewritten so the 23 `S5` items move along **one
+  named variable** (`ordinal_variable`), making the ladder ordinally readable.
+  No engine change was needed and all discrimination tests still pass.
+- **Adaptive: five pairs replaced.** A11/A12/A21/A23/A24 became A11R/A12R/A21R/
+  A23R/A24R with cleaner discriminators, and A07/A09 had their evidence
+  direction corrected. Because the frozen `prototype_rules_v1.json`
+  `adaptive_items` lists still name the old ids, **prototype↔adaptive linkage is
+  now derived from each item's own `target_a`/`target_b`**
+  (`adaptiveItemsByPrototype` in `src/content/index.ts`), which is also how
+  `relevantEvidence` already read it. `planAdaptive` uses this map.
+- **Relations: typed + degree.** The v1.1 copy library adds the relation-type
+  system and a degree clause; see `relations.json` above. The result page's
+  comparison panel renders the type chip and, for degree-comparable types, a
+  two-row position comparator (`compareDegree`, thresholds
+  `<0.15 / <0.35 / <0.65`). Pairs whose comparator holds no position on an axis
+  are reported as a priority difference rather than a fake head-on conflict.
 
 The public-facing explanation of the whole design lives on the wiki page
 (`src/views/wiki.ts` + `src/content/wiki.json`); its per-axis questions and

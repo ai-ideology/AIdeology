@@ -15,7 +15,7 @@
  * recorded in docs/DECISIONS.md and marked "CHOICE" below.
  */
 import {
-  adaptiveById, adaptiveItems, coreById, coreItems, hiddenItems,
+  adaptiveById, adaptiveItemIdsFor, adaptiveItems, coreById, coreItems, hiddenItems,
   hiddenRules, ideologyByName, ideologies, prototypeRules, scoringSpec,
 } from '../content';
 import { ALL_AXES } from '../content/types';
@@ -377,7 +377,9 @@ export function planAdaptive(userAxes: Partial<Record<AxisId, number>>): Adaptiv
 
   const pool = new Map<string, number>();
   for (const slug of candidates) {
-    for (const id of prototypeRules.find((r) => r.id === slug)?.adaptive_items ?? []) {
+    // Linkage comes from the adaptive bank's own target declarations (v1.1
+    // replaced five pairs, so the frozen rule lists are stale).
+    for (const id of adaptiveItemIdsFor(slug)) {
       pool.set(id, (pool.get(id) ?? 0) + 1);
     }
   }

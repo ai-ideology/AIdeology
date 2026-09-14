@@ -2,8 +2,8 @@
  * Content layer. Everything the app renders or scores from is loaded here, so
  * copy and question banks stay configurable (edit the JSON, not the code).
  */
-import coreItemsJson from './frozen/core_items_v1.json';
-import adaptiveItemsJson from './frozen/adaptive_items_v1.json';
+import coreItemsJson from './frozen/core_items_v1.1.json';
+import adaptiveItemsJson from './frozen/adaptive_items_v1.1.json';
 import hiddenItemsJson from './frozen/hidden_items_v1.json';
 import prototypeRulesJson from './frozen/prototype_rules_v1.json';
 import hiddenRulesJson from './frozen/hidden_rules_v1.json';
@@ -18,9 +18,9 @@ import relationsJson from './relations.json';
 
 import type {
   AdaptiveItem, AxisCopy, AxisId, CoreItem, Dimension, Family, HiddenCopy, HiddenItem,
-  HiddenRule, IdeologyCopy, IdeologyProfile, PrototypeRule, RelationPair,
+  HiddenRule, IdeologyCopy, IdeologyProfile, PrototypeRule, RelationPair, RelationType,
 } from './types';
-import { CORE_AXES, EXTENDED_AXES } from './types';
+import { ALL_AXES, CORE_AXES, EXTENDED_AXES } from './types';
 
 export const coreItems = coreItemsJson as unknown as CoreItem[];
 export const adaptiveItems = adaptiveItemsJson as unknown as AdaptiveItem[];
@@ -41,6 +41,61 @@ const relationKey = (a: string, b: string) => [a, b].sort().join('|');
 export const relationByPair = new Map(relations.map((r) => [relationKey(r.pair[0], r.pair[1]), r]));
 export function relationFor(a: string, b: string): RelationPair | undefined {
   return relationByPair.get(relationKey(a, b));
+}
+
+/* ---------- degree comparator (v1.1 §9) ---------- */
+
+export type DegreeBand = 'equal' | 'slightly' | 'clearly' | 'far';
+export interface DegreeComparison {
+  axis: AxisId;
+  /** User's own position on the axis, −1..1. */
+  user: number;
+  /** The comparator prototype's frozen axis target, −1..1. */
+  prototype: number;
+  delta: number;
+  band: DegreeBand;
+  /** Who is further along, or null when the gap is negligible. */
+  stronger: 'user' | 'other' | null;
+  /** Whether the prototype treats this axis as one of its own concerns. */
+  relevant: boolean;
+}
+
+/** Front-end degree bands from the doc (product thresholds, pilot-calibratable). */
+export function degreeBand(absDelta: number): DegreeBand {
+  if (absDelta < 0.15) return 'equal';
+  if (absDelta < 0.35) return 'slightly';
+  if (absDelta < 0.65) return 'clearly';
+  return 'far';
+}
+
+export const DEGREE_BAND_LABEL: Record<DegreeBand, string> = {
+  equal: '几乎同样强',
+  slightly: '略强一些',
+  clearly: '明显更强',
+  far: '走得远得多',
+};
+
+/**
+ * Compare the user's real axis position against a prototype's frozen target.
+ * `relevant` follows the doc's §9.2 rule: if the prototype does not treat this
+ * axis as its own concern, the caller must fall back to priority_difference
+ * rather than claim "it is more/less X".
+ */
+export function compareDegree(
+  axis: AxisId, userValue: number, other: Ideology, relevanceMin = 0.3,
+): DegreeComparison {
+  const prototype = other.rule.axis_targets[axis] ?? 0;
+  const delta = userValue - prototype;
+  const abs = Math.abs(delta);
+  return {
+    axis,
+    user: userValue,
+    prototype,
+    delta,
+    band: degreeBand(abs),
+    stronger: abs < 0.15 ? null : delta > 0 ? 'user' : 'other',
+    relevant: Math.abs(prototype) >= relevanceMin,
+  };
 }
 
 /** Which of the five front-end bands a raw axis score falls into. */
@@ -127,11 +182,34 @@ export const ideologyBySlug = new Map(ideologies.map((x) => [x.slug, x]));
 export const ideologyByCode = new Map(ideologies.map((x) => [x.code, x]));
 export const ideologyByName = new Map(ideologies.map((x) => [x.copy.nameZh, x]));
 
+/**
+ * Prototype slug -> the adaptive items that discriminate it.
+ *
+ * v1.1 replaced five adaptive pairs (A11/A12/A21/A23/A24 -> *R), so the frozen
+ * `adaptive_items` lists in `prototype_rules_v1.json` are stale. The bank owns
+ * this linkage: every adaptive item declares its `target_a` / `target_b`, which
+ * is already how `relevantEvidence` reads it. Deriving the map from the bank
+ * keeps one source of truth and covers every prototype.
+ */
+export const adaptiveItemsByPrototype = new Map<string, string[]>(
+  ideologies.map((x) => [x.slug, [] as string[]]),
+);
+for (const item of adaptiveItems) {
+  for (const name of [item.target_a, item.target_b]) {
+    const slug = ideologyByName.get(name)?.slug;
+    if (slug) adaptiveItemsByPrototype.get(slug)!.push(item.id);
+  }
+}
+
+export function adaptiveItemIdsFor(slug: string): string[] {
+  return adaptiveItemsByPrototype.get(slug) ?? [];
+}
+
 /** Adaptive items relevant to a set of prototype slugs. */
 export function adaptiveItemsFor(slugs: string[]): AdaptiveItem[] {
   const wanted = new Set<string>();
   for (const slug of slugs) {
-    for (const id of ruleById.get(slug)?.adaptive_items ?? []) wanted.add(id);
+    for (const id of adaptiveItemIdsFor(slug)) wanted.add(id);
   }
   return adaptiveItems.filter((i) => wanted.has(i.id));
 }
@@ -235,28 +313,68 @@ export function resonanceAxes(a: Ideology, b: Ideology, n: number): AxisId[] {
 }
 
 /**
- * One-line "why you're alike / where you split" teaser for a selector card.
- * Prefers the hand-written relation copy; otherwise derives it from the axis
- * where the two prototypes are closest (resonance) or furthest (contrast).
+ * The axis a contrast should actually be argued on: the biggest gap, but only
+ * where the comparator prototype holds a real position (|target| ≥ min). This
+ * avoids "you differ on X" when X is simply not one of the other's concerns.
+ */
+export function contrastingAxes(a: Ideology, b: Ideology, n: number, min = 0.3): AxisId[] {
+  const ranked = differingAxes(a, b, ALL_AXES.length);
+  const relevant = ranked.filter((id) => Math.abs(b.rule.axis_targets[id] ?? 0) >= min);
+  return (relevant.length ? relevant : ranked).slice(0, n);
+}
+
+/**
+ * Judge the relation type from the user's real axes vs the prototype vector,
+ * for pairs that have no hand-written copy (v1.1 §10.1 step 4). Keeps the
+ * panel honest: a far-apart pair that never actually disagrees on an axis both
+ * care about is reported as a priority difference, not a fake conflict.
+ */
+export function inferRelationType(axis: AxisId, userValue: number, other: Ideology): RelationType {
+  const cmp = compareDegree(axis, userValue, other);
+  const userSign = Math.sign(cmp.user);
+  const protoSign = Math.sign(cmp.prototype);
+  // Opposite camps: only when the prototype actually holds a position here.
+  if (userSign !== 0 && protoSign !== 0 && userSign !== protoSign) return 'opposite_direction';
+  // No real position on this axis -> it is not a degree contest (doc §9.2).
+  if (!cmp.relevant) return 'priority_difference';
+  if (cmp.band === 'far' || cmp.band === 'clearly') return 'same_direction_degree';
+  return 'priority_difference';
+}
+
+/**
+ * One-line teaser for a selector card. Must contain a comparison word, per the
+ * v1.1 rule that a card never just states one side's view.
  */
 export function relationPreview(self: Ideology, other: Ideology, kind: 'resonance' | 'contrast'): string {
   const manual = relationFor(self.slug, other.slug);
-  if (manual) {
-    return kind === 'resonance' ? manual.shared : manual.difference;
+  const name = other.copy.nameZh;
+
+  if (kind === 'resonance') {
+    if (manual?.shared) return manual.shared;
+    const shared = sharedAxes(self, other, 1)[0];
+    if (shared) {
+      const copy = axisCopyById[shared];
+      return copy ? `你们都重视「${copy.plain}」。` : `你和「${name}」的整体价值排序很接近。`;
+    }
+    const close = closestAxes(self, other, 1)[0];
+    const copy = close ? axisCopyById[close] : undefined;
+    return copy ? `你们在「${copy.plain}」上的判断最接近。` : `你和「${name}」的整体价值排序很接近。`;
   }
-  if (kind === 'contrast') {
-    const diff = differingAxes(self, other, 1)[0];
-    const copy = diff ? axisCopyById[diff] : undefined;
-    return copy ? `你们在「${copy.plain}」上分歧最大。` : '你们的整体价值排序差异明显。';
+
+  // contrast: lead with the relation type, then the axis both care about.
+  const type = manual?.relationType;
+  const axisId = manual?.keyAxis ?? differingAxes(self, other, 1)[0];
+  const axis = axisId ? axisCopyById[axisId] : undefined;
+  const topic = axis ? `「${axis.plain}」` : '整体价值排序';
+  switch (type) {
+    case 'same_direction_degree': return `你们都倾向${topic}，但有一方走得更远。`;
+    case 'threshold_difference': return `你们原则接近，对${topic}的跨线门槛不同。`;
+    case 'motive_difference': return `你们可能做出相近选择，但理由不同。`;
+    case 'priority_difference': return `你们不一定对立，只是更优先的问题不同。`;
+    case 'scope_difference': return `你们方向接近，只是适用的范围不同。`;
+    case 'opposite_direction': return `你们在${topic}上站在两边。`;
+    default: return `你和「${name}」在${topic}上分歧最大。`;
   }
-  const shared = sharedAxes(self, other, 1)[0];
-  if (shared) {
-    const copy = axisCopyById[shared];
-    return copy ? `你们都重视「${copy.plain}」。` : '你们有共同的价值取向。';
-  }
-  const close = closestAxes(self, other, 1)[0];
-  const copy = close ? axisCopyById[close] : undefined;
-  return copy ? `你们在「${copy.plain}」上的判断最接近。` : '你们的整体价值排序很接近。';
 }
 
 if (import.meta.env?.DEV) {
