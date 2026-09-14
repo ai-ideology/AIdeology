@@ -7,6 +7,7 @@ import { decodeShare, shareText, shareUrl } from './app/share';
 import { renderLanding } from './views/landing';
 import { renderTest, renderIntro, currentQuestion } from './views/test';
 import { renderResult, renderResultEmpty } from './views/result';
+import { buildCompareState, repaintCompare } from './views/compare';
 import { renderLibrary, libraryCountText, libraryGridHtml, type LibraryState } from './views/library';
 import { renderDetail } from './views/detail';
 import { renderWiki } from './views/wiki';
@@ -352,6 +353,22 @@ function clearNode(): void {
   if (panel) panel.innerHTML = atlasIntroHtml();
 }
 
+/* ---------- comparison explorer ---------- */
+
+/** Swap the comparison panel for one group without repainting the page. */
+function pickCompare(el: HTMLElement): void {
+  const r = getState().result;
+  const root = document.getElementById('compare-root');
+  if (!r || !root) return;
+  const kind = el.dataset.kind as 'resonance' | 'contrast';
+  const slug = el.dataset.slug;
+  if (kind !== 'resonance' && kind !== 'contrast' || !slug) return;
+
+  const state = buildCompareState(r);
+  state.selected[kind] = slug;
+  root.innerHTML = repaintCompare(r, state);
+}
+
 /* ---------- share ---------- */
 
 function toast(message: string): void {
@@ -450,6 +467,7 @@ APP.addEventListener('click', (e) => {
   else if (act === 'to-result') go('#/result');
   else if (act === 'share') openShare();
   else if (act === 'share-card') void doShareCard();
+  else if (act === 'pick-compare') pickCompare(el as HTMLElement);
   else if (act === 'clear-node') clearNode();
   else if (act === 'filter') {
     lib.family = (el as HTMLElement).dataset.family || 'all';

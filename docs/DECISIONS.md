@@ -74,6 +74,18 @@ engine top to bottom.
   `nickname` and `color` are authored for the app.
 - `src/content/detail-copy.json` — three core beliefs + a short 思想来源 note per
   ideology.
+- `src/content/axis-copy.json` — per-axis plain-language name, user question,
+  two-pole definitions and the five summary bands. Generated verbatim from
+  `设计方案/AIdeology_结果解释与主义关系文案库_v1.0.md` §4. The `plain` label
+  and the band thresholds ([-0.65, -0.25, 0.25, 0.65]) drive the result page's
+  「你的 AI 世界观」 cards and the axis labels everywhere.
+- `src/content/ideology-profiles.json` — the doc's §6 four-field profile
+  (一句话核心 / 最在意 / 最大担忧 / 理想未来) per ideology, shown on the detail
+  page as 「快速认识它」.
+- `src/content/relations.json` — the doc's §8 hand-written pair copy
+  (共鸣点 / 真正的分界 / 一句话边界), keyed order-independently. Pairs without
+  manual copy fall back to axis-derived copy (`relationPreview` in
+  `src/content/index.ts`).
 - `src/content/families.json` — five family groups, matching the Hero pack and
   detail-layout spec (IDs 22–23 sit in F4 there; `naming.md` places 22–26 in
   “开放与世界秩序”. We follow the pack used by the images and layout spec).

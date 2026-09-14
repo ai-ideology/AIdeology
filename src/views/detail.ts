@@ -1,6 +1,6 @@
 import {
   declaredNeighbors, detailCopyBySlug, dimensionById,
-  farthestIdeologies, ideologies,
+  farthestIdeologies, ideologies, profileBySlug,
 } from '../content';
 import { CORE_AXES, EXTENDED_AXES, type AxisId } from '../content/types';
 import { esc } from '../ui/dom';
@@ -19,6 +19,7 @@ export function renderDetail(slug: string, hasResult = false): string | null {
   if (!x) return null;
   const c = x.copy;
   const detail = detailCopyBySlug[slug];
+  const profile = profileBySlug[slug];
   const index = ideologies.indexOf(x);
   const prev = ideologies[(index + ideologies.length - 1) % ideologies.length];
   const next = ideologies[(index + 1) % ideologies.length];
@@ -66,6 +67,29 @@ export function renderDetail(slug: string, hasResult = false): string | null {
         <p class="dsec__lead">${esc(c.summary)}</p>
         <p class="dsec__en mono">${esc(c.nameEn)}</p>
       </section>
+
+      ${profile ? `<section class="dsec dsec--profile">
+        <h2 class="dsec__h">快速认识它</h2>
+        <p class="mono dsec__sub">AT A GLANCE · 核心 / 最在意 / 最大担忧 / 理想未来</p>
+        <div class="profile-grid">
+          <article class="profile-i profile-i--core">
+            <p class="mono profile-i__k">一句话核心</p>
+            <p class="profile-i__v">${esc(profile.core)}</p>
+          </article>
+          <article class="profile-i">
+            <p class="mono profile-i__k">最在意</p>
+            <p class="profile-i__v">${esc(profile.cares)}</p>
+          </article>
+          <article class="profile-i">
+            <p class="mono profile-i__k">最大担忧</p>
+            <p class="profile-i__v">${esc(profile.worry)}</p>
+          </article>
+          <article class="profile-i profile-i--future">
+            <p class="mono profile-i__k">理想未来</p>
+            <p class="profile-i__v">${esc(profile.future)}</p>
+          </article>
+        </div>
+      </section>` : ''}
 
       <section class="dsec">
         <h2 class="dsec__h">核心信念</h2>

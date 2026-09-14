@@ -1,7 +1,9 @@
 import { CORE_AXES, EXTENDED_AXES } from '../content/types';
 import { ideologies, type Ideology } from '../content';
 import { esc, pad2 } from '../ui/dom';
-import { axisRowHtml, hiddenBadgesHtml, miniHtml, splitHero } from '../ui/components';
+import { axisRowHtml, hiddenBadgesHtml, splitHero } from '../ui/components';
+import { renderWorldview } from './worldview';
+import { renderCompare } from './compare';
 import { RESULT_TYPE_LABEL, type ResultPackage } from '../scoring/engine';
 
 function bySlug(slug: string): Ideology | undefined {
@@ -37,18 +39,6 @@ export function renderResult(r: ResultPackage): string {
   const axesHtml = [...CORE_AXES, ...EXTENDED_AXES]
     .map((a) => axisRowHtml(a, r.axes[a] ?? 0, primary?.copy.color))
     .join('');
-
-  const resonanceCards = r.resonance.length
-    ? `<div class="mini-grid">${r.resonance.map((s) => miniHtml(bySlug(s.slug)!, s.finalFit)).join('')}</div>`
-    : `<p class="rsec__p">这一轮没有其他主义进入共鸣区间。</p>`;
-
-  const tensions = r.scores
-    .filter((s) => s.slug !== r.primary?.slug && s.finalFit < 56)
-    .slice(-3)
-    .reverse();
-  const tensionCards = tensions.length
-    ? `<div class="mini-grid">${tensions.map((s) => miniHtml(bySlug(s.slug)!)).join('')}</div>`
-    : `<p class="rsec__p">没有出现明显冲突的立场。</p>`;
 
   const hiddenSection = r.hidden.length
     ? `<section class="rsec">
@@ -86,6 +76,8 @@ export function renderResult(r: ResultPackage): string {
   return `<article class="result"${primary ? ` style="--c:${primary.copy.color};--f:${primary.copy.fg}"` : ''}>
     ${hero}
     <div class="result__body">
+      ${primary ? renderWorldview(r) : ''}
+
       <section class="rsec">
         <header class="rsec__head">
           <h2 class="rsec__h">价值轴定位</h2>
@@ -105,17 +97,9 @@ export function renderResult(r: ResultPackage): string {
         ${normalismNote}
       </section>
 
-      <section class="rsec">
-        <h2 class="rsec__h">与你相近</h2>
-        ${resonanceCards}
-      </section>
+      ${renderCompare(r)}
 
       ${hiddenSection}
-
-      <section class="rsec">
-        <h2 class="rsec__h">与你冲突</h2>
-        ${tensionCards}
-      </section>
 
       <section class="rsec">
         <h2 class="rsec__h">完整贴合度</h2>

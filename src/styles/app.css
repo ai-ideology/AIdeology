@@ -1184,6 +1184,16 @@ img, svg { display: block; max-width: 100%; }
   font-weight: 800;
 }
 
+/* small technical name under the plain-language label, for traceability */
+.axis__tech {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  opacity: .5;
+}
+
 .axis__v {
   font-size: 12px;
   font-weight: 700;
@@ -2370,4 +2380,185 @@ main { flex: 1 0 auto; }
   border: 2px solid currentColor;
   font-size: 11px;
   letter-spacing: .06em;
+}
+
+/* ============================================================
+   Result: "你的 AI 世界观" explanation layer
+   Turns axis numbers into plain-language stance cards.
+   ============================================================ */
+.wv__lead { margin-top: var(--s4); max-width: 68ch; font-size: 16px; }
+.wv-grid {
+  display: grid;
+  gap: var(--s4);
+  margin-top: var(--s5);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 720px) { .wv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.wv {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 20px 22px;
+  background: var(--white);
+  border: var(--bw-lg) solid var(--black);
+  box-shadow: var(--sh-md);
+}
+.wv__top { gap: var(--s3); align-items: center; }
+.wv__n { font-size: 12px; font-weight: 700; opacity: .55; }
+.wv__code { font-size: 11px; letter-spacing: .1em; color: var(--muted); }
+.wv__chip { flex: none; background: var(--black); color: var(--white); border-color: var(--black); }
+.wv__q {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.2vw, 23px);
+  font-weight: 900;
+  line-height: 1.3;
+}
+.wv__band { font-size: 15px; line-height: 1.7; }
+.wv__scale {
+  position: relative;
+  height: 10px;
+  margin-top: 4px;
+  background: var(--paper);
+  border: 2px solid var(--black);
+}
+.wv__scale::before {
+  content: '';
+  position: absolute;
+  left: 50%; top: -3px; bottom: -3px;
+  width: 2px;
+  background: var(--black);
+  opacity: .3;
+}
+.wv__scale-pin {
+  position: absolute;
+  top: -4px; bottom: -4px;
+  width: 6px;
+  margin-left: -3px;
+  background: var(--c, var(--black));
+  border: 2px solid var(--black);
+}
+.wv__poles { font-size: 10px; letter-spacing: .06em; color: var(--muted); }
+
+/* ============================================================
+   Result: Ideology Comparison Explorer (与你共鸣 / 与你分歧最大)
+   Cards are selectors; the panel below explains the selected pair.
+   ============================================================ */
+.xc-row {
+  display: grid;
+  gap: var(--s4);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 720px) { .xc-row { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.xc {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-height: 210px;
+  padding: 24px;
+  text-align: left;
+  cursor: pointer;
+  background: var(--c, var(--paper));
+  color: var(--f, var(--ink));
+  border: var(--bw-lg) solid var(--black);
+  box-shadow: var(--sh-md);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+@media (min-width: 720px) { .xc { min-height: 240px; } }
+.xc:hover { transform: translateY(-3px); box-shadow: var(--sh-lg); }
+.xc[aria-selected="true"] {
+  border-width: 5px;
+  transform: none;
+  box-shadow: none;
+}
+.xc__top { gap: var(--s3); align-items: baseline; }
+.xc__code { font-size: 11px; letter-spacing: .1em; opacity: .85; }
+.xc__match { font-size: 15px; font-weight: 700; }
+.xc__motif { display: block; }
+.xc__motif .motif { width: 40px; height: 40px; }
+.xc__zh { font-family: var(--font-display); font-size: 22px; font-weight: 900; line-height: 1.15; }
+.xc__en { font-size: 10px; letter-spacing: .12em; opacity: .8; }
+.xc__preview { margin-top: 2px; font-size: 14px; font-weight: 700; line-height: 1.5; }
+.xc__state { margin-top: auto; padding-top: 8px; font-size: 10px; letter-spacing: .12em; opacity: .75; }
+
+/* comparison panel */
+.xpanel {
+  margin-top: var(--s5);
+  padding: clamp(20px, 3vw, 34px);
+  background: var(--white);
+  border: var(--bw-xl) solid var(--black);
+  box-shadow: var(--sh-lg);
+}
+.xpanel__banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--s4);
+}
+.xpanel__sym { font-size: 30px; font-weight: 900; line-height: 1; }
+.xsec--resonance .xpanel__banner { color: #0A7D5A; }
+.xpanel--vs .xpanel__banner { color: #B0121B; }
+.xpanel__kind { font-size: 11px; letter-spacing: .16em; color: var(--ink); }
+.xpanel__h {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 900;
+  line-height: 1.2;
+}
+.xpanel__grid {
+  display: grid;
+  gap: var(--s5);
+  margin-top: var(--s5);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 860px) { .xpanel__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 2.4fr); } }
+.xpanel__col { padding-top: var(--s3); border-top: var(--bw-lg) solid var(--black); }
+.xpanel__k { margin-bottom: 10px; font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--muted); }
+.xpanel__b { font-size: 15px; line-height: 1.75; }
+.xc-axis { display: inline-flex; align-items: center; gap: 6px; }
+.xc-axis__id { font-size: 10px; font-weight: 700; opacity: .7; }
+.xpanel__oneline {
+  margin-top: var(--s5);
+  padding-top: var(--s5);
+  border-top: 2px dashed var(--black);
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.6vw, 30px);
+  font-weight: 900;
+  line-height: 1.35;
+}
+.xpanel__goto { display: inline-flex; margin-top: var(--s5); }
+
+/* ============================================================
+   Detail: 快速认识它 (ideology profile)
+   ============================================================ */
+.profile-grid {
+  display: grid;
+  gap: var(--s4);
+  margin-top: var(--s5);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 720px) { .profile-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.profile-i { padding: 20px 22px; background: var(--white); border: var(--bw-lg) solid var(--black); box-shadow: var(--sh-md); }
+.profile-i--core { background: var(--c, var(--sys-blue)); color: var(--f, var(--ink)); }
+.profile-i--future { background: var(--cool); }
+.profile-i__k { font-size: 11px; font-weight: 700; letter-spacing: .12em; opacity: .7; }
+.profile-i__v { margin-top: 10px; font-size: clamp(16px, 1.9vw, 19px); font-weight: 700; line-height: 1.6; }
+
+/* contrast cards use a different visual grammar: × marker, split diagonal */
+.xc--contrast .xc__motif { opacity: .55; }
+.xc__vs {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* wiki axis cards: plain name with the technical name as a quiet suffix */
+.waxis__tech {
+  margin-left: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  opacity: .5;
 }

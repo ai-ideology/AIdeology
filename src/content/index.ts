@@ -12,11 +12,15 @@ import scoringSpecJson from './frozen/scoring_spec_v1.json';
 import familiesJson from './families.json';
 import ideologiesJson from './ideologies.json';
 import detailCopyJson from './detail-copy.json';
+import axisCopyJson from './axis-copy.json';
+import ideologyProfilesJson from './ideology-profiles.json';
+import relationsJson from './relations.json';
 
 import type {
-  AdaptiveItem, AxisId, CoreItem, Dimension, Family, HiddenCopy, HiddenItem,
-  HiddenRule, IdeologyCopy, PrototypeRule,
+  AdaptiveItem, AxisCopy, AxisId, CoreItem, Dimension, Family, HiddenCopy, HiddenItem,
+  HiddenRule, IdeologyCopy, IdeologyProfile, PrototypeRule, RelationPair,
 } from './types';
+import { CORE_AXES, EXTENDED_AXES } from './types';
 
 export const coreItems = coreItemsJson as unknown as CoreItem[];
 export const adaptiveItems = adaptiveItemsJson as unknown as AdaptiveItem[];
@@ -28,6 +32,25 @@ export const scoringSpec = scoringSpecJson as unknown as Record<string, any>;
 export const families = familiesJson as unknown as Family[];
 export const ideologyCopy = ideologiesJson.ideologies as unknown as IdeologyCopy[];
 export const hiddenCopy = ideologiesJson.hidden as unknown as HiddenCopy[];
+export const axisCopyById = axisCopyJson as unknown as Record<AxisId, AxisCopy>;
+export const profileBySlug = ideologyProfilesJson as unknown as Record<string, IdeologyProfile>;
+export const relations = relationsJson as unknown as RelationPair[];
+
+/** Relation copy keyed by an order-independent slug pair. */
+const relationKey = (a: string, b: string) => [a, b].sort().join('|');
+export const relationByPair = new Map(relations.map((r) => [relationKey(r.pair[0], r.pair[1]), r]));
+export function relationFor(a: string, b: string): RelationPair | undefined {
+  return relationByPair.get(relationKey(a, b));
+}
+
+/** Which of the five front-end bands a raw axis score falls into. */
+export function axisBand(v: number): keyof AxisCopy['bands'] {
+  if (v < -0.65) return 'strong_left';
+  if (v < -0.25) return 'left';
+  if (v <= 0.25) return 'center';
+  if (v <= 0.65) return 'right';
+  return 'strong_right';
+}
 
 export interface DetailCopyItem { h: string; p: string }
 export interface DetailCopy { items: DetailCopyItem[]; origin: string }
@@ -124,6 +147,74 @@ export function farthestIdeologies(x: Ideology, n: number): Ideology[] {
     .sort((a, b) => b.d - a.d)
     .slice(0, n)
     .map((o) => o.y);
+}
+
+/** The axes where two prototypes differ most — used as the "key axes" chips. */
+export function differingAxes(a: Ideology, b: Ideology, n: number): AxisId[] {
+  return [...CORE_AXES, ...EXTENDED_AXES]
+    .map((id) => ({ id, d: Math.abs((a.rule.axis_targets[id] ?? 0) - (b.rule.axis_targets[id] ?? 0)) }))
+    .sort((x, y) => y.d - x.d)
+    .slice(0, n)
+    .map((o) => o.id);
+}
+
+/** The axes two prototypes agree on, strongest shared commitment first. */
+export function sharedAxes(a: Ideology, b: Ideology, n: number): AxisId[] {
+  return [...CORE_AXES, ...EXTENDED_AXES]
+    .map((id) => {
+      const av = a.rule.axis_targets[id] ?? 0;
+      const bv = b.rule.axis_targets[id] ?? 0;
+      const sameSide = av !== 0 && bv !== 0 && Math.sign(av) === Math.sign(bv);
+      return { id, strength: sameSide ? Math.min(Math.abs(av), Math.abs(bv)) : 0 };
+    })
+    .filter((o) => o.strength > 0)
+    .sort((x, y) => y.strength - x.strength)
+    .slice(0, n)
+    .map((o) => o.id);
+}
+
+/**
+ * The axes where two prototypes are closest in value, regardless of direction.
+ * Used as a fallback for resonance when the two share no same-side commitment —
+ * "you answer these the most alike" is still the honest reading.
+ */
+export function closestAxes(a: Ideology, b: Ideology, n: number): AxisId[] {
+  return [...CORE_AXES, ...EXTENDED_AXES]
+    .map((id) => ({ id, d: Math.abs((a.rule.axis_targets[id] ?? 0) - (b.rule.axis_targets[id] ?? 0)) }))
+    .sort((x, y) => x.d - y.d)
+    .slice(0, n)
+    .map((o) => o.id);
+}
+
+/** Key axes for a resonance panel: shared commitments, else closest answers. */
+export function resonanceAxes(a: Ideology, b: Ideology, n: number): AxisId[] {
+  const shared = sharedAxes(a, b, n);
+  return shared.length ? shared : closestAxes(a, b, n);
+}
+
+/**
+ * One-line "why you're alike / where you split" teaser for a selector card.
+ * Prefers the hand-written relation copy; otherwise derives it from the axis
+ * where the two prototypes are closest (resonance) or furthest (contrast).
+ */
+export function relationPreview(self: Ideology, other: Ideology, kind: 'resonance' | 'contrast'): string {
+  const manual = relationFor(self.slug, other.slug);
+  if (manual) {
+    return kind === 'resonance' ? manual.shared : manual.difference;
+  }
+  if (kind === 'contrast') {
+    const diff = differingAxes(self, other, 1)[0];
+    const copy = diff ? axisCopyById[diff] : undefined;
+    return copy ? `你们在「${copy.plain}」上分歧最大。` : '你们的整体价值排序差异明显。';
+  }
+  const shared = sharedAxes(self, other, 1)[0];
+  if (shared) {
+    const copy = axisCopyById[shared];
+    return copy ? `你们都重视「${copy.plain}」。` : '你们有共同的价值取向。';
+  }
+  const close = closestAxes(self, other, 1)[0];
+  const copy = close ? axisCopyById[close] : undefined;
+  return copy ? `你们在「${copy.plain}」上的判断最接近。` : '你们的整体价值排序很接近。';
 }
 
 if (import.meta.env?.DEV) {

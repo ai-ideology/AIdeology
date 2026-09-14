@@ -1,5 +1,5 @@
 /** Shared presentational components used across views. */
-import { dimensionById, hiddenCopyById } from '../content';
+import { axisCopyById, dimensionById, hiddenCopyById } from '../content';
 import type { Ideology } from '../content';
 import type { AxisId } from '../content/types';
 import { esc, motifSvg } from './dom';
@@ -113,17 +113,21 @@ export function splitHero(
 export function axisRowHtml(axisId: AxisId, value: number, accent?: string): string {
   const axis = dimensionById.get(axisId);
   if (!axis) return '';
+  const copy = axisCopyById[axisId];
   const v = Math.max(-1, Math.min(1, Number(value) || 0));
   const pct = 50 + v * 50;
   const sign = v >= 0 ? '+' : '';
   const poleLabel = v >= 0 ? axis.right : axis.left;
+  // Plain-language label is the user-facing axis name; the technical name stays
+  // as a small secondary line so the chart is still traceable to the model.
+  const plain = copy?.plain ?? axis.name;
   return `<div class="axis od-field">` +
     `<div class="axis__top od-row">` +
       `<span class="mono axis__code od-fixed">${axis.id}</span>` +
-      `<span class="axis__zh od-fill">${esc(axis.name)}</span>` +
+      `<span class="axis__zh od-fill">${esc(plain)}<span class="axis__tech">${esc(axis.name)}</span></span>` +
       `<span class="mono axis__v od-fixed od-nowrap">${sign}${v.toFixed(2)}</span>` +
     `</div>` +
-    `<div class="axis__track" role="img" aria-label="${esc(`${axis.name}：${sign}${v.toFixed(2)}，${poleLabel}`)}"${accent ? ` style="--c:${accent}"` : ''}>` +
+    `<div class="axis__track" role="img" aria-label="${esc(`${plain}（${axis.name}）：${sign}${v.toFixed(2)}，${poleLabel}`)}"${accent ? ` style="--c:${accent}"` : ''}>` +
       `<span class="axis__mid" aria-hidden="true"></span>` +
       `<span class="axis__pin" style="left:${pct.toFixed(1)}%" aria-hidden="true"></span>` +
     `</div>` +

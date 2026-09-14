@@ -3,7 +3,7 @@ import {
 } from '../content/types';
 import type { AxisId } from '../content/types';
 import {
-  dimensionById, families, hiddenCopy, ideologies, type Ideology,
+  dimensionById, families, hiddenCopy, ideologies, axisCopyById, type Ideology,
 } from '../content';
 import { esc, motifSvg, pad2 } from '../ui/dom';
 
@@ -33,11 +33,12 @@ function campChips(list: Ideology[]): string {
 
 function axisCard(id: AxisId): string {
   const d = dimensionById.get(id)!;
-  const q = wiki.axisQuestions[id] ?? '';
+  const copy = axisCopyById[id];
+  const q = wiki.axisQuestions[id] ?? copy?.question ?? '';
   return `<article class="waxis">
     <header class="waxis__head">
       <span class="mono waxis__code">${d.id}</span>
-      <h3 class="waxis__name">${esc(d.name)}</h3>
+      <h3 class="waxis__name">${esc(copy?.plain ?? d.name)}<span class="waxis__tech">${esc(d.name)}</span></h3>
     </header>
     <p class="waxis__q">${esc(q)}</p>
     <div class="waxis__poles">

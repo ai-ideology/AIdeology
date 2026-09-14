@@ -117,6 +117,42 @@ export interface HiddenRule {
   version?: string;
 }
 
+/* ---------- result explanation layer (editable copy) ---------- */
+
+export interface AxisCopy {
+  /** Technical name from the frozen dimensions. */
+  name: string;
+  /** Plain-language label shown to users. */
+  plain: string;
+  question: string;
+  left: { label: string; definition: string };
+  right: { label: string; definition: string };
+  bands: {
+    strong_left: string;
+    left: string;
+    center: string;
+    right: string;
+    strong_right: string;
+  };
+}
+
+export type AxisBand = keyof AxisCopy['bands'];
+
+export interface IdeologyProfile {
+  core: string;
+  cares: string;
+  worry: string;
+  future: string;
+}
+
+/** Hand-written two-ideology relation copy; `pair` is stored sorted. */
+export interface RelationPair {
+  pair: [string, string];
+  shared: string;
+  difference: string;
+  oneLine: string;
+}
+
 /* ---------- presentation layer (editable copy) ---------- */
 
 export interface IdeologyCopy {
