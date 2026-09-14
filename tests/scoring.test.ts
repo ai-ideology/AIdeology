@@ -1,8 +1,10 @@
 import { describe, expect, test } from 'bun:test';
 import {
   coreItems, adaptiveItems, hiddenItems, prototypeRules, ideologies, hiddenCopy,
-  adaptiveItemsByPrototype, compareDegree, degreeBand, relationFor, relations,
+  adaptiveItemsByPrototype, boundaryStance, compareDegree, degreeBand, relationFor, relations,
+  sharedStance, userResonanceAxes,
 } from '../src/content';
+import type { AxisId } from '../src/content/types';
 import { axisScores, axisFit, computeResult, emptyAnswers, planAdaptive, scoreItems } from '../src/scoring/engine';
 import type { SessionAnswers } from '../src/scoring/engine';
 
@@ -111,6 +113,39 @@ describe('content integrity', () => {
     // a pair that must be typed as opposite directions
     expect(relationFor('work-humanism', 'post-work')?.relationType).toBe('opposite_direction');
     expect(relationFor('work-humanism', 'post-work')?.keyAxis).toBe('V6');
+  });
+
+  test('comparison copy names the pole, never a bare "判断最接近 / 差异明显"', () => {
+    const armsRace = ideologies.find((x) => x.slug === 'arms-race')!;
+    const digitalLife = ideologies.find((x) => x.slug === 'digital-life')!;
+    // a reader who shares arms-race's race pole and digital-life's V4 pole
+    const axes: Partial<Record<AxisId, number>> = { V12: 0.7, V4: 0.4, V11: 0.6, V10: 0.7 };
+
+    expect(userResonanceAxes(armsRace, axes, 1)[0]).toBe('V12');
+    expect(userResonanceAxes(digitalLife, axes, 1)[0]).toBe('V4');
+
+    const shared = sharedStance('V12', 0.7, armsRace.rule.axis_targets.V12 ?? 0, armsRace.copy.nameZh);
+    expect(shared).toContain('军备竞速');
+    expect(shared).not.toContain('判断最接近');
+
+    const boundary = boundaryStance('V12', 0.7, armsRace);
+    expect(boundary).toContain('军备竞速主义');
+    expect(boundary).not.toContain('差异明显');
+
+    // opposite camps must state both concrete positions, not just "差异明显"
+    const intl = ideologies.find((x) => x.slug === 'ai-internationalism')!;
+    const b2 = boundaryStance('V11', 0.6, intl);
+    expect(b2).toContain('本国自主掌握');
+    expect(b2).toContain('国际机构、共同规则');
+    expect(b2).not.toContain('差异明显');
+  });
+
+  test('user-centric axis selection keeps the reader on an axis it answers', () => {
+    const armsRace = ideologies.find((x) => x.slug === 'arms-race')!;
+    // prior prototype-centric selector could land on an axis the reader left at 0
+    const axes: Partial<Record<AxisId, number>> = { V12: 0.8, V2: 0, V4: 0, V5: 0 };
+    const pick = userResonanceAxes(armsRace, axes, 1)[0];
+    expect(axes[pick]).not.toBe(0);
   });
 });
 

@@ -121,10 +121,18 @@ the earlier v1 bank. What changed and why:
   `relevantEvidence` already read it. `planAdaptive` uses this map.
 - **Relations: typed + degree.** The v1.1 copy library adds the relation-type
   system and a degree clause; see `relations.json` above. The result page's
-  comparison panel renders the type chip and, for degree-comparable types, a
-  two-row position comparator (`compareDegree`, thresholds
-  `<0.15 / <0.35 / <0.65`). Pairs whose comparator holds no position on an axis
-  are reported as a priority difference rather than a fake head-on conflict.
+  comparison panel renders the type chip and states the degree split in words
+  ("你的立场更强 / 「X」的立场更强"), never as a chart. Pairs whose comparator
+  holds no position on an axis are reported as a priority difference rather than
+  a fake head-on conflict.
+- **Comparison copy is user-centric.** The panel picks its axis from the
+  **reader's** answers (`userResonanceAxes` / `userContrastAxes` in
+  `src/content/index.ts`), not from the primary prototype's frozen vector. The
+  earlier prototype-centric selection could land on a question the reader never
+  took a side on and fall back to filler ("判断最接近 / 差异明显"). The fallback
+  copy (`sharedStance` / `boundaryStance`) now always names the pole each side
+  holds, and a same-pole split names whose position is stronger. The two-row
+  position-bar comparator was removed in favour of these direct sentences.
 
 The public-facing explanation of the whole design lives on the wiki page
 (`src/views/wiki.ts` + `src/content/wiki.json`); its per-axis questions and

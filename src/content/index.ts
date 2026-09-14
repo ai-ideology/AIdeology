@@ -139,14 +139,62 @@ export function versusStance(axisId: AxisId, userValue: number, otherValue: numb
   return `${mine}；而「${otherName}」认为：${theirs}。`;
 }
 
+/** A prototype takes a real position on an axis only when |target| is non-trivial. */
+export const AXIS_POSITION_MIN = 0.15;
+const POSITION_MIN = AXIS_POSITION_MIN;
+
 /** Where two positions agree on an axis, stated as a shared concrete claim. */
 export function sharedStance(axisId: AxisId, userValue: number, otherValue: number, otherName: string): string {
   const copy = axisCopyById[axisId];
   if (!copy) return '';
-  const sameSide = userValue !== 0 && otherValue !== 0 && Math.sign(userValue) === Math.sign(otherValue);
-  if (!sameSide) return `你和「${otherName}」在「${copy.plain}」上的判断最接近。`;
-  const side = otherValue >= 0 ? copy.right : copy.left;
-  return `你们都认为：${trimPunct(side.definition)}。`;
+  const sameSide = Math.abs(userValue) >= POSITION_MIN && Math.abs(otherValue) >= POSITION_MIN
+    && Math.sign(userValue) === Math.sign(otherValue);
+  if (sameSide) {
+    const side = userValue >= 0 ? copy.right : copy.left;
+    return `你们都站在「${side.label}」这一边：${trimPunct(side.definition)}。`;
+  }
+  // No shared pole: state the reader's own answer and whether the other side
+  // actually contests it — never a hollow "判断最接近".
+  const mine = trimPunct(userStance(axisId, userValue));
+  if (!mine) return '';
+  return Math.abs(otherValue) >= POSITION_MIN
+    ? `在「${copy.plain}」上，${mine}；「${otherName}」的回答也没有站在对面。`
+    : `在「${copy.plain}」上，${mine}；而「${otherName}」在这里没有强烈立场。`;
+}
+
+/**
+ * The concrete boundary between the user and a prototype on one axis, phrased
+ * from both sides (never "差异明显"). Handles opposite camps and, when both sit
+ * on the same pole, says directly who is the stronger one.
+ *
+ * `brief` omits the prototype's pole definition when the caller has already
+ * stated it (the resonance panel shows it in 「为什么相近」), leaving only the
+ * degree verdict so the two columns do not repeat the same sentence.
+ */
+export function boundaryStance(
+  axisId: AxisId, userValue: number, other: Ideology, opts?: { brief?: boolean },
+): string {
+  const copy = axisCopyById[axisId];
+  if (!copy) return '';
+  const name = other.copy.nameZh;
+  const otherValue = other.rule.axis_targets[axisId] ?? 0;
+  const mine = trimPunct(userStance(axisId, userValue));
+  if (!mine) return '';
+  const uStrong = Math.abs(userValue) >= POSITION_MIN;
+  const pStrong = Math.abs(otherValue) >= POSITION_MIN;
+
+  if (!pStrong) return `在「${copy.plain}」上，${mine}；而「${name}」在这里没有强烈立场。`;
+  const theirs = trimPunct(ideologyStance(axisId, otherValue).text);
+  if (!uStrong) return `在「${copy.plain}」上，你没有强烈立场；「${name}」则明确主张：${theirs}。`;
+  if (Math.sign(userValue) !== Math.sign(otherValue)) return `${mine}；而「${name}」认为：${theirs}。`;
+
+  // Same pole: name who holds the stronger version (v1.1 §9 — no bars, just words).
+  const delta = userValue - otherValue;
+  if (Math.abs(delta) < POSITION_MIN) {
+    return opts?.brief ? `${mine}；你们在这个方向上的程度接近。` : `${mine}；「${name}」的立场与你的程度接近：${theirs}。`;
+  }
+  const who = delta > 0 ? '你的立场更强' : `「${name}」的立场更强`;
+  return opts?.brief ? `${mine}；${who}。` : `${mine}；${who}：${theirs}。`;
 }
 
 export interface DetailCopyItem { h: string; p: string }
@@ -312,6 +360,55 @@ export function resonanceAxes(a: Ideology, b: Ideology, n: number): AxisId[] {
   return shared.length ? shared : closestAxes(a, b, n);
 }
 
+/* ---------- user-centric axis selection ----------
+ * The panel is about the READER, not about the primary prototype. Selecting the
+ * axis from the frozen prototype vector (as `resonanceAxes`/`contrastingAxes`
+ * do) can land on a question neither the user nor the other prototype has an
+ * opinion about, which is what produced "判断最接近 / 差异明显" filler. These
+ * variants rank the axes by the user's own answers. */
+
+/** A sparse axis -> user score map. */
+export type AxisValues = Partial<Record<AxisId, number>>;
+
+/** Axes where the user and a prototype hold the same pole, strongest shared first. */
+export function userSharedAxes(other: Ideology, axes: AxisValues, n: number): AxisId[] {
+  return [...CORE_AXES, ...EXTENDED_AXES]
+    .map((id) => {
+      const u = axes[id] ?? 0;
+      const p = other.rule.axis_targets[id] ?? 0;
+      const same = u !== 0 && p !== 0 && Math.sign(u) === Math.sign(p);
+      return { id, strength: same ? Math.min(Math.abs(u), Math.abs(p)) : 0 };
+    })
+    .filter((o) => o.strength > 0)
+    .sort((x, y) => y.strength - x.strength)
+    .slice(0, n)
+    .map((o) => o.id);
+}
+
+/** Axes where the user and a prototype are numerically closest (no pole needed). */
+export function userClosestAxes(other: Ideology, axes: AxisValues, n: number): AxisId[] {
+  return [...CORE_AXES, ...EXTENDED_AXES]
+    .map((id) => ({ id, d: Math.abs((axes[id] ?? 0) - (other.rule.axis_targets[id] ?? 0)) }))
+    .sort((x, y) => x.d - y.d)
+    .slice(0, n)
+    .map((o) => o.id);
+}
+
+/** Resonance axes for the reader: shared poles, else the least-disputed answers. */
+export function userResonanceAxes(other: Ideology, axes: AxisValues, n: number): AxisId[] {
+  const shared = userSharedAxes(other, axes, n);
+  return shared.length ? shared : userClosestAxes(other, axes, n);
+}
+
+/** Axes where the user's answer diverges most from a prototype it cares about. */
+export function userContrastAxes(other: Ideology, axes: AxisValues, n: number, min = 0.3): AxisId[] {
+  const ranked = [...CORE_AXES, ...EXTENDED_AXES]
+    .map((id) => ({ id, d: Math.abs((axes[id] ?? 0) - (other.rule.axis_targets[id] ?? 0)) }))
+    .sort((x, y) => y.d - x.d);
+  const relevant = ranked.filter((o) => Math.abs(other.rule.axis_targets[o.id] ?? 0) >= min);
+  return (relevant.length ? relevant : ranked).slice(0, n).map((o) => o.id);
+}
+
 /**
  * The axis a contrast should actually be argued on: the biggest gap, but only
  * where the comparator prototype holds a real position (|target| ≥ min). This
@@ -343,27 +440,33 @@ export function inferRelationType(axis: AxisId, userValue: number, other: Ideolo
 
 /**
  * One-line teaser for a selector card. Must contain a comparison word, per the
- * v1.1 rule that a card never just states one side's view.
+ * v1.1 rule that a card never just states one side's view. When the reader's own
+ * axes are supplied, the teaser reflects the pole the reader actually shares
+ * (or splits on) instead of a generic "判断最接近".
  */
-export function relationPreview(self: Ideology, other: Ideology, kind: 'resonance' | 'contrast'): string {
+export function relationPreview(
+  self: Ideology, other: Ideology, kind: 'resonance' | 'contrast', axes?: AxisValues,
+): string {
   const manual = relationFor(self.slug, other.slug);
   const name = other.copy.nameZh;
 
   if (kind === 'resonance') {
     if (manual?.shared) return manual.shared;
-    const shared = sharedAxes(self, other, 1)[0];
-    if (shared) {
-      const copy = axisCopyById[shared];
-      return copy ? `你们都重视「${copy.plain}」。` : `你和「${name}」的整体价值排序很接近。`;
+    const axis = axes ? userResonanceAxes(other, axes, 1)[0] : sharedAxes(self, other, 1)[0];
+    const copy = axis ? axisCopyById[axis] : undefined;
+    if (!copy || !axis) return `你和「${name}」的整体价值排序很接近。`;
+    const u = axes?.[axis] ?? self.rule.axis_targets[axis] ?? 0;
+    const p = other.rule.axis_targets[axis] ?? 0;
+    if (u !== 0 && p !== 0 && Math.sign(u) === Math.sign(p)) {
+      const side = p >= 0 ? copy.right : copy.left;
+      return `你们都站在「${side.label}」这一边。`;
     }
-    const close = closestAxes(self, other, 1)[0];
-    const copy = close ? axisCopyById[close] : undefined;
-    return copy ? `你们在「${copy.plain}」上的判断最接近。` : `你和「${name}」的整体价值排序很接近。`;
+    return `你们在「${copy.plain}」上的判断最接近。`;
   }
 
   // contrast: lead with the relation type, then the axis both care about.
   const type = manual?.relationType;
-  const axisId = manual?.keyAxis ?? differingAxes(self, other, 1)[0];
+  const axisId = manual?.keyAxis ?? (axes ? userContrastAxes(other, axes, 1)[0] : differingAxes(self, other, 1)[0]);
   const axis = axisId ? axisCopyById[axisId] : undefined;
   const topic = axis ? `「${axis.plain}」` : '整体价值排序';
   switch (type) {
@@ -373,8 +476,15 @@ export function relationPreview(self: Ideology, other: Ideology, kind: 'resonanc
     case 'priority_difference': return `你们不一定对立，只是更优先的问题不同。`;
     case 'scope_difference': return `你们方向接近，只是适用的范围不同。`;
     case 'opposite_direction': return `你们在${topic}上站在两边。`;
-    default: return `你和「${name}」在${topic}上分歧最大。`;
   }
+  if (axis && axisId) {
+    const u = axes?.[axisId] ?? self.rule.axis_targets[axisId] ?? 0;
+    const p = other.rule.axis_targets[axisId] ?? 0;
+    if (u !== 0 && p !== 0 && Math.sign(u) !== Math.sign(p)) {
+      return `你偏「${(u >= 0 ? axis.right : axis.left).label}」，它偏「${(p >= 0 ? axis.right : axis.left).label}」。`;
+    }
+  }
+  return `你和「${name}」在${topic}上分歧最大。`;
 }
 
 if (import.meta.env?.DEV) {

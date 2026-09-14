@@ -84,7 +84,7 @@ docs-reference/           设计系统与冻结规范的可读版（已提交，
 渲染侧的派生（不在 engine 里）：
 
 - **「你的 AI 世界观」** = `src/views/worldview.ts`：按文档规则选 5–6 条轴，用 `axis-copy.json` 的 5 档文案翻译成人话。档位阈值 `[-0.65,-0.25,0.25,0.65]`，见 `src/content/index.ts` 的 `axisBand`。
-- **「主义关系比较器」** = `src/views/compare.ts`：卡片是 selector（不是链接），点击只重绘面板。关系文案优先用 `relations.json` 手写版，缺失时由轴差异自动生成（`relationPreview` / `sharedAxes` / `differingAxes` / `resonanceAxes`）。
+- **「主义关系比较器」** = `src/views/compare.ts`：卡片是 selector（不是链接），点击只重绘面板。选轴用**用户自己的答案**（`userResonanceAxes` / `userContrastAxes`），不是主意识形态的冻结向量——否则会落到用户没表态的轴上，退化出「判断最接近／差异明显」的空话。文案优先用 `relations.json` 手写版，缺失时由 `sharedStance` / `boundaryStance` 生成，**必须点名两边各自站的那一端**；同向分歧直接说「谁的立场更强」，不再画位置长条。
 
 ## 5. 关键约定与陷阱
 
