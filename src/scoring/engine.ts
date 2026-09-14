@@ -683,8 +683,8 @@ export function emptyAnswers(): SessionAnswers {
 }
 
 export const RESULT_TYPE_LABEL: Record<ResultType, string> = {
-  single_primary: '主人格',
-  primary_plus_resonance: '主人格 + 共鸣',
+  single_primary: '主意识形态',
+  primary_plus_resonance: '主意识形态 + 共鸣',
   dual_core: '双核心',
   mixed: '混合型',
   low_information: '未定型',

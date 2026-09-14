@@ -264,20 +264,28 @@
   ],
   "hidden": [
     { "id": "machine-emancipation", "nameZh": "机器解放主义", "nameEn": "MACHINE EMANCIPATION",
+      "nickname": "机器也该有自由派", "color": "#6D28D9", "fg": "#FFFFFF", "motif": "key",
       "summary": "当系统拥有意识与责任能力，它就不该再是财产。", "keywords": ["权利", "解放", "主体"] },
     { "id": "intelligence-succession", "nameZh": "智能继承主义", "nameEn": "INTELLIGENCE SUCCESSION",
+      "nickname": "文明不一定非得人类接班派", "color": "#0E7490", "fg": "#FFFFFF", "motif": "stair",
       "summary": "智能主体终将接替人类，问题是如何让它体面地发生。", "keywords": ["接替", "继承", "过渡"] },
     { "id": "algorithmic-paternalism", "nameZh": "算法家长主义", "nameEn": "ALGORITHMIC PATERNALISM",
+      "nickname": "AI替你管好自己派", "color": "#B45309", "fg": "#FFFFFF", "motif": "target",
       "summary": "如果系统比你更懂你，替你决定就是一种照顾。", "keywords": ["代决", "照顾", "效率"] },
     { "id": "human-authenticism", "nameZh": "人文真实性主义", "nameEn": "HUMAN AUTHENTICISM",
+      "nickname": "真的发生过才重要派", "color": "#BE123C", "fg": "#FFFFFF", "motif": "window",
       "summary": "人亲自做的、真切经历的，具有不可替代的内在价值。", "keywords": ["真实", "亲历", "不可替代"] },
     { "id": "synthetic-equivalence", "nameZh": "合成等价主义", "nameEn": "SYNTHETIC EQUIVALENCE",
+      "nickname": "能感受到就是真的派", "color": "#4338CA", "fg": "#FFFFFF", "motif": "genesis",
       "summary": "只要体验与效果等价，合成的就是真实的。", "keywords": ["合成", "等价", "体验"] },
     { "id": "ai-ecomodernism", "nameZh": "AI生态现代主义", "nameEn": "AI ECOMODERNISM",
+      "nickname": "用更多技术解决技术代价派", "color": "#15803D", "fg": "#FFFFFF", "motif": "growth",
       "summary": "生态约束可以被技术扩容解决。", "keywords": ["扩容", "清洁", "增长"] },
     { "id": "digital-restraint", "nameZh": "数字节制主义", "nameEn": "DIGITAL RESTRAINT",
+      "nickname": "不是所有东西都要AI化派", "color": "#475569", "fg": "#FFFFFF", "motif": "rest",
       "summary": "不是所有能数字化的都值得数字化。", "keywords": ["节制", "留白", "退出"] },
     { "id": "deep-futurism", "nameZh": "深未来主义", "nameEn": "DEEP FUTURISM",
+      "nickname": "替几百年后的人想想派", "color": "#1E3A8A", "fg": "#FFFFFF", "motif": "orbit",
       "summary": "几百年后的人与文明，和今天的人同样重要。", "keywords": ["长期", "代际", "成本"] }
   ]
 }

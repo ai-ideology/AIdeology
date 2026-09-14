@@ -1,6 +1,6 @@
 import { hiddenCopyById, ideologies } from '../content';
 import { esc, pad2 } from '../ui/dom';
-import { axisRowHtml } from '../ui/components';
+import { axisRowHtml, hiddenBadgesHtml } from '../ui/components';
 import { CORE_AXES, EXTENDED_AXES } from '../content/types';
 import { RESULT_TYPE_LABEL, type Confidence, type ResultPackage } from '../scoring/engine';
 import type { SharePayload } from '../app/share';
@@ -62,6 +62,14 @@ export function renderShare(payload: SharePayload): string {
       }).join('')}</div>`
     : `<p class="rsec__p">没有其他主义进入共鸣区间。</p>`;
 
+  const hiddenSection = r.hidden.length
+    ? `<section class="rsec">
+        <h2 class="rsec__h">隐藏徽章</h2>
+        <p class="mono rsec__sub">HIDDEN BADGES · 稀有的边界立场，不替代主意识形态</p>
+        ${hiddenBadgesHtml(r.hidden)}
+      </section>`
+    : '';
+
   return `<article class="result share-page" style="--c:${c.color};--f:${c.fg}">
     <header class="result__hero">
       <div class="result__left">
@@ -88,6 +96,7 @@ export function renderShare(payload: SharePayload): string {
         <div class="axes">${axes}</div>
       </section>
       <section class="rsec"><h2 class="rsec__h">相近主义</h2>${resonance}</section>
+      ${hiddenSection}
       <section class="rsec">
         <h2 class="rsec__h">置信度</h2>
         <div class="conf-list">

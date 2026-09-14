@@ -55,7 +55,7 @@ export function renderDetail(slug: string, hasResult = false): string | null {
 
   return `<article class="detail" style="--c:${c.color};--f:${c.fg}">
     ${splitHero(x, {
-      codeLine: `${x.code} · ${c.family}`,
+      metaLine: c.family,
       actions:
         `<button type="button" class="btn btn--hero" data-act="start-test">${hasResult ? '重新测试' : '开始测试'} <span aria-hidden="true">→</span></button>` +
         '<a class="btn btn--hero" href="#/library">查看图鉴</a>',
@@ -103,16 +103,6 @@ export function renderDetail(slug: string, hasResult = false): string | null {
       <section class="dsec">
         <h2 class="dsec__h">冲突主义</h2>
         <div class="mini-grid">${far.map((y) => miniHtml(y)).join('')}</div>
-      </section>
-
-      <section class="dsec dsec--explore">
-        <h2 class="dsec__h">继续探索</h2>
-        <p class="dsec__p">想知道自己在这些立场中落在哪里？完成测试，看看你是哪一种未来。</p>
-        <div class="od-cluster">
-          <button type="button" class="btn btn--primary btn--lg" data-act="start-test">开始测试</button>
-          <a class="btn btn--lg" href="#/library">打开图鉴</a>
-          <a class="btn btn--lg" href="#/atlas">在谱系中查看</a>
-        </div>
       </section>
 
       <nav class="detail__nav od-row" aria-label="主义间导航">

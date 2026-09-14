@@ -77,6 +77,12 @@ engine top to bottom.
 - `src/content/families.json` — five family groups, matching the Hero pack and
   detail-layout spec (IDs 22–23 sit in F4 there; `naming.md` places 22–26 in
   “开放与世界秩序”. We follow the pack used by the images and layout spec).
+- The 8 hidden stances in `ideologies.json` carry `color` / `fg` / `motif` /
+  `nickname`. The frozen hidden rules name them but the image pack only covers
+  the 26 core ideologies, so hidden stances ship **without character art**. On
+  the result, share and wiki pages each renders as a black badge with a colored
+  emblem tile (`hiddenBadgesHtml`). If artwork is generated later, add a
+  `public/assets/char/<id>.webp` and the badge can switch to an image.
 
 All three are plain JSON: copy and taxonomy are configurable without touching
 TypeScript.

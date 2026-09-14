@@ -5,7 +5,7 @@ import type { AxisId } from '../content/types';
 import {
   dimensionById, families, hiddenCopy, ideologies, type Ideology,
 } from '../content';
-import { esc, pad2 } from '../ui/dom';
+import { esc, motifSvg, pad2 } from '../ui/dom';
 
 interface WikiData {
   axisQuestions: Record<string, string>;
@@ -94,7 +94,15 @@ export function renderWiki(): string {
   const topics = wiki.topics.map(topicBlock).join('');
 
   const hiddenNames = hiddenCopy.map((h) =>
-    `<span class="wchips__i">${esc(h.nameZh)}</span>`,
+    `<article class="hcard" style="--c:${h.color ?? '#0A0A0A'};--f:${h.fg ?? '#FFFFFF'}">
+      <span class="hcard__emblem" aria-hidden="true">${motifSvg(h.motif ?? 'axis')}</span>
+      <div class="hcard__b">
+        <h3 class="hcard__h">${esc(h.nameZh)}</h3>
+        <p class="mono hcard__en">${esc(h.nameEn)}</p>
+        ${h.nickname ? `<p class="hcard__nick">「${esc(h.nickname)}」</p>` : ''}
+        <p class="hcard__p">${esc(h.summary)}</p>
+      </div>
+    </article>`,
   ).join('');
 
   const layers = [
@@ -113,7 +121,7 @@ export function renderWiki(): string {
     { n: '02', t: '中性基线贴合', p: '用 AxisFit 计算你与 26 个原型的距离，并扣除「全中间作答」的天然相似度。' },
     { n: '03', t: '6–10 道判别题', p: '在你最接近的几个原型之间，动态追问最能区分它们的问题。' },
     { n: '04', t: '信条与反证', p: '用 Hallmark 确认核心信条是否真的出现，并用反证扣分，避免误判。' },
-    { n: '05', t: '输出档案', p: '得到主人格 / 双核心 / 混合型 / 未定型，以及三重置信度与可能的隐藏徽章。' },
+    { n: '05', t: '输出档案', p: '得到主意识形态 / 双核心 / 混合型 / 未定型，以及三重置信度与可能的隐藏徽章。' },
   ].map((s) => `<li class="step">
     <span class="mono step__n">${s.n}</span>
     <div class="step__b"><h3 class="step__t">${esc(s.t)}</h3><p class="step__p">${esc(s.p)}</p></div>
@@ -143,7 +151,7 @@ export function renderWiki(): string {
             <p class="wcontrast__note">这是一个规范判断，无法用数据单独证明。</p>
           </div>
         </div>
-        <p class="wsec__p">两个人可以对同一个事实有共识，却因为价值排序不同而得出相反结论。主人格由价值立场为主、事实信念为辅共同决定。</p>
+        <p class="wsec__p">两个人可以对同一个事实有共识，却因为价值排序不同而得出相反结论。主意识形态由价值立场为主、事实信念为辅共同决定。</p>
       </section>
 
       <section class="wsec">
@@ -173,7 +181,7 @@ export function renderWiki(): string {
 
       <section class="wsec">
         <h2 class="wsec__h">8 个隐藏立场</h2>
-        <p class="wsec__p">还有 8 种更稀有的边界立场。它们不参与普通比较，只有当你同时满足「明显的价值前置」和「专题题的明确支持」时才会被点亮，最多显示两个，且不会替代你的主人格。</p>
+        <p class="wsec__p">还有 8 种更稀有的边界立场。它们不参与普通比较，只有当你同时满足「明显的价值前置」和「专题题的明确支持」时才会被点亮，最多显示两个，且不会替代你的主意识形态。它们没有角色插画，在结果页以带色块的徽章呈现。</p>
         <div class="wchips">${hiddenNames}</div>
       </section>
 
@@ -183,7 +191,7 @@ export function renderWiki(): string {
         <ol class="steps">${pipeline}</ol>
         <div class="wtypes">
           ${[
-            { t: '主人格', p: '有一个立场明显最贴近，且核心信条成立。' },
+            { t: '主意识形态', p: '有一个立场明显最贴近，且核心信条成立。' },
             { t: '双核心', p: '两个立场几乎并肩贴合，且各自信条都成立。' },
             { t: '混合型', p: '多个立场都贴近，但证据不足以确定单一身份。' },
             { t: '未定型', p: '作答大量落在中间与条件式选项，立场仍在形成中。' },

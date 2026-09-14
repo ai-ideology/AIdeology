@@ -142,8 +142,14 @@ export interface HiddenCopy {
   id: string;
   nameZh: string;
   nameEn: string;
+  nickname?: string;
   summary: string;
   keywords: string[];
+  /** Presentation identity. Hidden stances ship without character art, so they
+   *  carry an emblem (motif + colour) instead of a photo. */
+  color?: string;
+  fg?: string;
+  motif?: string;
 }
 
 export interface Family {

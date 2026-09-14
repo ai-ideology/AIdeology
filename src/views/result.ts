@@ -1,7 +1,7 @@
 import { CORE_AXES, EXTENDED_AXES } from '../content/types';
 import { ideologies, type Ideology } from '../content';
 import { esc, pad2 } from '../ui/dom';
-import { axisRowHtml, keywordChips, miniHtml, splitHero } from '../ui/components';
+import { axisRowHtml, hiddenBadgesHtml, miniHtml, splitHero } from '../ui/components';
 import { RESULT_TYPE_LABEL, type ResultPackage } from '../scoring/engine';
 
 function bySlug(slug: string): Ideology | undefined {
@@ -53,15 +53,8 @@ export function renderResult(r: ResultPackage): string {
   const hiddenSection = r.hidden.length
     ? `<section class="rsec">
         <h2 class="rsec__h">隐藏徽章</h2>
-        <p class="mono rsec__sub">HIDDEN BADGES · 稀有的边界立场，不替代主人格</p>
-        <div class="badges">${r.hidden.map((h) => `<article class="badge">
-          <p class="mono badge__code">HIDDEN · ${esc(h.id)}</p>
-          <h3 class="badge__h">${esc(h.nameZh)}</h3>
-          <p class="mono badge__en">${esc(h.nameEn)}</p>
-          <p class="badge__p">${esc(h.summary)}</p>
-          ${keywordChips(h.keywords)}
-          <p class="mono badge__why">${h.reasons.map(esc).join(' · ')}</p>
-        </article>`).join('')}</div>
+        <p class="mono rsec__sub">HIDDEN BADGES · 稀有的边界立场，不替代主意识形态</p>
+        ${hiddenBadgesHtml(r.hidden)}
       </section>`
     : '';
 
@@ -104,7 +97,7 @@ export function renderResult(r: ResultPackage): string {
         <h2 class="rsec__h">结果置信度</h2>
         <p class="mono rsec__sub">CONFIDENCE · 结果类型：${esc(typeLabel)}</p>
         <div class="conf-list">
-          ${confidenceRow('身份置信', r.confidence.identity.value, 'IDENTITY — 与主人格的贴合度')}
+          ${confidenceRow('身份置信', r.confidence.identity.value, 'IDENTITY — 与主意识形态的贴合度')}
           ${confidenceRow('判别置信', r.confidence.discrimination.value, 'DISCRIMINATION — 与第二名的区分度')}
           ${confidenceRow('测量置信', r.confidence.measurement.value, 'MEASUREMENT — 题量与作答一致性')}
         </div>
@@ -130,17 +123,6 @@ export function renderResult(r: ResultPackage): string {
       </section>
 
       ${belief}
-
-      <section class="rsec rsec--cta">
-        <h2 class="rsec__h">你的未来不止一种颜色</h2>
-        <p class="rsec__p">把结果分享出去，或者去图鉴里看看与你冲突的那些未来。</p>
-        <div class="od-cluster">
-          <button type="button" class="btn btn--primary btn--lg" data-act="share">分享结果</button>
-          <button type="button" class="btn btn--lg" data-act="share-card">生成分享图</button>
-          <a class="btn btn--lg" href="#/library">打开图鉴</a>
-          <button type="button" class="btn btn--quiet btn--lg" data-act="start-test">重新测试</button>
-        </div>
-      </section>
     </div>
   </article>`;
 }
@@ -152,12 +134,14 @@ function resultHero(x: Ideology, r: ResultPackage): string {
     ? ` · 同时贴合 ${esc(bySlug(r.dual[1].slug)!.copy.nameZh)} ${r.dual[1].finalFit.toFixed(1)}`
     : '';
   return splitHero(x, {
-    codeLine: `${x.code} · MATCH ${match.toFixed(1)} · ${typeLabel}${dual}`,
+    metaLine: `${esc(typeLabel)}${dual}`,
+    match,
     note: r.normalism.tagOnly ? '同时呈现明显的 AI 常态倾向' : undefined,
     actions:
       '<button type="button" class="btn btn--hero" data-act="share">分享我的结果</button>' +
       '<button type="button" class="btn btn--hero" data-act="share-card">生成分享图</button>' +
-      `<a class="btn btn--hero btn--quiet" href="#/ideology/${x.slug}">查看完整主义</a>`,
+      `<a class="btn btn--hero btn--quiet" href="#/ideology/${x.slug}">查看完整主义</a>` +
+      '<button type="button" class="btn btn--hero btn--quiet" data-act="start-test">重新测试</button>',
   });
 }
 
