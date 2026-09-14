@@ -61,10 +61,11 @@ export function renderResult(r: ResultPackage): string {
   const topList = r.scores.slice(0, 8).map((s, i) => {
     const x = bySlug(s.slug)!;
     const isPrimary = s.slug === r.primary?.slug;
-    return `<li class="rank${isPrimary ? ' is-primary' : ''}" style="--c:${x.copy.color};--f:${x.copy.fg}">
+    const pct = Math.max(0, Math.min(100, s.finalFit));
+    return `<li class="rank${isPrimary ? ' is-primary' : ''}" style="--c:${x.copy.color};--f:${x.copy.fg};--w:${pct.toFixed(1)}%">
       <span class="mono rank__i">${pad2(i + 1)}</span>
       <a class="rank__name" href="#/ideology/${x.slug}">${esc(x.copy.nameZh)}</a>
-      <span class="rank__bar"><span class="rank__fill" style="width:${s.finalFit.toFixed(0)}%"></span></span>
+      <span class="rank__bar" aria-hidden="true"></span>
       <span class="mono rank__v">${s.finalFit.toFixed(1)}</span>
     </li>`;
   }).join('');

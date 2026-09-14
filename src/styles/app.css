@@ -1893,15 +1893,23 @@ img, svg { display: block; max-width: 100%; }
 .badge__why { margin-top: 4px; opacity: .6; font-size: 10px; }
 
 /* ---------- report: ranking ---------- */
+/* The bar itself is as long as the fit value — no inner fill, no track —
+   so the eight bars form a staggered staircase and colour reads directly. */
 .ranking { list-style: none; margin: var(--s5) 0 0; padding: 0; display: grid; gap: 8px; }
-.rank { display: grid; grid-template-columns: 34px minmax(0, 1fr) 96px 52px; align-items: center; gap: var(--s3); padding: 8px 10px; border: 2px solid var(--black); background: var(--white); }
+.rank { display: grid; grid-template-columns: 34px minmax(0, 1fr) min(260px, 26%) 52px; align-items: center; gap: var(--s3); padding: 8px 10px; border: 2px solid var(--black); background: var(--white); }
 .rank.is-primary { background: var(--c, var(--sys-blue)); color: var(--f, var(--ink)); border-width: var(--bw-lg); }
 .rank__i { color: inherit; opacity: .7; }
 .rank__name { font-weight: 800; text-decoration: none; }
-.rank__bar { height: 12px; background: var(--paper); border: 2px solid var(--black); }
-.rank.is-primary .rank__bar { background: rgba(255,255,255,.5); }
-.rank__fill { display: block; height: 100%; background: var(--c, var(--black)); }
-.rank.is-primary .rank__fill { background: var(--black); }
+.rank__bar {
+  justify-self: start;
+  width: var(--w, 0%);
+  height: 16px;
+  background: var(--c, var(--black));
+  border: 2px solid var(--black);
+}
+/* the primary row already carries the ideology colour as its background,
+   so its bar flips to solid black to stay legible */
+.rank.is-primary .rank__bar { background: var(--black); border-color: var(--black); }
 .rank__v { text-align: right; font-weight: 700; }
 @media (max-width: 560px) {
   .rank { grid-template-columns: 28px minmax(0, 1fr) 52px; }
