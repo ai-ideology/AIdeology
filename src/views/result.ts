@@ -14,7 +14,7 @@ export function renderResultEmpty(): string {
   return `<section class="empty">
     <p class="mono empty__code">NO RESULT YET</p>
     <h1 id="view-title" tabindex="-1">还没有你的结果</h1>
-    <p class="empty__p">完成 48 道核心情景题与随后的判别题后，这里会出现你的意识形态海报、价值轴定位、隐藏徽章，以及与它相近和冲突的立场。</p>
+    <p class="empty__p">完成 48 道核心情景题与随后的判别题后，这里会出现你的意识形态海报、价值轴定位、隐藏意识形态，以及与它相近和冲突的立场。</p>
     <div class="od-cluster">
       <button type="button" class="btn btn--primary btn--lg" data-act="start-test">开始测试</button>
       <a class="btn btn--lg" href="#/library">先看图鉴</a>
@@ -42,8 +42,8 @@ export function renderResult(r: ResultPackage): string {
 
   const hiddenSection = r.hidden.length
     ? `<section class="rsec">
-        <h2 class="rsec__h">隐藏徽章</h2>
-        <p class="mono rsec__sub">HIDDEN BADGES · 稀有的边界立场，不替代主意识形态</p>
+        <h2 class="rsec__h">隐藏意识形态</h2>
+        <p class="mono rsec__sub">HIDDEN STANCES · 稀有的边界立场，不替代主意识形态</p>
         ${hiddenBadgesHtml(r.hidden)}
       </section>`
     : '';
@@ -66,19 +66,14 @@ export function renderResult(r: ResultPackage): string {
     ? `<p class="rsec__p normalism-note">你同时呈现出明显的 <b>AI 常态倾向</b>：AI 更像一项长期铺开的基础设施，而不是神话或末日。由于其他立场也有很高的贴合度，它在此仅作为标签保留。</p>`
     : '';
 
-  const belief = r.beliefTags.length
-    ? `<section class="rsec"><h2 class="rsec__h">相关信念倾向</h2>
-        <p class="rsec__sub mono">INDEPENDENT B-BELIEF MODULE</p>
-        <div class="beliefs">${r.beliefTags.map((b) => `<div class="belief od-row">
-          <span class="belief__label">${esc(b.left)} ↔ ${esc(b.right)}</span>
-          <span class="kw">${esc(b.label)}</span>
-        </div>`).join('')}</div></section>`
-    : '';
-
   return `<article class="result"${primary ? ` style="--c:${primary.copy.color};--f:${primary.copy.fg}"` : ''}>
     ${hero}
     <div class="result__body">
+      ${hiddenSection}
+
       ${primary ? renderWorldview(r) : ''}
+
+      ${renderCompare(r)}
 
       <section class="rsec">
         <header class="rsec__head">
@@ -86,6 +81,12 @@ export function renderResult(r: ResultPackage): string {
           <p class="mono rsec__sub">AXIS VECTOR · 15 DIMENSIONS + M1 · ${r.meta.answeredCore} / ${r.meta.totalCore} CORE ITEMS</p>
         </header>
         <div class="axes">${axesHtml}</div>
+      </section>
+
+      <section class="rsec">
+        <h2 class="rsec__h">贴合度排行</h2>
+        <p class="mono rsec__sub">FIT RANKING · TOP 8 OF 26</p>
+        <ol class="ranking">${topList}</ol>
       </section>
 
       <section class="rsec">
@@ -98,18 +99,6 @@ export function renderResult(r: ResultPackage): string {
         </div>
         ${normalismNote}
       </section>
-
-      ${renderCompare(r)}
-
-      ${hiddenSection}
-
-      <section class="rsec">
-        <h2 class="rsec__h">贴合度排行</h2>
-        <p class="mono rsec__sub">FIT RANKING · TOP 8 OF 26</p>
-        <ol class="ranking">${topList}</ol>
-      </section>
-
-      ${belief}
     </div>
   </article>`;
 }
@@ -125,7 +114,6 @@ function resultHero(x: Ideology, r: ResultPackage): string {
     match,
     note: r.normalism.tagOnly ? '同时呈现明显的 AI 常态倾向' : undefined,
     actions:
-      '<button type="button" class="btn btn--hero" data-act="share">分享我的结果</button>' +
       '<button type="button" class="btn btn--hero" data-act="share-card">生成分享图</button>' +
       `<a class="btn btn--hero btn--quiet" href="#/ideology/${x.slug}">查看完整主义</a>` +
       '<button type="button" class="btn btn--hero btn--quiet" data-act="start-test">重新测试</button>',

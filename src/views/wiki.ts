@@ -122,7 +122,7 @@ export function renderWiki(): string {
     { n: '02', t: '中性基线贴合', p: '用 AxisFit 计算你与 26 个原型的距离，并扣除「全中间作答」的天然相似度。' },
     { n: '03', t: '6–10 道判别题', p: '在你最接近的几个原型之间，动态追问最能区分它们的问题。' },
     { n: '04', t: '信条与反证', p: '用 Hallmark 确认核心信条是否真的出现，并用反证扣分，避免误判。' },
-    { n: '05', t: '输出档案', p: '得到主意识形态 / 双核心 / 混合型 / 未定型，以及三重可信度与可能的隐藏徽章。' },
+    { n: '05', t: '输出档案', p: '得到主意识形态 / 双核心 / 混合型 / 未定型，以及三重可信度与可能的隐藏意识形态。' },
   ].map((s) => `<li class="step">
     <span class="mono step__n">${s.n}</span>
     <div class="step__b"><h3 class="step__t">${esc(s.t)}</h3><p class="step__p">${esc(s.p)}</p></div>
@@ -181,7 +181,7 @@ export function renderWiki(): string {
       </section>
 
       <section class="wsec">
-        <h2 class="wsec__h">8 个隐藏立场</h2>
+        <h2 class="wsec__h">8 个隐藏意识形态</h2>
         <p class="wsec__p">还有 8 种更稀有的边界立场。它们不参与普通比较，只有当你同时满足「明显的价值前置」和「专题题的明确支持」时才会被点亮，最多显示两个，且不会替代你的主意识形态。它们没有角色插画，在结果页以带色块的徽章呈现。</p>
         <div class="wchips">${hiddenNames}</div>
       </section>

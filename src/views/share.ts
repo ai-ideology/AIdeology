@@ -64,8 +64,8 @@ export function renderShare(payload: SharePayload): string {
 
   const hiddenSection = r.hidden.length
     ? `<section class="rsec">
-        <h2 class="rsec__h">隐藏徽章</h2>
-        <p class="mono rsec__sub">HIDDEN BADGES · 稀有的边界立场，不替代主意识形态</p>
+        <h2 class="rsec__h">隐藏意识形态</h2>
+        <p class="mono rsec__sub">HIDDEN STANCES · 稀有的边界立场，不替代主意识形态</p>
         ${hiddenBadgesHtml(r.hidden)}
       </section>`
     : '';

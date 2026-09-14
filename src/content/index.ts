@@ -52,6 +52,48 @@ export function axisBand(v: number): keyof AxisCopy['bands'] {
   return 'strong_right';
 }
 
+/** Trim trailing Chinese/ASCII sentence punctuation before joining clauses. */
+export function trimPunct(s: string): string {
+  return s.replace(/[。；;，,．.\s]+$/, '');
+}
+
+/** A concrete, second-person stance sentence for the user's own axis score. */
+export function userStance(axisId: AxisId, value: number): string {
+  const copy = axisCopyById[axisId];
+  return copy ? copy.bands[axisBand(value)] : '';
+}
+
+/** The concrete position a prototype takes on an axis (whose side + definition). */
+export function ideologyStance(axisId: AxisId, value: number): { lean: string; text: string; positive: boolean } {
+  const copy = axisCopyById[axisId];
+  if (!copy) return { lean: '', text: '', positive: value >= 0 };
+  const positive = value >= 0;
+  const side = positive ? copy.right : copy.left;
+  return { lean: side.label, text: side.definition, positive };
+}
+
+/**
+ * "你认为……，而「X」认为……" — the concrete two-sided contrast on one axis.
+ * Used by the comparison panel so it states positions instead of asking the
+ * axis question back at the reader.
+ */
+export function versusStance(axisId: AxisId, userValue: number, otherValue: number, otherName: string): string {
+  const mine = trimPunct(userStance(axisId, userValue));
+  const theirs = trimPunct(ideologyStance(axisId, otherValue).text);
+  if (!mine || !theirs) return '';
+  return `${mine}；而「${otherName}」认为：${theirs}。`;
+}
+
+/** Where two positions agree on an axis, stated as a shared concrete claim. */
+export function sharedStance(axisId: AxisId, userValue: number, otherValue: number, otherName: string): string {
+  const copy = axisCopyById[axisId];
+  if (!copy) return '';
+  const sameSide = userValue !== 0 && otherValue !== 0 && Math.sign(userValue) === Math.sign(otherValue);
+  if (!sameSide) return `你和「${otherName}」在「${copy.plain}」上的判断最接近。`;
+  const side = otherValue >= 0 ? copy.right : copy.left;
+  return `你们都认为：${trimPunct(side.definition)}。`;
+}
+
 export interface DetailCopyItem { h: string; p: string }
 export interface DetailCopy { items: DetailCopyItem[]; origin: string }
 export const detailCopyBySlug = detailCopyJson.beliefs as unknown as Record<string, DetailCopy>;

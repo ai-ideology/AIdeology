@@ -52,7 +52,7 @@ export function renderLanding(): string {
       <ol class="how__list">
         <li class="how__i"><span class="how__n mono">01</span><h3 class="how__h">回答 48 个核心情景</h3><p class="how__p">没有对错。每题选一个更接近你的答案，选定后会立即进入下一题。</p></li>
         <li class="how__i"><span class="how__n mono">02</span><h3 class="how__h">动态追问 6–10 题</h3><p class="how__p">系统根据你的坐标，从 24 道近邻判别题里挑出最能区分你的那几题。</p></li>
-        <li class="how__i"><span class="how__n mono">03</span><h3 class="how__h">遇见你的意识形态</h3><p class="how__p">26 种未来中，与你最接近的那一种会以海报的形式揭晓；稀有立场还会点亮隐藏徽章。</p></li>
+        <li class="how__i"><span class="how__n mono">03</span><h3 class="how__h">遇见你的意识形态</h3><p class="how__p">26 种未来中，与你最接近的那一种会以海报的形式揭晓；稀有立场还会点亮隐藏意识形态。</p></li>
       </ol>
     </section>
 
