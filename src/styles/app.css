@@ -521,8 +521,6 @@ img, svg { display: block; max-width: 100%; }
   .featured__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
-.featured__grid .poster { min-height: 340px; }
-
 .link {
   color: var(--ink);
   text-decoration: none;
@@ -590,6 +588,9 @@ img, svg { display: block; max-width: 100%; }
   flex-direction: column;
   gap: var(--s3);
   padding: var(--s4);
+  /* Uniform tile height across the grid; the manifesto is clamped so a long
+     one cannot make its tile taller than the rest. */
+  min-height: 300px;
   background: var(--c, var(--white));
   color: var(--f, var(--ink));
   border: var(--bw-lg) solid var(--black);
@@ -628,40 +629,35 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .poster__motif .motif {
-  width: clamp(56px, 38%, 120px);
+  width: clamp(56px, 30%, 96px);
   height: auto;
 }
 
-.poster__body { display: grid; gap: 6px; }
+.poster__body { display: grid; gap: 6px; align-content: start; }
 
 .poster__zh {
   font-family: var(--font-display);
   font-weight: 900;
-  font-size: clamp(22px, 2.2vw, 30px);
+  font-size: clamp(21px, 1.7vw, 26px);
   line-height: 1.12;
   letter-spacing: -.01em;
-}
-
-.poster__en {
-  font-size: 10px;
-  letter-spacing: .08em;
 }
 
 .poster__mf {
   margin-top: 6px;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(14px, 1.2vw, 17px);
+  font-size: clamp(14px, 1.1vw, 16px);
   line-height: 1.18;
+  /* Reserve two lines in every tile so a wrapping manifesto cannot push the
+     title up and break alignment across a row. */
+  min-height: 2.36em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
-
-.poster__mfzh {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.poster--small .poster__zh { font-size: 20px; }
-.poster--small .poster__motif { min-height: 36px; }
 
 /* ---------- masonry library ---------- */
 
@@ -743,6 +739,10 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: .1em;
 }
 
+/* Uniform poster grid. The taxonomy is flat, so every tile is the same size —
+   a bigger tile would imply a hierarchy that does not exist. Rows stretch to
+   one height and the manifesto is clamped so long copy cannot push a tile
+   taller than its neighbours. */
 .masonry {
   display: grid;
   gap: var(--s5);
@@ -754,38 +754,17 @@ img, svg { display: block; max-width: 100%; }
   .masonry { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media (min-width: 1024px) {
-  .masonry {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-auto-rows: minmax(clamp(150px, 13.5vw, 210px), auto);
-    grid-auto-flow: dense;
-  }
-  .masonry .poster--feature { grid-column: span 6; grid-row: span 3; }
-  .masonry .poster--tall { grid-column: span 4; grid-row: span 3; }
-  .masonry .poster--wide { grid-column: span 6; grid-row: span 2; }
-  .masonry .poster--square { grid-column: span 4; grid-row: span 2; }
-  .masonry .poster--small { grid-column: span 3; grid-row: span 2; }
+@media (min-width: 900px) {
+  .masonry { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
-@media (max-width: 1023px) {
-  .poster { min-height: 280px; }
-  .poster--feature,
-  .poster--tall { min-height: 400px; }
-  .poster--wide,
-  .poster--square { min-height: 320px; }
+@media (min-width: 1280px) {
+  .masonry { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
-/* Phone: a single column of uniform, compact posters. The desktop mosaic's
-   five shapes and 320–440px tiles make a 26-card list far too tall to scan on
-   a phone, so every tile shares one short height and the motif shrinks (§21). */
 @media (max-width: 639px) {
   .masonry { gap: var(--s3); margin-top: var(--s4); }
-  .poster,
-  .poster--feature,
-  .poster--tall,
-  .poster--wide,
-  .poster--square,
-  .poster--small {
+  .poster {
     min-height: 148px;
     gap: var(--s2);
     padding: 14px 16px;
@@ -793,9 +772,7 @@ img, svg { display: block; max-width: 100%; }
   .poster__motif { min-height: 28px; flex: 0 0 auto; }
   .poster__motif .motif { width: clamp(40px, 22%, 64px); }
   .poster__zh { font-size: 22px; }
-  .poster__en { font-size: 10px; }
-  .poster__mf,
-  .poster__mfzh { font-size: 12px; }
+  .poster__mf { font-size: 12px; }
 }
 
 /* ---------- test ---------- */

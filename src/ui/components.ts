@@ -4,29 +4,28 @@ import type { Ideology } from '../content';
 import type { AxisId } from '../content/types';
 import { esc, motifSvg } from './dom';
 
+/**
+ * Ideology poster — the library/showcase tile. Every ideology renders the same
+ * size and the same fields: the taxonomy is flat, so a bigger tile would imply
+ * a hierarchy that does not exist (and previously gave four arbitrarily-chosen
+ * ideologies an extra line of copy). Identity comes from color, motif, scale of
+ * type and the manifesto, not from tile size.
+ */
 export function posterHtml(x: Ideology, match?: number | null): string {
   const c = x.copy;
-  const size = posterSize(x);
   const badge = match === null || match === undefined ? '' :
     `<span class="mono mini__match">${match.toFixed(1)}</span>`;
-  const body = `<span class="poster__zh">${esc(c.nameZh)}</span>` +
-    (size === 'feature'
-      ? `<span class="poster__mf">${esc(c.manifestoEn)}</span><span class="poster__mfzh">${esc(c.manifestoZh)}</span>`
-      : `<span class="poster__mf">${esc(c.manifestoZh)}</span>`);
-  return `<a class="poster poster--${size}" href="#/ideology/${x.slug}" style="--c:${c.color};--f:${c.fg}">` +
+  return `<a class="poster" href="#/ideology/${x.slug}" style="--c:${c.color};--f:${c.fg}">` +
     `<span class="poster__top od-row">` +
       `<span class="mono poster__fam od-fill">${esc(c.family)}</span>` +
       badge +
     `</span>` +
     `<span class="poster__motif" aria-hidden="true">${motifSvg(c.motif)}</span>` +
-    `<span class="poster__body">${body}</span>` +
+    `<span class="poster__body">` +
+      `<span class="poster__zh">${esc(c.nameZh)}</span>` +
+      `<span class="poster__mf">${esc(c.manifestoZh)}</span>` +
+    `</span>` +
   `</a>`;
-}
-
-/** Deterministic poster shape so the masonry stays stable and lively. */
-function posterSize(x: Ideology): 'feature' | 'tall' | 'wide' | 'square' | 'small' {
-  const shapes = ['feature', 'tall', 'wide', 'square', 'small', 'square', 'tall', 'wide'] as const;
-  return shapes[(x.id - 1) % shapes.length];
 }
 
 export function miniHtml(x: Ideology, match?: number | null): string {

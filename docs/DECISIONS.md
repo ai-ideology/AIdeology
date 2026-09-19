@@ -147,9 +147,20 @@ the earlier v1 bank. What changed and why:
   and the site footer (meaningless mid-test), places 上一题/下一题 side by side
   instead of stacked, and tightens spacing, question size and option height so
   all five choices stay above the fold — verified for **all 88 items at
-  360×640**. The library's 26-poster mosaic collapses to a single column of
-  ~150px cards (11000px → 5950px of scroll), nav tap targets grow to 40px, and
-  hard shadows drop to 3–4px. Desktop rules are untouched.
+  360×640**. The library collapses to a single tight column on phones,
+  nav tap targets grow to 40px, and hard shadows drop to 3–4px.
+  Desktop rules are untouched.
+- **Library posters are uniform — a deliberate departure from §19.** The design
+  system recommends an Asymmetric Masonry (Tall / Wide / Square / Small /
+  Feature), but two things made it wrong here. First, the 26 ideologies are
+  peers: a tile three times the area of another implies a ranking the model does
+  not have. Second, the implementation assigned shapes by `id % 8`, so size
+  carried no meaning at all — and `feature` tiles additionally rendered the
+  English manifesto, handing four arbitrarily-chosen ideologies an extra line of
+  copy. Every tile is now the same size and the same fields; identity comes from
+  color, motif and type scale. The grid uses 1 / 2 / 3 / 4 columns, and the
+  manifesto reserves two lines in every tile so a wrapping line cannot break
+  alignment within a row.
 - **No internal identifiers in the UI.** The design system's §9 mono examples
   (`IDEOLOGY_17`, `SCENARIO_014`) are a visual-language reference, not a licence
   to print bookkeeping keys: readers cannot act on `C-V1-01`, `IDEOLOGY_07`,

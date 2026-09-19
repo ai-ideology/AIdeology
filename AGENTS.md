@@ -102,8 +102,9 @@ docs-reference/           设计系统与冻结规范的可读版（已提交，
 - **移动端样式集中在文件末尾的条件块里**，不要为此改基础规则：
   - `@media (max-width: 640px)`（`/* ---------- compact phone layout for the test ---------- */`）压缩做题页，`@media (max-width: 640px) and (max-height: 700px)` 为矮屏（iPhone SE 类）再紧一档。**88 道题（48 核心 + 24 判别 + 16 专题）在 360×640 下都能让「上一题/下一题」留在首屏**——改做题页间距/字号后请重新扫一遍。
   - `body[data-view='test']` 在手机上去掉页脚；`.test__hint`（键盘快捷键）在 `(max-width: 640px), (hover: none)` 下隐藏。
-  - `@media (max-width: 639px)` 把图鉴 26 张海报从 320–440px 的 mosaic 压成单列 ~150px 紧凑卡（否则手机上一页 11000px 高）。
+  - `@media (max-width: 639px)` 把图鉴压成单列 ~150px 紧凑卡（否则手机上一页 6000+px 高）。
   - `@media (max-width: 640px)` 里还有一档 `:root` 阴影降级（`--sh-*` 3–4px），对应设计系统 §21「Mobile Shadow 3–4px」。
+- **图鉴海报一律等大。** 设计系统 §19 推荐的是 Asymmetric Masonry（Tall/Wide/Square/Small/Feature 五种形状），但 26 个主义是**平级**的，用大小区分会暗示一个不存在的层级；而且旧的 `posterSize()` 是按 `id % 8` 取模分配的，还额外给 4 个主义多渲染一行英文宣言——等于随机挑 4 个白得信息。现在所有海报同尺寸、同字段，`posterHtml()` 不带形状参数，列数随断点 1/2/3/4 变化。
 
 ## 6. 命令
 
