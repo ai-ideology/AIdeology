@@ -1,4 +1,4 @@
-import { hiddenCopyById, ideologies } from '../content';
+import { hiddenCopyById, ideologies, siteCopy } from '../content';
 import { esc } from '../ui/dom';
 import { axisRowHtml, hiddenBadgesHtml } from '../ui/components';
 import { CORE_AXES, EXTENDED_AXES } from '../content/types';
@@ -188,10 +188,10 @@ export async function drawShareCard(input: CardInput): Promise<Blob | null> {
   ctx.fillRect(0, H - FOOT_H, W, FOOT_H);
   ctx.fillStyle = '#FFFFFF';
   ctx.font = `700 32px ${sans}`;
-  ctx.fillText('不同思想，争夺不同的未来。', 64, H - 82);
+  ctx.fillText(siteCopy.sloganZh, 64, H - 82);
   ctx.fillStyle = input.color;
   ctx.font = `500 22px ${mono}`;
-  ctx.fillText('AIDEOLOGY — 26 POSSIBLE FUTURES', 64, H - 42);
+  ctx.fillText(siteCopy.wordmark, 64, H - 42);
 
   return await new Promise((resolve) => canvas.toBlob((b) => resolve(b), 'image/png'));
 }

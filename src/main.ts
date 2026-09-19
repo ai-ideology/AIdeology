@@ -1,6 +1,6 @@
 import './styles/primitives.css';
 import './styles/app.css';
-import { hiddenRules, ideologies, coreItems } from './content';
+import { hiddenRules, ideologies, coreItems, siteCopy } from './content';
 import { axisScores, computeResult, planAdaptive, RESULT_TYPE_LABEL, scoreItems } from './scoring/engine';
 import { clearState, getState, resetState, setState, type SessionState } from './app/store';
 import { decodeShare, shareText, shareUrl } from './app/share';
@@ -542,7 +542,20 @@ document.addEventListener('keydown', (e) => {
 
 /* ---------- boot ---------- */
 
+/** Keep the static footer in index.html in step with src/content/site.json. */
+function syncSiteCopy(): void {
+  const set = (sel: string, text: string) => {
+    const el = document.querySelector(sel);
+    if (el) el.textContent = text;
+  };
+  set('.site-foot__slogan', siteCopy.sloganZh);
+  set('.site-foot__sub', siteCopy.sloganEn);
+  const meta = document.querySelector('.site-foot__meta span');
+  if (meta) meta.textContent = siteCopy.wordmark;
+}
+
 function init(): void {
+  syncSiteCopy();
   window.addEventListener('hashchange', render);
   if (!window.location.hash) {
     // keep an old in-progress session reachable

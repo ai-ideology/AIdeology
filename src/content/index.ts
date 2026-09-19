@@ -15,6 +15,7 @@ import detailCopyJson from './detail-copy.json';
 import axisCopyJson from './axis-copy.json';
 import ideologyProfilesJson from './ideology-profiles.json';
 import relationsJson from './relations.json';
+import siteJson from './site.json';
 
 import type {
   AdaptiveItem, AxisCopy, AxisId, CoreItem, Dimension, Family, HiddenCopy, HiddenItem,
@@ -35,6 +36,13 @@ export const hiddenCopy = ideologiesJson.hidden as unknown as HiddenCopy[];
 export const axisCopyById = axisCopyJson as unknown as Record<AxisId, AxisCopy>;
 export const profileBySlug = ideologyProfilesJson as unknown as Record<string, IdeologyProfile>;
 export const relations = relationsJson as unknown as RelationPair[];
+
+/**
+ * Brand copy shown outside the test: the footer slogan and the share card.
+ * Kept in one file so the two render sites cannot drift apart (they used to
+ * hard-code the same sentence separately).
+ */
+export const siteCopy = siteJson as unknown as { sloganZh: string; sloganEn: string; wordmark: string };
 
 /** Relation copy keyed by an order-independent slug pair. */
 const relationKey = (a: string, b: string) => [a, b].sort().join('|');

@@ -57,7 +57,7 @@ export function renderLanding(): string {
     </section>
 
     <section class="featured">
-      <header class="sec-head"><h2 class="sec-title">部分立场预览</h2><a class="mono link" href="#/library">查看全部 26 种 →</a></header>
+      <header class="sec-head"><h2 class="sec-title">意识形态预览</h2><a class="mono link" href="#/library">查看全部 26 种 →</a></header>
       <div class="featured__grid">${preview}</div>
     </section>
 

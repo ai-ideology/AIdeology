@@ -176,3 +176,17 @@ the earlier v1 bank. What changed and why:
 The public-facing explanation of the whole design lives on the wiki page
 (`src/views/wiki.ts` + `src/content/wiki.json`); its per-axis questions and
 debate-map copy are editable there.
+
+## Brand copy
+
+`src/content/site.json` holds the sentences shown outside the test — the footer
+slogan, its English companion, and the wordmark line. The footer in `index.html`
+keeps a hard-coded copy as the no-JS fallback and `syncSiteCopy()` re-syncs it at
+boot; the share card reads the same file. They previously hard-coded the slogan
+separately in two places, which is how an earlier duplicate block survived.
+
+The slogan was 「不同思想，争夺不同的未来。」 The word 争夺 framed the
+ideologies as competing for one prize, which contradicts the neutral framing the
+product claims ("STRUCTURE NEUTRAL"). It is now 「不同思想，通向不同的未来。」
+— the same rhythm and the same emphasis on difference, without the zero-sum
+reading.

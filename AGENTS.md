@@ -43,6 +43,7 @@ src/content/               内容层：所有文案/题库的加载与派生
   relations.json           18 组关系：relationType + keyAxis + 程度句 + 一句话对照
   detail-copy.json         每主义 3 条核心信念 + 思想来源
   wiki.json                维基页文案
+  site.json                页脚 slogan / 英文标语 / 品牌行（页脚与分享图共用）
   families.json            5 个谱系分组
   derived-colors.json      由 scripts/assets.ts 从插画提取的主色（生成物）
 src/views/                 每个页面一个渲染函数（返回 HTML 字符串）
