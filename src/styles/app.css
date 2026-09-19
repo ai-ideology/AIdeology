@@ -781,10 +781,27 @@ img, svg { display: block; max-width: 100%; }
   .poster--square { min-height: 320px; }
 }
 
+/* Phone: a single column of uniform, compact posters. The desktop mosaic's
+   five shapes and 320–440px tiles make a 26-card list far too tall to scan on
+   a phone, so every tile shares one short height and the motif shrinks (§21). */
 @media (max-width: 639px) {
-  .poster { min-height: 320px; }
+  .masonry { gap: var(--s3); margin-top: var(--s4); }
+  .poster,
   .poster--feature,
-  .poster--tall { min-height: 440px; }
+  .poster--tall,
+  .poster--wide,
+  .poster--square,
+  .poster--small {
+    min-height: 148px;
+    gap: var(--s2);
+    padding: 14px 16px;
+  }
+  .poster__motif { min-height: 28px; flex: 0 0 auto; }
+  .poster__motif .motif { width: clamp(40px, 22%, 64px); }
+  .poster__zh { font-size: 22px; }
+  .poster__en { font-size: 10px; }
+  .poster__mf,
+  .poster__mfzh { font-size: 12px; }
 }
 
 /* ---------- test ---------- */
@@ -911,9 +928,10 @@ img, svg { display: block; max-width: 100%; }
   font-size: 11px;
 }
 
-@media (max-width: 560px) {
-  .test__nav .btn { flex: 1 1 auto; }
-  .test__nav .btn--primary { margin-left: 0; flex-basis: 100%; }
+/* There is no physical keyboard to press on a phone (or any hover-less
+   device), so the shortcut hint is pure noise there. */
+@media (max-width: 640px), (hover: none) {
+  .test__hint { display: none; }
 }
 
 /* ---------- computing ---------- */
@@ -1711,12 +1729,29 @@ img, svg { display: block; max-width: 100%; }
   }
   .brand { font-size: 18px; }
   .brand__mark { width: 28px; height: 28px; }
-  .site-nav a { padding: 6px 8px; font-size: 13px; }
+  /* finger-sized nav targets; the six labels still fit one line down to 320px */
+  .site-nav { gap: 0; }
+  .site-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 5px 8px;
+    font-size: 13px;
+  }
   .dsec { padding: var(--s6) 0; }
   .rsec { padding: var(--s6) 0; }
   .detail__nav { display: grid; grid-template-columns: 1fr; }
   .detail__navlink { min-width: 0; }
   .detail__navlink--r { text-align: left; }
+
+  /* §21 of the design system: mobile keeps the black frames and color blocks
+     but drops the huge hard shadows (desktop 6–8px -> mobile 3–4px). */
+  :root {
+    --sh-sm: 3px 3px 0 var(--black);
+    --sh-md: 3px 3px 0 var(--black);
+    --sh-lg: 4px 4px 0 var(--black);
+    --sh-xl: 4px 4px 0 var(--black);
+  }
 }
 
 /* ---------- reduced motion ---------- */
@@ -2054,6 +2089,57 @@ main { flex: 1 0 auto; }
   font-size: 13px;
   font-weight: 700;
   vertical-align: 3px;
+}
+
+/* ---------- compact phone layout for the test ----------
+   The answering screen has to fit a small viewport without pushing the
+   choices below the fold, so spacing, the question size and the option rows
+   all tighten up on phones. */
+@media (max-width: 640px) {
+  .test { padding: var(--s3) 16px var(--s5); }
+
+  .progress { margin-top: 8px; height: 12px; }
+
+  .test__scenario {
+    margin-top: var(--s3);
+    padding: 12px 14px;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .test__scenario-tag { margin-right: 8px; padding: 3px 8px; font-size: 11px; vertical-align: 2px; }
+
+  .test__q--question { margin-top: var(--s3); font-size: 19px; line-height: 1.4; }
+  .test__q { margin-top: var(--s4); }
+  .test__note { margin-top: var(--s3); font-size: 11px; }
+
+  .test__opts { gap: 7px; margin-top: var(--s4); }
+  .opt { gap: 9px; padding: 9px 11px; align-items: center; }
+  .opt__key { width: 23px; height: 23px; font-size: 11px; }
+  .opt__text { font-size: 15px; line-height: 1.4; }
+  .opt__mark { line-height: 23px; }
+
+  /* prev / next sit side by side, one on each edge, instead of stacking */
+  .test__nav { flex-wrap: nowrap; gap: var(--s2); margin-top: var(--s4); }
+  .test__nav .btn { flex: 1 1 0; min-width: 0; padding: 10px 12px; font-size: 14px; }
+  .test__nav .btn--primary { margin-left: 0; }
+
+  /* the site footer ("开始测试" plus the version meta) means nothing mid-test */
+  body[data-view='test'] .site-foot { display: none; }
+}
+
+/* Short phones (iPhone SE class, 640px tall and under) get one more notch of
+   tightening so even a scenario question keeps its five choices on screen. */
+@media (max-width: 640px) and (max-height: 700px) {
+  .test { padding-top: 6px; }
+  .test__meta { font-size: 11px; }
+  .progress { margin-top: 6px; height: 10px; }
+  .test__scenario { margin-top: 10px; padding: 9px 11px; font-size: 14px; line-height: 1.55; }
+  .test__q--question { margin-top: 10px; font-size: 17px; }
+  .test__opts { gap: 6px; margin-top: 10px; }
+  .opt { padding: 7px 10px; }
+  .opt__text { font-size: 14px; line-height: 1.35; }
+  .test__nav { margin-top: 10px; }
+  .test__nav .btn { min-height: 38px; }
 }
 
 /* ============================================================

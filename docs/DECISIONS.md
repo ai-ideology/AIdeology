@@ -142,6 +142,14 @@ the earlier v1 bank. What changed and why:
 - **Worldview carries the primary's claim.** The result page's 「你的 AI 世界观」
   shows the primary ideology's one-line `summary` in a color bar under the lead,
   so the plain-language cards have an explicit stance to compare against.
+- **Mobile is its own layout, not a shrunken desktop** (design system §21). On
+  phones the test screen drops the keyboard-shortcut hint (no physical keyboard)
+  and the site footer (meaningless mid-test), places 上一题/下一题 side by side
+  instead of stacked, and tightens spacing, question size and option height so
+  all five choices stay above the fold — verified for **all 88 items at
+  360×640**. The library's 26-poster mosaic collapses to a single column of
+  ~150px cards (11000px → 5950px of scroll), nav tap targets grow to 40px, and
+  hard shadows drop to 3–4px. Desktop rules are untouched.
 
 The public-facing explanation of the whole design lives on the wiki page
 (`src/views/wiki.ts` + `src/content/wiki.json`); its per-axis questions and
