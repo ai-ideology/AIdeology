@@ -568,19 +568,6 @@ img, svg { display: block; max-width: 100%; }
 
 .mq__dot { opacity: .4; }
 
-.cta-end { padding: 80px 0; }
-
-.cta-end__h {
-  margin: var(--s2) 0 var(--s6);
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: clamp(36px, 6vw, 80px);
-  line-height: 1.05;
-  letter-spacing: -.02em;
-}
-
-.cta-end__cta { margin-top: var(--s2); }
-
 /* ---------- posters ---------- */
 
 .poster {
@@ -1997,7 +1984,9 @@ main { flex: 1 0 auto; }
 .site-foot__main,
 .site-foot__meta { max-width: none; margin: 0; }
 
-.landing { max-width: none; margin: 0; padding: 0 var(--pad-x); }
+/* Bottom padding keeps the black marquee band from running into the black
+   site footer — without it the two merge into one tall block. */
+.landing { max-width: none; margin: 0; padding: 0 var(--pad-x) var(--s8); }
 .lib { max-width: none; margin: 0; padding: var(--s7) var(--pad-x) var(--s8); }
 .atlas { max-width: none; margin: 0; padding: var(--s7) var(--pad-x) var(--s8); }
 

@@ -62,14 +62,5 @@ export function renderLanding(): string {
     </section>
 
     <div class="marquee" aria-hidden="true"><div class="marquee__track">${marquee}${marquee}</div></div>
-
-    <section class="cta-end">
-      <p class="mono tag-line">STRUCTURE NEUTRAL · IDEOLOGY EXPRESSIVE</p>
-      <h2 class="cta-end__h">不同思想，<br>争夺不同的未来。</h2>
-      <div class="od-cluster cta-end__cta">
-        <button type="button" class="btn btn--primary btn--xl" data-act="start-test">开始测试 →</button>
-        <a class="btn btn--xl" href="#/atlas">在谱系中漫游</a>
-      </div>
-    </section>
   </section>`;
 }
