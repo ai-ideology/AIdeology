@@ -67,7 +67,7 @@ export function renderWorldview(r: ResultPackage): string {
     return `<article class="wv" style="--c:${copy.right.label === lean || flip ? 'inherit' : ''}">
       <div class="wv__top od-row">
         <span class="mono wv__n">${String(i + 1).padStart(2, '0')}</span>
-        <span class="mono wv__code od-fill">${c.axis} · ${esc(copy.name)}</span>
+        <span class="mono wv__code od-fill">${esc(copy.name)}</span>
         <span class="kw wv__chip">${esc(chip)}</span>
       </div>
       <p class="mono wv__q">${esc(copy.plain)}</p>

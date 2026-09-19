@@ -64,21 +64,21 @@ function cardHtml(kind: Kind, item: CompareItem, self: Ideology, selected: boole
       data-kind="${kind}" data-slug="${item.slug}"
       style="--c:${c.color};--f:${c.fg}">
     <span class="xc__top od-row">
-      <span class="mono xc__code od-fill">${x.code}</span>
+      <span class="mono xc__fam od-fill">${esc(c.family)}</span>
       ${marker}
     </span>
     <span class="xc__motif" aria-hidden="true">${motifSvg(c.motif)}</span>
     <span class="xc__zh">${esc(c.nameZh)}</span>
     <span class="mono xc__en">${esc(c.nameEn)}</span>
     <span class="xc__preview">${esc(preview)}</span>
-    <span class="mono xc__state">${selected ? 'SELECTED ↓' : '查看比较 ↓'}</span>
+    <span class="mono xc__state">${selected ? '正在比较 ↓' : '点击比较 ↓'}</span>
   </button>`;
 }
 
 function axisChip(axisId: string): string {
   const copy = axisCopyById[axisId as keyof typeof axisCopyById];
   if (!copy) return '';
-  return `<span class="kw xc-axis"><span class="mono xc-axis__id">${axisId}</span>${esc(copy.plain)}</span>`;
+  return `<span class="kw xc-axis">${esc(copy.plain)}</span>`;
 }
 
 type Axes = Partial<Record<AxisId, number>>;

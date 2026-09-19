@@ -37,7 +37,6 @@ function axisCard(id: AxisId): string {
   const q = wiki.axisQuestions[id] ?? copy?.question ?? '';
   return `<article class="waxis">
     <header class="waxis__head">
-      <span class="mono waxis__code">${d.id}</span>
       <h3 class="waxis__name">${esc(copy?.plain ?? d.name)}<span class="waxis__tech">${esc(d.name)}</span></h3>
     </header>
     <p class="waxis__q">${esc(q)}</p>
@@ -65,7 +64,7 @@ function topicBlock(t: WikiData['topics'][number], i: number): string {
       <h3 class="topic__title">${esc(t.title)}</h3>
       <p class="topic__q">${esc(t.q)}</p>
       <p class="topic__note">${esc(t.note)}</p>
-      <div class="topic__axis mono">${esc(d.id)} · ${esc(d.name)}</div>
+      <div class="topic__axis mono">${esc(d.name)}</div>
       <div class="camps">
         ${camp(d.left, low, false)}
         ${camp(d.right, high, true)}
@@ -83,7 +82,7 @@ function familyBlock(key: string): string {
       <span class="mono wfam__en">${esc(f.en)}</span>
     </header>
     <ul class="wfam__list">${list.map((x) =>
-      `<li><a class="wfam__item" href="#/ideology/${x.slug}"><span class="wfam__dot" style="background:${x.copy.color}" aria-hidden="true"></span>${esc(x.copy.nameZh)}<span class="mono wfam__code">${x.code}</span></a></li>`,
+      `<li><a class="wfam__item" href="#/ideology/${x.slug}"><span class="wfam__dot" style="background:${x.copy.color}" aria-hidden="true"></span>${esc(x.copy.nameZh)}</a></li>`,
     ).join('')}</ul>
   </div>`;
 }
@@ -107,21 +106,20 @@ export function renderWiki(): string {
   ).join('');
 
   const layers = [
-    { k: 'L1', t: '未来信念 · 世界会怎样', p: 'AI 会发展到什么程度、会不会带来大规模失业、是否可能出现数字意识、文明级灾难的概率有多大。' },
-    { k: 'L2', t: '核心价值 · 什么值得保留', p: '进步、安全、人的主体性、自由、平等、真实性、生态边界——当它们冲突时，谁优先。' },
-    { k: 'L3', t: '制度立场 · 谁控制、谁分配', p: '智能归资本、国家、公众、开源社区，还是 AI 自身；收益又该怎么分。' },
-    { k: 'L4', t: '行动主张 · 现在怎么办', p: '加速、监管、开放、限制，以及国家之间合作还是竞争。' },
+    { t: '未来信念 · 世界会怎样', p: 'AI 会发展到什么程度、会不会带来大规模失业、是否可能出现数字意识、文明级灾难的概率有多大。' },
+    { t: '核心价值 · 什么值得保留', p: '进步、安全、人的主体性、自由、平等、真实性、生态边界——当它们冲突时，谁优先。' },
+    { t: '制度立场 · 谁控制、谁分配', p: '智能归资本、国家、公众、开源社区，还是 AI 自身；收益又该怎么分。' },
+    { t: '行动主张 · 现在怎么办', p: '加速、监管、开放、限制，以及国家之间合作还是竞争。' },
   ].map((l) => `<div class="layer">
-    <span class="mono layer__k">${l.k}</span>
     <h3 class="layer__t">${esc(l.t)}</h3>
     <p class="layer__p">${esc(l.p)}</p>
   </div>`).join('');
 
   const pipeline = [
     { n: '01', t: '48 道核心题', p: '每题直接落在一到两条价值轴上，得到 15 条轴 + AI 显著性的读数。' },
-    { n: '02', t: '中性基线贴合', p: '用 AxisFit 计算你与 26 个原型的距离，并扣除「全中间作答」的天然相似度。' },
+    { n: '02', t: '中性基线贴合', p: '按与 26 个原型的距离计算贴合度，并扣除「全部选中间」带来的天然相似度。' },
     { n: '03', t: '6–10 道判别题', p: '在你最接近的几个原型之间，动态追问最能区分它们的问题。' },
-    { n: '04', t: '信条与反证', p: '用 Hallmark 确认核心信条是否真的出现，并用反证扣分，避免误判。' },
+    { n: '04', t: '信条与反证', p: '检查每个原型的核心信条是否真的在你的回答里出现，并用反证扣分，避免误判。' },
     { n: '05', t: '输出档案', p: '得到主意识形态 / 双核心 / 混合型 / 未定型，以及三重可信度与可能的隐藏意识形态。' },
   ].map((s) => `<li class="step">
     <span class="mono step__n">${s.n}</span>

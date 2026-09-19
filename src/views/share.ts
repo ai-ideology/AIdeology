@@ -1,5 +1,5 @@
 import { hiddenCopyById, ideologies } from '../content';
-import { esc, pad2 } from '../ui/dom';
+import { esc } from '../ui/dom';
 import { axisRowHtml, hiddenBadgesHtml } from '../ui/components';
 import { CORE_AXES, EXTENDED_AXES } from '../content/types';
 import { RESULT_TYPE_LABEL, type Confidence, type ResultPackage } from '../scoring/engine';
@@ -56,7 +56,7 @@ export function renderShare(payload: SharePayload): string {
     ? `<div class="mini-grid">${r.resonance.map((s) => {
         const x = ideologies.find((i) => i.slug === s.slug)!;
         return `<a class="mini" href="#/ideology/${x.slug}" style="--c:${x.copy.color};--f:${x.copy.fg}">
-          <span class="mini__top od-row"><span class="mono mini__code od-fill">${x.code}</span></span>
+          <span class="mini__top od-row"><span class="mono mini__fam od-fill">${esc(x.copy.family)}</span></span>
           <span class="mini__zh">${esc(x.copy.nameZh)}</span>
           <span class="mini__en mono">${esc(x.copy.nameEn)}</span></a>`;
       }).join('')}</div>`
@@ -78,14 +78,13 @@ export function renderShare(payload: SharePayload): string {
         <p class="mono result__en">${esc(c.nameEn)}</p>
         <p class="result__mfzh">${esc(c.manifestoZh)}</p>
         <p class="result__mf">${esc(c.manifestoEn)}</p>
-        <p class="mono result__meta-line">${primary.code} · 来自好友分享 · 可信度 ${esc(r.confidence.identity.label)}</p>
+        <p class="mono result__meta-line">来自好友分享 · 可信度 ${esc(r.confidence.identity.label)}</p>
         <div class="result__cta od-cluster">
           <button type="button" class="btn btn--primary btn--lg" data-act="start-test">测测我是哪一种</button>
           <a class="btn btn--lg" href="#/ideology/${primary.slug}">查看这个主义</a>
         </div>
       </div>
       <div class="result__right">
-        <div class="result__num" aria-hidden="true">${pad2(primary.id)}</div>
         <figure class="result__figure"><img class="result__char" src="./assets/char/${primary.slug}.webp" alt="${esc(c.nameZh)}主视觉" decoding="async"></figure>
       </div>
     </header>
@@ -128,7 +127,7 @@ export function renderShareError(): string {
 /* ---------- share card (canvas → PNG download) ---------- */
 
 export interface CardInput {
-  nameZh: string; nameEn: string; code: string; manifestoZh: string; manifestoEn: string;
+  nameZh: string; nameEn: string; manifestoZh: string; manifestoEn: string;
   summary: string; color: string; fg: string; match: number | null;
   confidence: Confidence; typeLabel: string; imageUrl: string;
 }
@@ -164,9 +163,9 @@ export async function drawShareCard(input: CardInput): Promise<Blob | null> {
   ctx.font = `700 26px ${mono}`;
   ctx.fillText('我的意识形态', 64, IMG_H + 78);
 
-  const codeLine = input.match !== null ? `${input.code} · MATCH ${input.match.toFixed(1)}` : input.code;
+  const matchLine = input.match !== null ? `MATCH ${input.match.toFixed(1)}` : '';
   ctx.font = `700 24px ${mono}`;
-  ctx.fillText(codeLine, 64, IMG_H + 122);
+  if (matchLine) ctx.fillText(matchLine, 64, IMG_H + 122);
 
   ctx.font = `900 84px ${sans}`;
   wrapText(ctx, input.nameZh, 64, IMG_H + 240, W - 128, 92);

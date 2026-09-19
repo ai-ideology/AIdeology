@@ -150,6 +150,17 @@ the earlier v1 bank. What changed and why:
   360×640**. The library's 26-poster mosaic collapses to a single column of
   ~150px cards (11000px → 5950px of scroll), nav tap targets grow to 40px, and
   hard shadows drop to 3–4px. Desktop rules are untouched.
+- **No internal identifiers in the UI.** The design system's §9 mono examples
+  (`IDEOLOGY_17`, `SCENARIO_014`) are a visual-language reference, not a licence
+  to print bookkeeping keys: readers cannot act on `C-V1-01`, `IDEOLOGY_07`,
+  `V10`, `M1`, `HIDDEN · machine-liberation`, or `v1 · 48 CORE · 24 ADAPTIVE`.
+  All of them are gone from rendered copy, along with the 26-slot hero ordinal
+  and the axis/step/layer codes. What replaced them is information the reader
+  can use: the ideology's family, its name, the plain axis question, the step
+  label (`核心题 3 / 48`), and the ideology's motif in the atlas node and panel.
+  The codes stay in the frozen data and in `ProtoScore` — only rendering changed.
+  Rule of thumb: if a string only identifies a row in the source data, it does
+  not belong on screen.
 
 The public-facing explanation of the whole design lives on the wiki page
 (`src/views/wiki.ts` + `src/content/wiki.json`); its per-axis questions and

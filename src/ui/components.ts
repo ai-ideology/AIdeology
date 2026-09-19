@@ -15,8 +15,8 @@ export function posterHtml(x: Ideology, match?: number | null): string {
       : `<span class="poster__mf">${esc(c.manifestoZh)}</span>`);
   return `<a class="poster poster--${size}" href="#/ideology/${x.slug}" style="--c:${c.color};--f:${c.fg}">` +
     `<span class="poster__top od-row">` +
-      `<span class="mono poster__code od-fill">${x.code}</span>` +
-      `<span class="mono poster__fam">${badge || esc(c.family)}</span>` +
+      `<span class="mono poster__fam od-fill">${esc(c.family)}</span>` +
+      badge +
     `</span>` +
     `<span class="poster__motif" aria-hidden="true">${motifSvg(c.motif)}</span>` +
     `<span class="poster__body">${body}</span>` +
@@ -34,7 +34,7 @@ export function miniHtml(x: Ideology, match?: number | null): string {
   const badge = match === null || match === undefined ? '' :
     `<span class="mono mini__match">${match.toFixed(1)}</span>`;
   return `<a class="mini" href="#/ideology/${x.slug}" style="--c:${c.color};--f:${c.fg}">` +
-    `<span class="mini__top od-row"><span class="mono mini__code od-fill">${x.code}</span>${badge}</span>` +
+    `<span class="mini__top od-row"><span class="mono mini__fam od-fill">${esc(c.family)}</span>${badge}</span>` +
     `<span class="mini__motif" aria-hidden="true">${motifSvg(c.motif)}</span>` +
     `<span class="mini__zh">${esc(c.nameZh)}</span>` +
     `<span class="mini__en mono">${esc(c.nameEn)}</span>` +
@@ -64,7 +64,7 @@ export function hiddenBadgesHtml(hidden: HiddenBadgeLike[]): string {
     const hc = hiddenCopyById.get(h.id);
     return `<article class="badge" style="--c:${hc?.color ?? '#0A0A0A'};--f:${hc?.fg ?? '#FFFFFF'}">
       <div class="badge__top od-row">
-        <span class="mono badge__code od-fill">HIDDEN · ${esc(h.id)}</span>
+        <span class="mono badge__code od-fill">边界立场</span>
         <span class="badge__emblem" aria-hidden="true">${motifSvg(hc?.motif ?? 'axis')}</span>
       </div>
       <h3 class="badge__h">${esc(h.nameZh)}</h3>
@@ -123,7 +123,6 @@ export function axisRowHtml(axisId: AxisId, value: number, accent?: string): str
   const plain = copy?.plain ?? axis.name;
   return `<div class="axis od-field">` +
     `<div class="axis__top od-row">` +
-      `<span class="mono axis__code od-fixed">${axis.id}</span>` +
       `<span class="axis__zh od-fill">${esc(plain)}<span class="axis__tech">${esc(axis.name)}</span></span>` +
       `<span class="mono axis__v od-fixed od-nowrap">${sign}${v.toFixed(2)}</span>` +
     `</div>` +

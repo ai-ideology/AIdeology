@@ -383,7 +383,7 @@ function openShare(): void {
   const r = getState().result;
   if (!r || !r.primary) { toast('先完成测试再分享'); return; }
   const x = ideologies.find((i) => i.slug === r.primary!.slug)!;
-  lastShareText = shareText(r, x.copy.nameZh, x.code, r.type === 'low_information' ? '' : x.copy.manifestoZh, r.primary.finalFit);
+  lastShareText = shareText(r, x.copy.nameZh, r.type === 'low_information' ? '' : x.copy.manifestoZh, r.primary.finalFit);
   closeModal();
   modal = document.createElement('div');
   modal.className = 'modal';
@@ -414,7 +414,7 @@ async function doShareCard(): Promise<void> {
   if (!r || !r.primary) { toast('先完成测试再生成分享图'); return; }
   const x = ideologies.find((i) => i.slug === r.primary!.slug)!;
   const blob = await drawShareCard({
-    nameZh: x.copy.nameZh, nameEn: x.copy.nameEn, code: x.code,
+    nameZh: x.copy.nameZh, nameEn: x.copy.nameEn,
     manifestoZh: x.copy.manifestoZh, manifestoEn: x.copy.manifestoEn,
     summary: x.copy.summary,
     color: x.copy.color, fg: x.copy.fg, match: r.primary.finalFit,

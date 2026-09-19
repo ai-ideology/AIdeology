@@ -57,5 +57,10 @@ const MOTIFS: Record<string, string> = {
 };
 
 export function motifSvg(kind: string): string {
-  return svg(MOTIFS[kind] ?? '<rect x="24" y="24" width="72" height="72" stroke-width="9"/>');
+  return svg(motifInner(kind));
+}
+
+/** Raw motif geometry, for embedding inside an existing SVG (e.g. atlas nodes). */
+export function motifInner(kind: string): string {
+  return MOTIFS[kind] ?? '<rect x="24" y="24" width="72" height="72" stroke-width="9"/>';
 }

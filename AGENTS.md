@@ -98,6 +98,7 @@ docs-reference/           设计系统与冻结规范的可读版（已提交，
 - **隐藏立场没有插画。** 图片包只覆盖 26 个常规主义。隐藏立场在结果/分享/维基页用 `hiddenBadgesHtml()` 渲染成「黑色卡 + 彩色徽章块」（颜色/符号来自 `ideologies.json` 的 `hidden` 块）。若将来补图，放 `public/assets/char/<id>.webp` 即可切换。
 - **`设计方案/` 不进 git。** 原始素材（含生图 prompt、原型）已 gitignore，只在本地。仓库里可引用的是 `docs-reference/`。`scripts/assets.ts` 会读 `设计方案/AI意识形态26个图/`，所以重新生成图片只在本地可行。
 - **`derived-colors.json` 是生成物**，由 `bun run assets` 写出；它不参与计分，只是配色来源之一。
+- **不要在界面上印内部编号。** `C-V1-01`、`IDEOLOGY_07`、`V10`、`M1`、`HIDDEN · <slug>`、`v1 · 48 CORE` 这类串只用来标识数据行，用户既看不懂也用不上，**一律不渲染**（设计系统 §9 里 `IDEOLOGY_17` 那种 mono 示例是视觉语言参考，不是让你把主键印出来）。要显示身份就显示用户能用的东西：主义名、谱系、通俗轴名、`核心题 3 / 48` 这样的步骤计数。编号仍保留在 `frozen/` 数据与 `ProtoScore` 里，只是不上屏。
 - **移动端样式集中在文件末尾的条件块里**，不要为此改基础规则：
   - `@media (max-width: 640px)`（`/* ---------- compact phone layout for the test ---------- */`）压缩做题页，`@media (max-width: 640px) and (max-height: 700px)` 为矮屏（iPhone SE 类）再紧一档。**88 道题（48 核心 + 24 判别 + 16 专题）在 360×640 下都能让「上一题/下一题」留在首屏**——改做题页间距/字号后请重新扫一遍。
   - `body[data-view='test']` 在手机上去掉页脚；`.test__hint`（键盘快捷键）在 `(max-width: 640px), (hover: none)` 下隐藏。

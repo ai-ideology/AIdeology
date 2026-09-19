@@ -29,7 +29,7 @@ export function renderLanding(): string {
   }).join('');
 
   const marquee = ideologies.map((x) =>
-    `<span class="mq__item"><b class="mono">${x.code}</b>${esc(x.copy.nameZh)}</span><span class="mq__dot" aria-hidden="true">■</span>`,
+    `<span class="mq__item">${esc(x.copy.nameZh)}</span><span class="mq__dot" aria-hidden="true">■</span>`,
   ).join('');
 
   return `<section class="landing">

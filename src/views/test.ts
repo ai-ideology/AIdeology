@@ -5,7 +5,6 @@ import { getState, type SessionState } from '../app/store';
 export interface QuestionView {
   kind: 'core' | 'adaptive' | 'hidden';
   id: string;
-  code: string;
   scenario?: string;
   prompt: string;
   note?: string;
@@ -22,7 +21,7 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
     const item = coreItems[state.coreIndex];
     if (!item) return null;
     return {
-      kind: 'core', id: item.id, code: item.id, scenario: item.scenario,
+      kind: 'core', id: item.id, scenario: item.scenario,
       prompt: item.prompt, note: item.note,
       options: item.options.map((o) => o.label),
       index: state.coreIndex + 1, total: coreItems.length, stepIndex: state.coreIndex,
@@ -34,7 +33,7 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
     const item = id ? adaptiveById.get(id) : undefined;
     if (!item) return null;
     return {
-      kind: 'adaptive', id: item.id, code: `DISCRIMINANT · ${item.id}`, scenario: item.scenario,
+      kind: 'adaptive', id: item.id, scenario: item.scenario,
       prompt: item.prompt,
       options: item.options.map((o) => o.label),
       index: state.adaptiveIndex + 1, total: state.adaptivePlan.length, stepIndex: state.adaptiveIndex,
@@ -45,7 +44,7 @@ export function currentQuestion(state: SessionState = getState()): QuestionView 
   const item = id ? hiddenById.get(id) : undefined;
   if (!item) return null;
   return {
-    kind: 'hidden', id: item.id, code: `SPECIAL · ${item.id}`, scenario: item.scenario,
+    kind: 'hidden', id: item.id, scenario: item.scenario,
     prompt: item.prompt,
     options: item.options.map((o) => o.label),
     index: state.hiddenIndex + 1, total: state.hiddenPlan.length, stepIndex: state.hiddenIndex,
@@ -96,7 +95,7 @@ export function renderTest(state: SessionState = getState()): string {
     : '下一题';
 
   return `<section class="test">
-    <div class="test__meta mono" id="test-meta">${esc(q.code)} · ${esc(STEP_LABEL[q.kind])} ${q.index} / ${q.total}</div>
+    <div class="test__meta mono" id="test-meta">${esc(STEP_LABEL[q.kind])} ${q.index} / ${q.total}</div>
     <div class="progress" id="test-progress" role="progressbar" aria-label="测试进度" aria-valuemin="1" aria-valuemax="${q.total}" aria-valuenow="${q.index}">
       <span class="progress__fill" id="test-bar-fill" style="width:${pct.toFixed(1)}%"></span>
     </div>

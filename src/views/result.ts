@@ -78,7 +78,7 @@ export function renderResult(r: ResultPackage): string {
       <section class="rsec">
         <header class="rsec__head">
           <h2 class="rsec__h">价值轴定位</h2>
-          <p class="mono rsec__sub">AXIS VECTOR · 15 DIMENSIONS + M1 · ${r.meta.answeredCore} / ${r.meta.totalCore} CORE ITEMS</p>
+          <p class="mono rsec__sub">AXIS VECTOR · 15 条价值轴 + AI 显著性 · 已作答 ${r.meta.answeredCore} / ${r.meta.totalCore} 题</p>
         </header>
         <div class="axes">${axesHtml}</div>
       </section>
@@ -137,7 +137,7 @@ function lowInfoHero(r: ResultPackage): string {
     </div>
     <div class="result__right">
       <div class="result__num" aria-hidden="true">??</div>
-      ${near ? `<p class="mono result__meta-line">最接近：${near.code} ${esc(near.copy.nameZh)} ${top.finalFit.toFixed(1)}</p>` : ''}
+      ${near ? `<p class="mono result__meta-line">最接近：${esc(near.copy.nameZh)} ${top.finalFit.toFixed(1)}</p>` : ''}
     </div>
   </header>`;
 }

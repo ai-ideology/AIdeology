@@ -1,5 +1,5 @@
 import { ideologies, nearestIdeologies, type Ideology } from '../content';
-import { esc, pad2 } from '../ui/dom';
+import { esc, motifInner, motifSvg } from '../ui/dom';
 
 const W = 1000;
 const H = 640;
@@ -66,9 +66,10 @@ export function renderAtlas(): string {
 
   const nodeHtml = nodes.map((o) => {
     const light = o.x.copy.fg === '#FFFFFF' ? ' anode--light' : '';
-    return `<g class="anode${light}" tabindex="0" role="button" data-slug="${o.x.slug}" aria-label="${esc(`${o.x.code} ${o.x.copy.nameZh}`)}" transform="translate(${o.cx.toFixed(1)},${o.cy.toFixed(1)})">` +
+    return `<g class="anode${light}" tabindex="0" role="button" data-slug="${o.x.slug}" aria-label="${esc(o.x.copy.nameZh)}" style="--f:${o.x.copy.fg}" transform="translate(${o.cx.toFixed(1)},${o.cy.toFixed(1)})">` +
       `<rect class="anode__box" x="-24" y="-24" width="48" height="48" fill="${o.x.copy.color}"></rect>` +
-      `<text class="anode__id" x="0" y="1" text-anchor="middle" dominant-baseline="middle">${pad2(o.x.id)}</text>` +
+      // motif geometry is authored on a 120x120 grid; scale it into the 48x48 box
+      `<g class="anode__motif" transform="translate(-21.6 -21.6) scale(0.36)" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">${motifInner(o.x.copy.motif)}</g>` +
       `<text class="anode__name" x="0" y="40" text-anchor="middle">${esc(o.x.copy.nameShort)}</text>` +
     `</g>`;
   }).join('');
@@ -101,14 +102,14 @@ export function renderAtlas(): string {
 export function atlasIntroHtml(): string {
   return `<p class="mono atlas__panelcode">SELECT A NODE</p>
     <p class="atlas__panelsum">点击任意节点，查看它的身份、关键词与相邻立场。连线指向与它最接近的主义。</p>
-    <p class="mono atlas__panelnear">26 NODES · 26 EDGES · 16 AXES</p>`;
+    <p class="mono atlas__panelnear">26 个节点 · 最近邻连线</p>`;
 }
 
 export function atlasPanelHtml(x: Ideology): string {
   const near = nearestIdeologies(x, 2);
-  return `<p class="mono atlas__panelcode">SELECTED · ${x.code}</p>
+  return `<p class="mono atlas__panelcode">已选中的立场</p>
     <div class="atlas__panelmain od-row-top">
-      <span class="atlas__swatch od-fixed" style="--c:${x.copy.color};--f:${x.copy.fg}" aria-hidden="true">${pad2(x.id)}</span>
+      <span class="atlas__swatch od-fixed" style="--c:${x.copy.color};--f:${x.copy.fg}" aria-hidden="true">${motifSvg(x.copy.motif)}</span>
       <div class="od-fill">
         <p class="atlas__panelzh">${esc(x.copy.nameZh)}</p>
         <p class="mono atlas__panelen">${esc(x.copy.nameEn)}</p>
@@ -116,7 +117,7 @@ export function atlasPanelHtml(x: Ideology): string {
     </div>
     <p class="atlas__panelsum">${esc(x.copy.summary)}</p>
     <div class="od-cluster">${x.copy.keywords.map((k) => `<span class="kw">${esc(k)}</span>`).join('')}</div>
-    <p class="mono atlas__panelnear">NEAREST · ${near.map((y) => `${y.code.replace('IDEOLOGY_', '#')} ${esc(y.copy.nameZh)}`).join(' · ')}</p>
+    <p class="mono atlas__panelnear">最接近 · ${near.map((y) => esc(y.copy.nameZh)).join(' · ')}</p>
     <div class="od-cluster atlas__panelcta">
       <a class="btn" href="#/ideology/${x.slug}">查看主义详情</a>
       <button type="button" class="btn btn--quiet" data-act="clear-node">清除选择</button>
@@ -124,7 +125,7 @@ export function atlasPanelHtml(x: Ideology): string {
 }
 
 export function atlasTipHtml(x: Ideology): string {
-  return `<span class="mono atlas__tipcode">${x.code}</span>
+  return `<span class="mono atlas__tipcode">${esc(x.copy.family)}</span>
     <span class="atlas__tipzh">${esc(x.copy.nameZh)}</span>
     <span class="atlas__tipkw">${x.copy.keywords.map((k) => `<span class="kw">${esc(k)}</span>`).join('')}</span>`;
 }

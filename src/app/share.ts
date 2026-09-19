@@ -58,11 +58,11 @@ export function shareUrl(result: ResultPackage): string {
 }
 
 export function shareText(
-  result: ResultPackage, nameZh: string, code: string, manifesto: string, match: number,
+  result: ResultPackage, nameZh: string, manifesto: string, match: number,
 ): string {
   return [
     'AIdeology · 我的 AI 意识形态',
-    `${code} ${nameZh}`,
+    nameZh,
     `MATCH ${match.toFixed(1)}`,
     `「${manifesto}」`,
     '',

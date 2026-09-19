@@ -134,8 +134,8 @@ export function renderDetail(slug: string, hasResult = false): string | null {
       </section>
 
       <nav class="detail__nav od-row" aria-label="主义间导航">
-        <a class="detail__navlink" href="#/ideology/${prev.slug}"><span class="mono">← ${prev.code}</span><span>${esc(prev.copy.nameZh)}</span></a>
-        <a class="detail__navlink detail__navlink--r" href="#/ideology/${next.slug}"><span class="mono">${next.code} →</span><span>${esc(next.copy.nameZh)}</span></a>
+        <a class="detail__navlink" href="#/ideology/${prev.slug}"><span class="mono">← 上一个</span><span>${esc(prev.copy.nameZh)}</span></a>
+        <a class="detail__navlink detail__navlink--r" href="#/ideology/${next.slug}"><span class="mono">下一个 →</span><span>${esc(next.copy.nameZh)}</span></a>
       </nav>
     </div>
   </article>`;
